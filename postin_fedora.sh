@@ -5,6 +5,8 @@ source resources/bash_colors
 
 checkuser
 
+echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\n${DECOLOR}"
+
 REL=$(cat /etc/fedora-release |awk {'print$3'})
 
 echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"

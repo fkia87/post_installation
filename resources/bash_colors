@@ -26,6 +26,7 @@ LPURPLE='\033[0;95m'    # Light Purple
 LCYAN='\033[0;96m'      # Light Cyan
 
 # Bold
+BOLD='\033[1m'          # Bold
 BBLACK='\033[1;30m'     # Black
 BRED='\033[1;31m'       # Red
 BGREEN='\033[1;32m'     # Green
@@ -36,6 +37,7 @@ BCYAN='\033[1;36m'      # Cyan
 BWHITE='\033[1;37m'     # White
 
 # Underline
+UNDERLINE='\033[4m'     # Underline
 UBLACK='\033[4;30m'     # Black
 URED='\033[4;31m'       # Red
 UGREEN='\033[4;32m'     # Green
