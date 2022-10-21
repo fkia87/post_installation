@@ -1,0 +1,18 @@
+#!/bin/bash
+
+NET_DEV=wlp5s0
+
+while :
+do
+	declare -i rstart=`cat /proc/net/dev |grep $NET_DEV| cut -d ' ' -f 2`
+	declare -i tstart=`cat /proc/net/dev |grep $NET_DEV| cut -d ' ' -f 2`
+	sleep .5
+	declare -i rend=`cat /proc/net/dev |grep $NET_DEV| cut -d ' ' -f 2`
+	declare -i tend=`cat /proc/net/dev |grep $NET_DEV| cut -d ' ' -f 2`
+	declare -i rspeed=rend-rstart
+	declare -i tspeed=tend-tstart
+	rspeed=$rspeed/500
+	tspeed=$tspeed/500
+ 	echo -en "\r"Rx is"\t\t""$rspeed" KB/s "\t" Tx is "\t\t""$tspeed" KB/s
+
+done

@@ -1,0 +1,4 @@
+Edit these keys in about:config page:
+
+browser.urlbar.openintab			True
+browser.tabs.loadBookmarksInTabs		True

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+declare -l LG=$(setxkbmap -query | awk '/layout/{print $2}')
+
+if [ $LG = 'us' ]
+then
+exec setxkbmap 'ir'
+echo 1
+fi
+
+if [ $LG = 'ir' ]
+then
+exec setxkbmap 'us'
+echo 2
+fi

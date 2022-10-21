@@ -1,0 +1,8 @@
+ServerAliveInterval 60
+
+StrictHostKeyChecking no
+
+# For RPI OS you may need to add this line to work around some problems 
+# related to SSH connection establishment below the line "Host *":
+
+# KexAlgorithms ecdh-sha2-nistp521

@@ -1,0 +1,1 @@
+Copy config file to ~/.config/terminator

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+pcal -t|sed -e 's/^[0-9]*-//'

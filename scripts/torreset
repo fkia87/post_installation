@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+sudo systemctl restart tor &
+
+
+
+watch -n.2 'systemctl status tor |grep $HOSTNAME |cut -d : -f4,5'

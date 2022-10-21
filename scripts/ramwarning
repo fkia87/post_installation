@@ -1,0 +1,21 @@
+#!/bin/bash
+#Minimum available memory limit, MB
+THRESHOLD=500
+
+#Check time interval, sec
+INTERVAL=10
+
+while :
+do
+
+    free=$(free -m|awk '/^Mem:/{print $7}')
+
+    if [ $free -lt $THRESHOLD ]
+        then
+        notify-send "Memory is running out!" "$free MB free"
+    fi
+
+
+    sleep $INTERVAL
+
+done

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo `torify ssh pi@qudi2xq6kudeey6u.onion room-temp |awk {'print $2'}` C

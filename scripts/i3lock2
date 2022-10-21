@@ -1,0 +1,5 @@
+#!/bin/bash
+
+scrot 'screen.png' -e 'mv $f /tmp'
+ convert /tmp/screen.png -blur 0x4 /tmp/screen.png
+i3lock -f --image=/tmp/screen.png
