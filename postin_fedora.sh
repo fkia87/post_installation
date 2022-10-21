@@ -5,6 +5,8 @@ source resources/bash_colors
 
 checkuser
 
+REL=$(cat /etc/fedora-release |awk {'print$3'})
+
 echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"
 read TARGETUSER
 
@@ -14,15 +16,19 @@ echo "Storage=volatile" >> /etc/systemd/journald.conf
 systemctl restart systemd-journald
 
 echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
-cp /etc/default/grub{,.bak}
-sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="pcie_aspm=off"/' /etc/default/grub
-update-grub
+grubby --update-kernel ALL --args "selinux=0 pcie_aspm=off"
+
+echo "${BLUE}Turning \"SELinux\" off...$DECOLOR}"
+setenforce 0
 
 echo -e "${BLUE}\nCreating directories in \"$HOME\"...${DECOLOR}"
 install -d -o fkia -g fkia /home/${TARGETUSER}\
 /{.fonts,.themes,bin,Applications,.icons,.ssh}
 
-echo -e "${BLUE}\nConfiguring \"SSH\"...${DECOLOR}"
+echo "${BLUE}Writing configurations...${DECOLOR}"
+cp ./configurations/dnf.conf /etc/dnf/dnf.conf
+
+echo "${BLUE}Configuring \"SSH\"...${DECOLOR}"
 cp /etc/ssh/ssh_config{,.bak}
 install -o $TARGETUSER -g $TARGETUSER ./configurations/ssh/* /home/${TARGETUSER}/.ssh
 chmod 700 /home/${TARGETUSER}/.ssh
@@ -40,9 +46,6 @@ cat configurations/fstab >> /etc/fstab
 systemctl daemon-reload
 mount -a
 
-install_pkg lsd
-install_pkg duf
-
 echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
 cp ./configurations/ag-proxy.service /etc/systemd/system/
 cp ./configurations/evo-proxy.service /etc/systemd/system/
@@ -51,6 +54,21 @@ systemctl enable ag-proxy.service --now && \
 echo -e "${GREEN}\nStarted \"ag-proxy\" service successfully.${DECOLOR}"
 systemctl enable evo-proxy.service --now && \
 echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
+
+echo "${BLUE}Removing unused packages...${DECOLOR}"
+dnf -q -y remove dnfdragora-* claws-mail-* pidgin-* geany-* parole-*.x86_64 xfburn-* \
+mousepad-* xarchiver-* gnumeric-* ristretto-* transmission-* asunder-* abiword-* cheese \
+eog gnome-photos totem
+dnf -q -y remove dnfdragora-* claws-mail-* pidgin-* geany-* parole-*.x86_64 xfburn-* \
+mousepad-* xarchiver-* gnumeric-* ristretto-* transmission-* asunder-* abiword-* cheese \
+eog gnome-photos totem
+
+echo "${BLUE}Installing useful packages...${DECOLOR}"
+dnf -q -y install unar gedit gthumb libreoffice numix-icon-theme-circle nextcloud-client \
+file-roller https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${REL}.noarch.rpm \
+vim-syntastic-sh libgnome-keyring uget \
+https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
+dnf -q -y install vlc terminator
 
 echo "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 cat ./configurations/bashrc-fedora >> /etc/bashrc && source /etc/bashrc

@@ -11,6 +11,3 @@ echo G: $gpu_util
 echo M: $memory_percent %
 echo -e T: $gpu_temp "\u00b0"C
 echo F: $gpu_fan
-
-# memory_util=$(nvidia-smi --query-gpu=utilization.memory --format=csv,noheader)
-#degree_c=$'\xe2\x84\x83'

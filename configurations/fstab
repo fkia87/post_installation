@@ -1,16 +1,1 @@
-
-#
-# /etc/fstab
-# Created by anaconda on Wed Feb 26 19:27:33 2020
-#
-# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
-# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
-#
-# After editing this file, run 'systemctl daemon-reload' to update systemd
-# units generated from this file.
-#
-UUID=de1ce0fb-034f-48b0-af7e-baaad6597eaa /                       ext4    defaults        1 1
-UUID=be247198-57b5-4d62-baa1-081afb11aedf /boot                   ext4    defaults        1 2
 UUID=e0886b21-1596-4626-b131-2137ec7394fa /home/fkia/GoFlex	  ext4	  defaults	  0 2
-UUID=C83E-34B6          /boot/efi               vfat    umask=0077,shortname=winnt 0 2
-UUID=c8d4b6be-6a5f-485e-903e-2912c448ed19 none                    swap    defaults        0 0

@@ -1,0 +1,9 @@
+
+# better bash completion
+bind "set completion-ignore-case on"
+bind "set completion-map-case on"
+bind "set show-all-if-ambiguous on"
+
+alias ip='ip -c'
+alias ll='lsd -lAhi --header --group-directories-first --date relative'
+alias df='duf'

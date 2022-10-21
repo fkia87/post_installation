@@ -1,8 +1,0 @@
-GRUB_TIMEOUT=5
-GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
-GRUB_DEFAULT=saved
-GRUB_DISABLE_SUBMENU=true
-GRUB_TERMINAL_OUTPUT="console"
-GRUB_CMDLINE_LINUX="resume=UUID=c8d4b6be-6a5f-485e-903e-2912c448ed19 rhgb quiet rd.driver.pre=vfio-pci pcie_aspm=off intel_iommu=on iommu=pt"
-GRUB_DISABLE_RECOVERY="true"
-GRUB_ENABLE_BLSCFG=true
