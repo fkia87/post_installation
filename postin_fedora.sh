@@ -2,6 +2,7 @@
 
 source resources/os
 source resources/bash_colors
+source resources/pkg_management
 
 checkuser
 
@@ -68,6 +69,9 @@ eog gnome-photos totem
 echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${REL}.noarch.rpm \
 https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
+
+install_pkg lsd
+install_pkg duf
 
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 cat ./configurations/bashrc-fedora >> /etc/bashrc
