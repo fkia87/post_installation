@@ -2,6 +2,7 @@
 
 source resources/os
 source resources/bash_colors
+source resources/pkg_management
 
 checkuser
 
