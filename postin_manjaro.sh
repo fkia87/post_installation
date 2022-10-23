@@ -19,7 +19,7 @@ systemctl restart systemd-journald
 echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
 cp /etc/default/grub{,.bak}
 sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="pcie_aspm=off"/' /etc/default/grub
-update-grub
+update-grub > /dev/null
 
 echo -e "${BLUE}\nCreating directories in \"$HOME\"...${DECOLOR}"
 install -d -o fkia -g fkia /home/${TARGETUSER}\
@@ -50,9 +50,9 @@ echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
 cp ./configurations/ag-proxy.service /etc/systemd/system/
 cp ./configurations/evo-proxy.service /etc/systemd/system/
 systemctl daemon-reload
-systemctl enable ag-proxy.service --now && \
+systemctl enable ag-proxy.service --now >/dev/null && \
 echo -e "${GREEN}\nStarted \"ag-proxy\" service successfully.${DECOLOR}"
-systemctl enable evo-proxy.service --now && \
+systemctl enable evo-proxy.service --now >/dev/null && \
 echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
 
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
