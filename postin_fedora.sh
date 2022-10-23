@@ -52,9 +52,9 @@ echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
 cp ./configurations/ag-proxy.service /etc/systemd/system/
 cp ./configurations/evo-proxy.service /etc/systemd/system/
 systemctl daemon-reload
-systemctl enable ag-proxy.service --now >/dev/null && \
+systemctl enable ag-proxy.service --now 2>/dev/null && \
 echo -e "${GREEN}\nStarted \"ag-proxy\" service successfully.${DECOLOR}"
-systemctl enable evo-proxy.service --now >/dev/null && \
+systemctl enable evo-proxy.service --now 2>/dev/null && \
 echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
 
 echo -e "${BLUE}Removing unused packages...${DECOLOR}"
@@ -70,7 +70,7 @@ dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-
 https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
 
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
-cat ./configurations/bashrc-fedora >> /etc/bashrc && source /etc/bashrc
+cat ./configurations/bashrc-fedora >> /etc/bashrc
 
 echo -e "${GREEN}\nFinished configuring system.
 It's recommended to restart your computer.${DECOLOR}"
