@@ -58,19 +58,16 @@ systemctl enable evo-proxy.service --now && \
 echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
 
 echo -e "${BLUE}Removing unused packages...${DECOLOR}"
-dnf -q -y remove dnfdragora-* claws-mail-* pidgin-* geany-* parole-*.x86_64 xfburn-* \
+dnf -y remove dnfdragora-* claws-mail-* pidgin-* geany-* parole-*.x86_64 xfburn-* \
 mousepad-* xarchiver-* gnumeric-* ristretto-* transmission-* asunder-* abiword-* cheese \
 eog gnome-photos totem
-dnf -q -y remove dnfdragora-* claws-mail-* pidgin-* geany-* parole-*.x86_64 xfburn-* \
+dnf -y remove dnfdragora-* claws-mail-* pidgin-* geany-* parole-*.x86_64 xfburn-* \
 mousepad-* xarchiver-* gnumeric-* ristretto-* transmission-* asunder-* abiword-* cheese \
 eog gnome-photos totem
 
-echo -e "${BLUE}Installing useful packages...${DECOLOR}"
-dnf -y install unar gedit gthumb libreoffice numix-icon-theme-circle nextcloud-client \
-file-roller https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${REL}.noarch.rpm \
-vim-syntastic-sh libgnome-keyring uget \
+echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
+dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${REL}.noarch.rpm \
 https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
-dnf -y install vlc terminator
 
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 cat ./configurations/bashrc-fedora >> /etc/bashrc && source /etc/bashrc
