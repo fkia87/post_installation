@@ -56,7 +56,7 @@ systemctl enable evo-proxy.service --now >/dev/null && \
 echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
 
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
-cat ./configurations/bashrc-fedora >> /etc/bashrc && source /etc/bashrc
+cat ./configurations/bashrc-manjaro >> /etc/bash.bashrc && source /etc/bash.bashrc
 
 echo -e "${GREEN}\nFinished configuring system.
 It's recommended to restart your computer.${DECOLOR}"
