@@ -3,4 +3,4 @@
 source resources/os
 
 [[ "$(os)" == "manjaro" ]] && ./postin_manjaro.sh
-[[ "$(os)" == "fedora" ]] && ./posting_fedora.sh
+[[ "$(os)" == "fedora" ]] && ./postin_fedora.sh
