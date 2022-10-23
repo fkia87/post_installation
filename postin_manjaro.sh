@@ -12,7 +12,7 @@ read TARGETUSER
 
 echo -e "${BLUE}\nConfiguring \"journald\"...${DECOLOR}"
 sed -i '/^Storage=volatile/d' /etc/systemd/journald.conf
-echo "Storage=volatile" >> /etc/systemd/journald.conf
+echo -e "Storage=volatile" >> /etc/systemd/journald.conf
 systemctl restart systemd-journald
 
 echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
@@ -54,7 +54,7 @@ echo -e "${GREEN}\nStarted \"ag-proxy\" service successfully.${DECOLOR}"
 systemctl enable evo-proxy.service --now && \
 echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
 
-echo "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
+echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 cat ./configurations/bashrc-fedora >> /etc/bashrc && source /etc/bashrc
 
 echo -e "${GREEN}\nFinished configuring system.
