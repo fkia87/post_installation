@@ -58,14 +58,6 @@ echo -e "${GREEN}\nStarted \"ag-proxy\" service successfully.${DECOLOR}"
 systemctl enable evo-proxy.service --now 2>/dev/null && \
 echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
 
-echo -e "${BLUE}Removing unused packages...${DECOLOR}"
-dnf -y remove dnfdragora-* claws-mail-* pidgin-* geany-* parole-*.x86_64 xfburn-* \
-mousepad-* xarchiver-* gnumeric-* ristretto-* transmission-* asunder-* abiword-* cheese \
-eog gnome-photos totem
-dnf -y remove dnfdragora-* claws-mail-* pidgin-* geany-* parole-*.x86_64 xfburn-* \
-mousepad-* xarchiver-* gnumeric-* ristretto-* transmission-* asunder-* abiword-* cheese \
-eog gnome-photos totem
-
 echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${REL}.noarch.rpm \
 https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
