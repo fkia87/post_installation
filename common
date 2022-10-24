@@ -11,7 +11,7 @@ read TARGETUSER
 }
 
 function create_dirs {
-echo -e "${BLUE}\nCreating directories in \"$HOME\"...${DECOLOR}"
+echo -e "${BLUE}\nCreating directories in \"/home/${TARGETUSER}\"...${DECOLOR}"
 install -d -o fkia -g fkia /home/${TARGETUSER}\
 /{.fonts,.themes,bin,Applications,.icons,.ssh}
 }
