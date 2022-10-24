@@ -27,6 +27,7 @@ install -d -o fkia -g fkia /home/${TARGETUSER}\
 
 echo -e "${BLUE}\nConfiguring \"SSH\"...${DECOLOR}"
 cp /etc/ssh/ssh_config{,.bak}
+gpg -o configurations/ssh/id_rsa --decrypt configurations/ssh/encrypted_key
 install -o $TARGETUSER -g $TARGETUSER ./configurations/ssh/* /home/${TARGETUSER}/.ssh
 chmod 700 /home/${TARGETUSER}/.ssh
 chmod 644 /home/${TARGETUSER}/.ssh/id_rsa.pub
