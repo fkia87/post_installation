@@ -3,71 +3,44 @@
 source resources/os
 source resources/bash_colors
 source resources/pkg_management
+source common
 
 checkuser
 
-echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\n${DECOLOR}"
+strt_msg
 
 REL=$(cat /etc/fedora-release |awk {'print$3'})
 
-echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"
-read TARGETUSER
+get_target_user
 
-echo -e "${BLUE}\nConfiguring \"journald\"...${DECOLOR}"
-sed -i '/^Storage=volatile/d' /etc/systemd/journald.conf
-echo -e "Storage=volatile" >> /etc/systemd/journald.conf
-systemctl restart systemd-journald
+config_journald
 
 echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
 grubby --update-kernel ALL --args "selinux=0 pcie_aspm=off"
 
-echo -e "${BLUE}Turning \"SELinux\" off...$DECOLOR}"
+echo -e "${BLUE}Turning \"SELinux\" off...${DECOLOR}"
 setenforce 0
 
-echo -e "${BLUE}\nCreating directories in \"$HOME\"...${DECOLOR}"
-install -d -o fkia -g fkia /home/${TARGETUSER}\
-/{.fonts,.themes,bin,Applications,.icons,.ssh}
+create_dirs
 
 echo -e "${BLUE}Writing configurations...${DECOLOR}"
 cp ./configurations/dnf.conf /etc/dnf/dnf.conf
 
-echo -e "${BLUE}Configuring \"SSH\"...${DECOLOR}"
-cp /etc/ssh/ssh_config{,.bak}
-gpg -o configurations/ssh/id_rsa --decrypt configurations/ssh/encrypted_key
-install -o $TARGETUSER -g $TARGETUSER ./configurations/ssh/* /home/${TARGETUSER}/.ssh
-chmod 700 /home/${TARGETUSER}/.ssh
-chmod 644 /home/${TARGETUSER}/.ssh/id_rsa.pub
-chmod 600 /home/${TARGETUSER}/.ssh/id_rsa
-cat ./configurations/ssh_config >> /etc/ssh/ssh_config
+config_ssh
 
-echo -e "${BLUE}\nInstalling scripts...${DECOLOR}"
-install -m 755 -o $TARGETUSER -g $TARGETUSER ./scripts/* /home/${TARGETUSER}/bin/
+install_scripts
 
-echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
-install -d -o fkia -g fkia /home/${TARGETUSER}/GoFlex
-cp /etc/fstab{,.bak}
-cat configurations/fstab >> /etc/fstab
-systemctl daemon-reload
-mount -a
+config_goflex
 
-echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
-cp ./configurations/ag-proxy.service /etc/systemd/system/
-cp ./configurations/evo-proxy.service /etc/systemd/system/
-systemctl daemon-reload
-systemctl enable ag-proxy.service --now 2>/dev/null && \
-echo -e "${GREEN}\nStarted \"ag-proxy\" service successfully.${DECOLOR}"
-systemctl enable evo-proxy.service --now 2>/dev/null && \
-echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
+config_proxy
 
 echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
 dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${REL}.noarch.rpm \
 https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
 
-install_pkg lsd
-install_pkg duf
+common_pkg
 
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 cat ./configurations/bashrc-fedora >> /etc/bashrc
 
-echo -e "${GREEN}\nFinished configuring system.
-It's recommended to restart your computer.${DECOLOR}"
+finish_msg
