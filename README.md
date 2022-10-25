@@ -1,6 +1,10 @@
 # post_installation
-Personal post installation scripts
+Personal post installation scripts.
 
-clone with this command:
+## How to use
 
-`git clone --recurse-submodules <github-url>`
+* Clone with this command:
+
+    `git clone <github-url>`
+
+* Run `main.sh` in your terminal.
