@@ -17,7 +17,7 @@ install -d -o fkia -g fkia /home/${TARGETUSER}\
 }
 
 function config_ssh {
-echo -e "${BLUE}Configuring \"SSH\"...${DECOLOR}"
+echo -e "${BLUE}\nConfiguring \"SSH\"...${DECOLOR}"
 cp /etc/ssh/ssh_config{,.bak}
 echo -e "${BBLUE}\nEnter your SSH private key password:\n${DECOLOR}"
 while ! gpg --pinentry-mode loopback -o configurations/ssh/id_rsa \
@@ -68,5 +68,5 @@ echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\
 
 function finish_msg {
 echo -e "${GREEN}\nFinished configuring system.
-It's recommended to restart your computer.${DECOLOR}"
+It's recommended to restart your computer.\n${DECOLOR}"
 }
