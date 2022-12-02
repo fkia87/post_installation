@@ -32,5 +32,5 @@ bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
 
 alias ip='ip -c'
-alias ll='lsd -lAhi --header --group-directories-first --date relative'
+alias ll='lsd -lAhi --color always --header --group-directories-first --date relative'
 alias df='duf'
