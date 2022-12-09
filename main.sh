@@ -51,6 +51,7 @@ config_ssh
 install_scripts
 
 config_goflex
+[[ $? == 2 ]] && echo -e "${RED}\"GoFlex\" hard disk not found.${DECOLOR}"
 
 [[ "$(os)" == "manjaro" ]] && common_pkg
 
