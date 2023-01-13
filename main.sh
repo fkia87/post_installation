@@ -1,15 +1,20 @@
 #!/bin/bash
 
-rm -rf resources
+files=("resources/pkg_management" "resources/os" "resources/bash_colors")
 
-git clone https://github.com/fkia87/resources.git || \
-{ echo -e "Error downloading required files from Github.
+if ! [[ -f ${files[0]} ]] \
+|| ! [[ -f ${files[1]} ]] \
+|| ! [[ -f ${files[2]} ]]; then
+    rm -rf resources
+    git clone https://github.com/fkia87/resources.git || \
+    { echo -e "Error downloading required files from Github.
 Check if \"Git\" is installed and your internet connection is OK." >&2; \
-exit 1; }
+    exit 1; }
+fi
 
-source resources/os
-source resources/bash_colors
-source resources/pkg_management
+for file in ${files[@]}; do
+    source $file
+done
 source common
 
 checkuser
