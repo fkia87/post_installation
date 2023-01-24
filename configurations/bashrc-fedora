@@ -32,7 +32,7 @@ bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
 
 alias ip='ip -c '
-alias ll='lsd -lAhi --color always --header --group-directories-first --date relative '
+alias ll='lsd -lAhi --color always --header --group-directories-first --date relative --icon-theme unicode '
 alias df='duf '
 alias sl='systemctl '
 alias sls='systemctl status '
