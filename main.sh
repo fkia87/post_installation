@@ -79,6 +79,7 @@ manjaro|ubuntu)
     BASHRC="/etc/bash.bashrc"
     ;;
 esac
+sed -i '/^alias ll/d' /home/$TARGETUSER/.bashrc $BASHRC
 cat ./configurations/bashrc-{$(os),common} >> $BASHRC
 
 finish_msg
