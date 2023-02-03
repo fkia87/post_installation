@@ -1,0 +1,2 @@
+alias ll='lsd -lAhi --color always --header --group-directories-first --date relative '
+alias df='duf '

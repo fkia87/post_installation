@@ -68,7 +68,11 @@ fedora)
 esac
 
 # Installing useful packages
-common_pkg
+case $(os) in
+fedora|manjaro)
+    common_pkg
+    ;;
+esac
 
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 case $(os) in
@@ -79,7 +83,7 @@ manjaro|ubuntu)
     BASHRC="/etc/bash.bashrc"
     ;;
 esac
-sed -i '/^alias ll/d' /home/$TARGETUSER/.bashrc $BASHRC
+sed -i '/^alias ll/d' /home/$TARGETUSER/.bashrc
 cat ./configurations/bashrc-{$(os),common} >> $BASHRC
 
 finish_msg
