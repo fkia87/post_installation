@@ -1,10 +1,3 @@
-
-PS1='\[\033[01;32m\][\u@\h\[\033[00m\] \[\033[00;36m\]\w]\[\033[00m\]$ '
-# "\W" ----> current directory name
-# "\w" ----> current directory full path
-# "\h" ----> hostname
-# "\u" ----> username
-
 function ex {
 	if [ -f $1 ] ; then
 		case $1 in
@@ -37,3 +30,5 @@ alias df='duf '
 alias sl='systemctl '
 alias sls='systemctl status '
 alias slr='systemctl restart '
+alias h='head'
+alias t='tail'

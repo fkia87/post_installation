@@ -1,7 +1,6 @@
 #!/bin/bash
 
 files=("resources/pkg_management" "resources/os" "resources/bash_colors")
-
 if ! [[ -f ${files[0]} ]] \
 || ! [[ -f ${files[1]} ]] \
 || ! [[ -f ${files[2]} ]]; then
@@ -11,7 +10,6 @@ if ! [[ -f ${files[0]} ]] \
 Check if \"Git\" is installed and your internet connection is OK." >&2; \
     exit 1; }
 fi
-
 for file in ${files[@]}; do
     source $file
 done
@@ -51,36 +49,36 @@ fedora)
     ;;
 esac
 
-config_ssh
-
-install_scripts
-
-config_goflex
-[[ $? == 2 ]] && echo -e "${RED}\"GoFlex\" hard disk not found.${DECOLOR}"
-
-[[ "$(os)" == "manjaro" ]] && common_pkg
-
-config_proxy
+case $(os) in
+fedora|manjaro)
+    config_ssh
+    install_scripts
+    config_goflex
+    [[ $? == 2 ]] && echo -e "${RED}\"GoFlex\" hard disk not found.${DECOLOR}"
+    config_proxy
+    ;;
+esac
 
 case $(os) in
 fedora)
     echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
     dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${REL}.noarch.rpm \
-https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
+    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
     ;;
 esac
 
-[[ "$(os)" == "fedora" ]] && common_pkg
+# Installing useful packages
+common_pkg
 
+echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 case $(os) in
 fedora)
-    echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
-    cat ./configurations/bashrc-fedora >> /etc/bashrc
+    BASHRC="/etc/bashrc"
     ;;
-manjaro)
-    echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
-    cat ./configurations/bashrc-manjaro >> /etc/bash.bashrc
+manjaro|ubuntu)
+    BASHRC="/etc/bash.bashrc"
     ;;
 esac
+cat ./configurations/bashrc-{$(os),common} >> $BASHRC
 
 finish_msg
