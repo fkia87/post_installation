@@ -12,7 +12,7 @@ read TARGETUSER
 
 function create_dirs {
 echo -e "${BLUE}\nCreating directories in \"/home/${TARGETUSER}\"...${DECOLOR}"
-install -d -o fkia -g fkia /home/${TARGETUSER}\
+install -d -o $TARGETUSER -g $TARGETUSER /home/${TARGETUSER}\
 /{.fonts,.themes,bin,Applications,.icons,.ssh}
 }
 
@@ -43,7 +43,7 @@ echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
 # Confirm that GoFlex HDD is present:
 blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || return 2
 
-install -d -o fkia -g fkia /home/${TARGETUSER}/GoFlex
+install -d -o $TARGETUSER -g $TARGETUSER /home/${TARGETUSER}/GoFlex
 cp /etc/fstab{,.bak}
 cat configurations/fstab >> /etc/fstab
 systemctl daemon-reload
