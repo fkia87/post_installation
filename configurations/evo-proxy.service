@@ -4,7 +4,7 @@ Requires=network.target
 
 [Service]
 Type=simple
-ExecStart=ssh -tt -o StrictHostKeyChecking=no -p2244 -D12346 -vv root@191.101.166.157
+ExecStart=ssh -tt -o StrictHostKeyChecking=no -p2244 -D12346 -vv -N root@191.101.166.157
 Restart=on-failure
 RestartSec=5
 User=fkia
