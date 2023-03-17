@@ -51,8 +51,7 @@ mount -a
 }
 
 function common_pkg {
-install_pkg lsd
-install_pkg duf
+install_pkg lsd duf bat
 }
 
 function config_proxy {
