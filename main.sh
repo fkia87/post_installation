@@ -46,6 +46,10 @@ case $(os) in
 fedora)
     echo -e "${BLUE}Writing \"DNF\" configurations...${DECOLOR}"
     cp ./configurations/dnf.conf /etc/dnf/dnf.conf
+    echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
+    dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${REL}.noarch.rpm \
+    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
+    BASHRC="/etc/bashrc"
     ;;
 esac
 
@@ -56,33 +60,17 @@ fedora|manjaro)
     config_goflex
     [[ $? == 2 ]] && echo -e "${RED}\"GoFlex\" hard disk not found.${DECOLOR}"
     config_proxy
-    ;;
-esac
-
-case $(os) in
-fedora)
-    echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
-    dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-${REL}.noarch.rpm \
-    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-${REL}.noarch.rpm
-    ;;
-esac
-
-# Installing useful packages
-case $(os) in
-fedora|manjaro)
     common_pkg
     ;;
 esac
 
-echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 case $(os) in
-fedora)
-    BASHRC="/etc/bashrc"
-    ;;
 manjaro|ubuntu)
     BASHRC="/etc/bash.bashrc"
     ;;
 esac
+
+echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 sed -i '/^alias ll/d' /home/$TARGETUSER/.bashrc
 cat ./configurations/bashrc-{$(os),common} >> $BASHRC
 
