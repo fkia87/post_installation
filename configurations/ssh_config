@@ -7,3 +7,15 @@ StrictHostKeyChecking no
 # related to SSH connection establishment below the line "Host *":
 
 # KexAlgorithms ecdh-sha2-nistp521
+
+Host ansible-stage-144.166
+	HostName 172.16.144.166
+	User f.kia
+	Port 4141
+Host backup-64.33
+	Hostname 172.16.64.33
+	User f.kia
+	Port 4141
+Host myserver
+	Hostname 185.232.152.106
+	User ubuntu
