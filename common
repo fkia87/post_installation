@@ -1,22 +1,24 @@
-function config_journald {
+# shellcheck disable=SC2148
+
+config_journald() {
 echo -e "${BLUE}\nConfiguring \"journald\"...${DECOLOR}"
 sed -i '/^Storage=volatile/d' /etc/systemd/journald.conf
 echo -e "Storage=volatile" >> /etc/systemd/journald.conf
 systemctl restart systemd-journald
 }
 
-function get_target_user {
+get_target_user() {
 echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"
-read TARGETUSER
+read -r TARGETUSER
 }
 
-function create_dirs {
+create_dirs() {
 echo -e "${BLUE}\nCreating directories in \"/home/${TARGETUSER}\"...${DECOLOR}"
-install -d -o $TARGETUSER -g $TARGETUSER /home/${TARGETUSER}\
+install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"${TARGETUSER}"\
 /{.fonts,.themes,bin,Applications,.icons,.ssh}
 }
 
-function config_ssh {
+config_ssh() {
 echo -e "${BLUE}\nConfiguring \"SSH\"...${DECOLOR}"
 cp /etc/ssh/ssh_config{,.bak}
 echo -e "${BBLUE}\nEnter your SSH private key password:\n${DECOLOR}"
@@ -25,36 +27,36 @@ while ! gpg --pinentry-mode loopback -o configurations/ssh/id_rsa \
 do
     sleep 1
 done
-install -o $TARGETUSER -g $TARGETUSER ./configurations/ssh/* /home/${TARGETUSER}/.ssh
-chmod 700 /home/${TARGETUSER}/.ssh
-chmod 644 /home/${TARGETUSER}/.ssh/id_rsa.pub
-chmod 600 /home/${TARGETUSER}/.ssh/id_rsa
+install -o "$TARGETUSER" -g "$TARGETUSER" ./configurations/ssh/* /home/"${TARGETUSER}"/.ssh
+chmod 700 /home/"${TARGETUSER}"/.ssh
+chmod 644 /home/"${TARGETUSER}"/.ssh/id_rsa.pub
+chmod 600 /home/"${TARGETUSER}"/.ssh/id_rsa
 cat ./configurations/ssh_config >> /etc/ssh/ssh_config
 }
 
-function install_scripts {
+install_scripts() {
 echo -e "${BLUE}\nInstalling scripts...${DECOLOR}"
-install -m 755 -o $TARGETUSER -g $TARGETUSER ./scripts/* /home/${TARGETUSER}/bin/
+install -m 755 -o "$TARGETUSER" -g "$TARGETUSER" ./scripts/* /home/"${TARGETUSER}"/bin/
 }
 
-function config_goflex {
+config_goflex() {
 echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
 
 # Confirm that GoFlex HDD is present:
 blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || return 2
 
-install -d -o $TARGETUSER -g $TARGETUSER /home/${TARGETUSER}/GoFlex
+install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"${TARGETUSER}"/GoFlex
 cp /etc/fstab{,.bak}
 cat configurations/fstab >> /etc/fstab
 systemctl daemon-reload
 mount -a
 }
 
-function common_pkg {
+common_pkg() {
 install_pkg lsd duf bat
 }
 
-function config_proxy {
+config_proxy() {
 echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
 cp ./configurations/ag-proxy.service /etc/systemd/system/
 cp ./configurations/evo-proxy.service /etc/systemd/system/
@@ -65,11 +67,11 @@ systemctl enable evo-proxy.service --now 2>/dev/null && \
 echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
 }
 
-function strt_msg {
+strt_msg() {
 echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\n${DECOLOR}"
 }
 
-function finish_msg {
+finish_msg() {
 echo -e "${GREEN}\nFinished configuring system.
 It's recommended to restart your computer.\n${DECOLOR}"
 }

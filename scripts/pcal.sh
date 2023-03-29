@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2220,SC2213
 
 BREAKS=(-61 9 38 199 426 686 756 818 1111 1181 1210 1635 2060 2097 2192 2262 2324 2394 2456 3178)
 DAY_NAMES_FA=(Sh Ye Do Se Ch Pa Jo)
@@ -16,7 +17,7 @@ to_jalaali() {
   local gm=$2
   local gd=$3
 
-  echo $(d2j $(g2d $gy $gm $gd))
+  d2j "$(g2d "$gy" "$gm" "$gd")"
 }
 
 to_gregorian() {
@@ -24,7 +25,7 @@ to_gregorian() {
   local jm=$2
   local jd=$3
 
-  echo $(format_output $(d2g $(j2d $jy $jm $jd)))
+  format_output "$(d2g "$(j2d "$jy" "$jm" "$jd")")"
 }
 
 g2d() {
@@ -99,11 +100,11 @@ jal_cal() {
 
 d2j() {
   local jdn=$1
-  local gy=$(d2g $jdn)
+  local gy; gy=$(d2g "$jdn")
   gy=${gy%% *}
   local jy=$((gy - 621))
-  local r="$(jal_cal $jy 'false')"
-  local jdn1f=$(g2d $gy 3 ${r##* })
+  local r; r="$(jal_cal $jy 'false')"
+  local jdn1f; jdn1f=$(g2d "$gy" 3 "${r##* }")
   local k=$((jdn - jdn1f))
 
   if [[ $k -ge 0 ]]; then
@@ -111,7 +112,7 @@ d2j() {
       local jm=$((1 + k / 31))
       local jd=$((k % 31 + 1))
 
-      echo "$(format_output $jy $jm $jd)"
+      format_output $jy $jm $jd
       return 0
     else
       k=$((k - 186))
@@ -128,17 +129,17 @@ d2j() {
   local jm=$((7 + k / 30))
   local jd=$((k % 30 + 1))
 
-  echo "$(format_output $jy $jm $jd)"
+  format_output "$jy" "$jm" "$jd"
 }
 
 j2d() {
   local jy=$1
   local jm=$2
   local jd=$3
-  local r=$(jal_cal $jy "true")
+  local r; r=$(jal_cal "$jy" "true")
   local gy=${r#* }
   gy=${gy% *}
-  local g2d_res=$(g2d $gy 3 ${r##* })
+  local g2d_res; g2d_res=$(g2d "$gy" 3 "${r##* }")
 
   echo $(( g2d_res + (jm - 1) * 31 - (jm / 7) * (jm - 7) + jd - 1 ))
 
@@ -154,8 +155,8 @@ zero_pad() {
 
 format_output() {
   local jy=$1
-  local jm=$(zero_pad $2)
-  local jd=$(zero_pad $3)
+  local jm; jm=$(zero_pad "$2")
+  local jd; jd=$(zero_pad "$3")
   local odel=${OPTION_ODEL--}
 
   echo "$jy$odel$jm$odel$jd"
@@ -164,16 +165,16 @@ format_output() {
 parse_input() {
   local input_date=$1
   local idel=${OPTION_IDEL:--}
-  local y=${input_date%%$idel*}
-  local m=${input_date%$idel*}
-  m=${m#*$idel}
-  local d=${input_date##*$idel}
+  local y=${input_date%%"$idel"*}
+  local m=${input_date%"$idel"*}
+  m=${m#*"$idel"}
+  local d=${input_date##*"$idel"}
 
   echo "$((10#$y)) $((10#$m)) $((10#$d))"
 }
 
 is_leap_jalaali_year() {
-  [[ $(jal_cal_leap $(current_persian_year)) -eq 0 ]] && echo "true" && return 0
+  [[ $(jal_cal_leap "$(current_persian_year)") -eq 0 ]] && echo "true" && return 0
   echo "false"
 }
 
@@ -212,23 +213,23 @@ jalaali_month_length() {
 }
 
 print_current_month() {
-  local index=$(first_day_of_month)
+  local index; index=$(first_day_of_month)
   local counter=0
   local day=1
-  local current_month=$(current_persian_month)
-  local month_length=$(jalaali_month_length $current_month)
+  local current_month; current_month=$(current_persian_month)
+  local month_length; month_length=$(jalaali_month_length "$current_month")
   local fcolor='\e[39m'
   local bcolor='\e[49m'
   local dfcolor='\e[39m'
   local dbcolor='\e[49m'
-  local current_day=$(current_persian_day)
+  local current_day; current_day=$(current_persian_day)
   local current_month_name=${MONTH_NAMES[$((current_month - 1))]}
   local month_name_length=${#current_month_name}
   local month_pad=$(((21 + month_name_length) / 2))
 
-  printf '%12s\n' $(current_persian_year)
-  printf "%${month_pad}s\n" $current_month_name
-  echo ${DAY_NAMES_FA[@]}
+  printf '%12s\n' "$(current_persian_year)"
+  printf "%${month_pad}s\n" "$current_month_name"
+  echo "${DAY_NAMES_FA[@]}"
 
   for ((i = 0; i < 6; i++)); do
     for ((j = 0; j < 7; j++)); do
@@ -263,39 +264,38 @@ print_current_month() {
 
 find_en_day_name() {
   local first_day_number=$1
-  local current_seconds=$(printf '%(%s)T' -1)
+  local current_seconds; current_seconds=$(printf '%(%s)T' -1)
   local first_date_seconds=$(( current_seconds - (first_day_number - 1) * 86400 ))
-  echo "$(printf '%(%a)T' $first_date_seconds)"
+  printf '%(%a)T' $first_date_seconds
 }
 
 first_day_of_month() {
-  local current=$(current_persian_date)
+  local current; current=$(current_persian_date)
   local first_day_number=$((10#${current##*-}))
-
-  echo ${DAY_NAMES[${DAY_NAMES_EN[$(find_en_day_name $first_day_number)]}]}
+  echo "${DAY_NAMES[${DAY_NAMES_EN[$(find_en_day_name $first_day_number)]}]}"
 }
 
 current_persian_date() {
-  local current_g=$(printf '%(%F)T' -1)
-  local current_j=$(to_jalaali $(parse_input $current_g))
+  local current_g; current_g=$(printf '%(%F)T' -1)
+  local current_j; current_j=$(to_jalaali "$(parse_input "$current_g")")
   echo "$current_j"
 }
 
 current_persian_day() {
-  local current=$(current_persian_date)
+  local current; current=$(current_persian_date)
   local current_day=${current##*-}
   echo $((10#$current_day))
 }
 
 current_persian_month() {
-  local current=$(current_persian_date)
+  local current; current=$(current_persian_date)
   local current_month=${current%-*}
   current_month=${current_month#*-}
   echo $((10#$current_month))
 }
 
 current_persian_year() {
-  local current=$(current_persian_date)
+  local current; current=$(current_persian_date)
   local current_year=${current%%-*}
   echo $((10#$current_year))
 }
@@ -319,7 +319,7 @@ print_help() {
 main() {
   local input_data
   local gregorian
-  local must_exit=1
+  # local must_exit; must_exit=1
 
   while getopts ":hd:D:gmt" opt; do
     case ${opt} in
@@ -369,12 +369,12 @@ main() {
   done
   shift $((OPTIND -1))
 
-  read input_data
+  read -r input_data
 
   if [[ $gregorian -eq 1 ]]; then
-    to_gregorian $(parse_input $input_data)
+    to_gregorian "$(parse_input "$input_data")"
   else
-    to_jalaali $(parse_input $input_data)
+    to_jalaali "$(parse_input "$input_data")"
   fi
 }
 

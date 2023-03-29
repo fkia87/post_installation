@@ -7,7 +7,7 @@ gpu_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
 gpu_fan=$(nvidia-smi --query-gpu=fan.speed --format=csv,noheader)
 memory_percent=$(echo "scale=1; ${memory_used}*100/${memory_total}" | bc)
 
-echo G: $gpu_util
-echo M: $memory_percent %
-echo -e T: $gpu_temp "\u00b0"C
-echo F: $gpu_fan
+echo G: "$gpu_util"
+echo M: "$memory_percent" %
+echo -e T: "$gpu_temp" "\u00b0"C
+echo F: "$gpu_fan"

@@ -1,2 +1,2 @@
 #!/bin/bash
-cat /proc/meminfo |grep -i dirty | awk {'print$2,$3'}
+grep -i dirty /proc/meminfo | awk '{print$2,$3}'
