@@ -1,0 +1,12 @@
+Host myserver
+        HostName 185.232.152.106
+        Port 22
+        User ubuntu
+Host ag
+        Hostname 193.37.213.206
+        Port 2244
+        User root
+Host evo
+        Hostname 191.101.166.157
+        Port 2244
+        User root

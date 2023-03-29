@@ -1,10 +1,11 @@
 #!/bin/bash
 # shellcheck disable=SC2068,SC1091,SC1090
 
-files=("resources/pkg_management" "resources/os" "resources/bash_colors")
+files=("resources/pkg_management" "resources/os" "resources/bash_colors" "resources/utils")
 if ! [[ -f ${files[0]} ]] \
 || ! [[ -f ${files[1]} ]] \
-|| ! [[ -f ${files[2]} ]]; then
+|| ! [[ -f ${files[2]} ]] \
+|| ! [[ -f ${files[3]} ]]; then
     rm -rf resources
     git clone https://github.com/fkia87/resources.git || \
     { echo -e "Error downloading required files from Github.
@@ -51,15 +52,16 @@ case $(os) in
         https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"${REL}".noarch.rpm
         BASHRC="/etc/bashrc"
         ;;
-    esac
+esac
 
-    case $(os) in
+ask "Do you want to setup SSH?" "config_ssh"
+ask "Do you want to configure SSH proxies?" "config_proxy"
+
+case $(os) in
     fedora|manjaro)
-        config_ssh
         install_scripts
         config_goflex
         [[ $? == 2 ]] && echo -e "${RED}\"GoFlex\" hard disk not found.${DECOLOR}"
-        config_proxy
         common_pkg
         ;;
 esac

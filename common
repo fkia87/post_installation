@@ -14,7 +14,7 @@ read -r TARGETUSER
 
 create_dirs() {
 echo -e "${BLUE}\nCreating directories in \"/home/${TARGETUSER}\"...${DECOLOR}"
-install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"${TARGETUSER}"\
+install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"$TARGETUSER"\
 /{.fonts,.themes,bin,Applications,.icons,.ssh}
 }
 
@@ -27,16 +27,16 @@ while ! gpg --pinentry-mode loopback -o configurations/ssh/id_rsa \
 do
     sleep 1
 done
-install -o "$TARGETUSER" -g "$TARGETUSER" ./configurations/ssh/* /home/"${TARGETUSER}"/.ssh
-chmod 700 /home/"${TARGETUSER}"/.ssh
-chmod 644 /home/"${TARGETUSER}"/.ssh/id_rsa.pub
-chmod 600 /home/"${TARGETUSER}"/.ssh/id_rsa
+install -o "$TARGETUSER" -g "$TARGETUSER" ./configurations/ssh/* /home/"$TARGETUSER"/.ssh
+chmod 700 /home/"$TARGETUSER"/.ssh
+chmod 644 /home/"$TARGETUSER"/.ssh/id_rsa.pub
+chmod 600 /home/"$TARGETUSER"/.ssh/id_rsa
 cat ./configurations/ssh_config >> /etc/ssh/ssh_config
 }
 
 install_scripts() {
 echo -e "${BLUE}\nInstalling scripts...${DECOLOR}"
-install -m 755 -o "$TARGETUSER" -g "$TARGETUSER" ./scripts/* /home/"${TARGETUSER}"/bin/
+install -m 755 -o "$TARGETUSER" -g "$TARGETUSER" ./scripts/* /home/"$TARGETUSER"/bin/
 }
 
 config_goflex() {
@@ -45,7 +45,7 @@ echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
 # Confirm that GoFlex HDD is present:
 blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || return 2
 
-install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"${TARGETUSER}"/GoFlex
+install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"$TARGETUSER"/GoFlex
 cp /etc/fstab{,.bak}
 cat configurations/fstab >> /etc/fstab
 systemctl daemon-reload
