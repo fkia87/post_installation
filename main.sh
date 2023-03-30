@@ -69,6 +69,7 @@ esac
 case $(os) in
     manjaro|ubuntu)
         BASHRC="/etc/bash.bashrc"
+        common_pkg
         ;;
 esac
 
