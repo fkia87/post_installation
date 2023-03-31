@@ -39,6 +39,12 @@ echo -e "${BLUE}\nInstalling scripts...${DECOLOR}"
 install -m 755 -o "$TARGETUSER" -g "$TARGETUSER" ./scripts/* /home/"$TARGETUSER"/bin/
 }
 
+install_fonts() {
+echo -e "${BLUE}\nInstalling fonts...${DECOLOR}"
+cp -r ./fonts/* /home/"$TARGETUSER"/.fonts/
+chown -R "$TARGETUSER":"$TARGETUSER" /home/"$TARGETUSER"/.fonts/*
+}
+
 config_goflex() {
 echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
 
