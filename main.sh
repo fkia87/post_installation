@@ -2,7 +2,7 @@
 # shellcheck disable=SC2068,SC1091,SC1090
 
 # IMPORT REQUIREMENTS ###################################################################################
-requirements=("resources/pkg_management" "resources/os" "resources/bash_colors" "resources/utils")
+requirements=("resources/pkg_management" "resources/bash_colors" "resources/utils")
 for ((i=0; i<${#requirements[@]}; i++)); do
     if ! [[ -d resources ]] || ! [[ -f ${requirements[i]} ]]; then
         rm -rf resources
@@ -10,6 +10,7 @@ for ((i=0; i<${#requirements[@]}; i++)); do
         { echo -e "Error downloading required files from Github." >&2; \
         echo -e "Please check your internet connection." >&2; \
         exit 1; }
+        unzip master.zip && mv resources* resources
         break
     fi
 done
