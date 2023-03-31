@@ -1,19 +1,23 @@
 #!/bin/bash
 # shellcheck disable=SC2068,SC1091,SC1090
 
-files=("resources/pkg_management" "resources/os" "resources/bash_colors" "resources/utils")
-if ! [[ -f ${files[0]} ]] \
-|| ! [[ -f ${files[1]} ]] \
-|| ! [[ -f ${files[2]} ]] \
-|| ! [[ -f ${files[3]} ]]; then
-    rm -rf resources
-    git clone https://github.com/fkia87/resources.git || \
-    { echo -e "Error downloading required files from Github.
-Check if \"Git\" is installed and your internet connection is OK." >&2; exit 1; }
-fi
-for file in ${files[@]}; do
+# IMPORT REQUIREMENTS ###################################################################################
+requirements=("resources/pkg_management" "resources/os" "resources/bash_colors" "resources/utils")
+for ((i=0; i<${#requirements[@]}; i++)); do
+    if ! [[ -d resources ]] || ! [[ -f ${requirements[i]} ]]; then
+        rm -rf resources
+        wget https://github.com/fkia87/resources/archive/refs/heads/master.zip || \
+        { echo -e "Error downloading required files from Github." >&2; \
+        echo -e "Please check your internet connection." >&2; \
+        exit 1; }
+        break
+    fi
+done
+
+for file in ${requirements[@]}; do
     source "$file"
 done
+#########################################################################################################
 source common
 
 checkuser
@@ -75,6 +79,6 @@ esac
 
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 sed -i '/^alias ll/d' /home/"$TARGETUSER"/.bashrc
-cat ./configurations/bashrc-{"$(os)",common} >> "$BASHRC"
+cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
 
 finish_msg
