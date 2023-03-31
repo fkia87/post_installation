@@ -1,4 +1,5 @@
-
+# POST INSTALLATION
+# shellcheck disable=SC2148
 ex() {
 	if [ -f "$1" ] ; then
 		case $1 in
@@ -20,15 +21,64 @@ ex() {
 	fi
 }
 
+wttr() {
+	curl wttr.in/"$1"
+}
+
+calc() {
+	awk "BEGIN{ print $* }"
+}
+
 # better bash completion
 bind "set completion-ignore-case on"
 bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
 
-# custom aliases
-alias ip='ip -c '
+alias weather='wttr'
+alias weather_in='wttr'
+alias ip='ip -c -h -p '
+alias ipa='ip -br a'
 alias sl='systemctl '
 alias sls='systemctl status '
 alias slr='systemctl restart '
-alias h='head'
-alias t='tail'
+alias h='head '
+alias t='tail '
+alias cpv='rsync -ah --info=progress2 '
+alias myip='curl ipaddy.net '
+# Other options be like:
+# INLINE:
+#    l2.io/ip
+#    https://echoip.de
+#    ifconfig.me
+#    ipecho.net/plain
+#    -L ident.me
+#    -L canihazip.com/s
+#    -L tnx.nl/ip
+#    wgetip.com
+#    whatismyip.akamai.com
+#    ip.tyk.nu
+#    bot.whatismyipaddress.com
+#    curlmyip.net
+#    api.ipify.org
+#    ipv4bot.whatismyipaddress.com
+#    ipcalf.com
+# NEWLINE:
+#    ipaddy.net
+#    eth0.me
+#    ipaddr.site
+#    ifconfig.co
+#    ifconfig.pro
+#    curlmyip.net
+#    ipinfo.io/ip
+#    icanhazip.com
+#    checkip.amazonaws.com
+#    smart-ip.net/myip
+#    ip-api.com/line?fields=query
+#    ifconfig.io/ip
+#    -s ip.liquidweb.com
+#    ifconfig.es
+#    ipaddress.sh
+#    2ip.ru
+alias externalip='myip '
+alias publicip='myip '
+alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python - '
