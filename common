@@ -53,7 +53,7 @@ mount -a
 }
 
 common_pkg() {
-install_pkg lsd duf bat
+install_pkg lsd duf bat curl
 }
 
 config_proxy() {
