@@ -8,8 +8,12 @@ systemctl restart systemd-journald
 }
 
 get_target_user() {
-echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"
-read -r TARGETUSER
+while [[ -z $TARGETUSER ]] || ! grep 'bash$' /etc/passwd | \
+    awk -F ':' '{print$1}' | grep -q ^"$TARGETUSER"$ 2>/dev/null
+do
+    echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"
+    read -r TARGETUSER
+done
 }
 
 create_dirs() {
