@@ -82,6 +82,6 @@ echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\
 }
 
 finish_msg() {
-echo -e "${GREEN}\nFinished configuring system.
+echo -e "${GREEN}\nFinished configuring system.\n\
 It's recommended to restart your computer.\n${DECOLOR}"
 }
