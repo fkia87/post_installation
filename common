@@ -1,4 +1,4 @@
-# shellcheck disable=SC2148
+# shellcheck disable=SC2148,SC2317
 
 config_journald() {
     echo -e "${BLUE}\nConfiguring \"journald\"...${DECOLOR}"
