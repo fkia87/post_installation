@@ -20,15 +20,10 @@ for file in ${requirements[@]}; do
 done
 ##################################################################################################################
 source common
-
 checkuser
-
 strt_msg
-
 [[ "$(os)" == "fedora" ]] && REL=$(awk '{print$3}' < /etc/fedora-release)
-
 get_target_user
-
 config_journald
 
 ## GRUB ##########################################################################################################
@@ -47,6 +42,7 @@ case $(os) in
         ;;
 esac
 
+# Create directories #############################################################################################
 create_dirs
 
 ## DNF ###########################################################################################################
@@ -60,6 +56,7 @@ case $(os) in
         ;;
 esac
 
+# SSH and proxy configuration ####################################################################################
 ask "Do you want to setup SSH?" "config_ssh"
 ask "Do you want to configure SSH tunnels?" "config_proxy"
 
@@ -96,6 +93,8 @@ esac
 sed -i '/^alias ll/d' /home/"$TARGETUSER"/.bashrc
 cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
 
+# Fonts ##########################################################################################################
 ask "Do you want to install fonts?" "install_fonts"
 
+##################################################################################################################
 finish_msg
