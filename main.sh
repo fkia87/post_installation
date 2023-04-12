@@ -71,9 +71,17 @@ case $(os) in
         [[ $? == 2 ]] && echo -e "${RED}\"GoFlex\" hard disk not found.${DECOLOR}"
         ;;
 esac
-##################################################################################################################
 
-common_pkg
+# Package installation ###########################################################################################
+case $(os) in
+    fedora|manjaro)
+        install_pkg lsd duf bat curl
+        ;;
+    ubuntu|debian)
+        install_pkg duf bat curl
+        snap install lsd
+        ;;
+esac
 
 # bachrc #########################################################################################################
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
