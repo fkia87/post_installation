@@ -2,15 +2,14 @@
 # shellcheck disable=SC2068,SC1091,SC1090
 
 # IMPORT REQUIREMENTS ############################################################################################
-requirements=("resources/pkg_management" "resources/bash_colors" "resources/utils")
+requirements=("resources/bash_colors" "resources/utils")
 for ((i=0; i<${#requirements[@]}; i++)); do
     if ! [[ -d resources ]] || ! [[ -f ${requirements[i]} ]]; then
         rm -rf resources
         wget https://github.com/fkia87/resources/archive/refs/heads/master.zip || \
-        { echo -e "Error downloading required files from Github." >&2; \
-        echo -e "Please check your internet connection." >&2; \
-        exit 1; }
-        unzip master.zip && mv resources* resources
+        { echo -e "Error downloading required files from Github." >&2; exit 1; }
+        unzip master.zip || { echo -e "Command \"unzip master.zip\" failed." >&2; exit 1; }
+        mv resources* resources
         break
     fi
 done
@@ -18,6 +17,7 @@ done
 for file in ${requirements[@]}; do
     source "$file"
 done
+
 ##################################################################################################################
 source common
 checkuser
