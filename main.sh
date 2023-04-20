@@ -19,7 +19,7 @@ for file in ${requirements[@]}; do
 done
 
 ##################################################################################################################
-source common
+source ./common
 checkuser
 strt_msg
 [[ "$(os)" == "fedora" ]] && REL=$(awk '{print$3}' < /etc/fedora-release)
