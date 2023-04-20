@@ -36,6 +36,10 @@ config_ssh() {
     cat ./configurations/ssh_config >> /etc/ssh/ssh_config
 }
 
+config_hosts() {
+    cat ./configurations/hosts >> /etc/hosts
+}
+
 install_scripts() {
     echo -e "${BLUE}\nInstalling scripts...${DECOLOR}"
     install -m 755 -o "$TARGETUSER" -g "$TARGETUSER" ./scripts/* /home/"$TARGETUSER"/bin/
@@ -64,7 +68,8 @@ strt_msg() {
 
 config_goflex() {
     echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
-    blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || return 2
+    blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || \
+        { echo -e "${RED}\"GoFlex\" not found.${DECOLOR}"; return 2; }
     install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"$TARGETUSER"/GoFlex
     cp /etc/fstab{,.bak}
     cat configurations/fstab >> /etc/fstab

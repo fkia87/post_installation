@@ -56,18 +56,16 @@ case $(os) in
         ;;
 esac
 
-# SSH and proxy configuration ####################################################################################
-ask "Do you want to setup SSH?" "config_ssh"
-ask "Do you want to configure SSH tunnels?" "config_proxy"
+# Hosts, SSH and proxy configuration ####################################################################################
+ask "Setup SSH keys?" "config_ssh"
+ask "Install \"/etc/hosts\"?" "config_hosts"
+ask "Configure SSH tunnels?" "config_proxy"
+
+##################################################################################################################
+install_scripts
 
 # GoFlex #########################################################################################################
-case $(os) in
-    fedora|manjaro)
-        install_scripts
-        config_goflex
-        [[ $? == 2 ]] && echo -e "${RED}\"GoFlex\" hard disk not found.${DECOLOR}"
-        ;;
-esac
+ask "Configure \"GoFlex\"?" "config_goflex"
 
 # Package installation ###########################################################################################
 case $(os) in
