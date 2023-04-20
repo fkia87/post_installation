@@ -88,7 +88,7 @@ case $(os) in
         BASHRC="/etc/bashrc"
         ;;
 esac
-sed -i '/^alias ll/d' "$TARGETHOME"/.bashrc
+[[ $(os) == "ubuntu" ]] || sed -i '/^alias ll/d' "$targethome"/.bashrc
 cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
 
 # Fonts ##########################################################################################################

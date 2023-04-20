@@ -8,22 +8,22 @@ config_journald() {
 }
 
 get_target_user() {
-    while [[ -z $TARGETUSER ]] || ! grep 'bash$' /etc/passwd | \
-        awk -F ':' '{print$1}' | grep -q ^"$TARGETUSER"$ 2>/dev/null; do
+    while [[ -z $targetuser ]] || ! grep 'bash$' /etc/passwd | \
+        awk -F ':' '{print$1}' | grep -q ^"$targetuser"$ 2>/dev/null; do
         echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"
-        read -r TARGETUSER
-        if [[ $TARGETUSER == "root" ]]; then
-            TARGETHOME=/$TARGETUSER
+        read -r targetuser
+        if [[ $targetuser == "root" ]]; then
+            targethome=/$targetuser
         else
-            TARGETHOME=/home/"$TARGETUSER"
+            targethome=/home/"$targetuser"
         fi
     done
 }
 
 create_dirs() {
-    echo -e "${BLUE}\nCreating directories in \"$TARGETHOME\"...${DECOLOR}"
-    install -d -o "$TARGETUSER" -g "$TARGETUSER" \
-        "$TARGETHOME"/{.fonts,.themes,bin,Applications,.icons,.ssh}
+    echo -e "${BLUE}\nCreating directories in \"$targethome\"...${DECOLOR}"
+    install -d -o "$targetuser" -g "$targetuser" \
+        "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh}
 }
 
 config_ssh() {
@@ -34,10 +34,10 @@ config_ssh() {
         --decrypt configurations/ssh/encrypted_key; do
         sleep 1
     done
-    install -o "$TARGETUSER" -g "$TARGETUSER" ./configurations/ssh/* "$TARGETHOME"/.ssh
-    chmod 700 "$TARGETHOME"/.ssh
-    chmod 644 "$TARGETHOME"/.ssh/id_rsa.pub
-    chmod 600 "$TARGETHOME"/.ssh/id_rsa
+    install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh
+    chmod 700 "$targethome"/.ssh
+    chmod 644 "$targethome"/.ssh/id_rsa.pub
+    chmod 600 "$targethome"/.ssh/id_rsa
     cat ./configurations/ssh_config >> /etc/ssh/ssh_config
 }
 
@@ -47,13 +47,13 @@ config_hosts() {
 
 install_scripts() {
     echo -e "${BLUE}\nInstalling scripts...${DECOLOR}"
-    install -m 755 -o "$TARGETUSER" -g "$TARGETUSER" ./scripts/* "$TARGETHOME"/bin/
+    install -m 755 -o "$targetuser" -g "$targetuser" ./scripts/* "$targethome"/bin/
 }
 
 install_fonts() {
     echo -e "${BLUE}\nInstalling fonts...${DECOLOR}"
-    cp -r ./fonts/* "$TARGETHOME"/.fonts/
-    chown -R "$TARGETUSER":"$TARGETUSER" "$TARGETHOME"/.fonts/*
+    cp -r ./fonts/* "$targethome"/.fonts/
+    chown -R "$targetuser":"$targetuser" "$targethome"/.fonts/*
 }
 
 config_proxy() {
@@ -75,7 +75,7 @@ config_goflex() {
     echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
     blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || \
         { echo -e "${RED}\"GoFlex\" not found.${DECOLOR}"; return 2; }
-    install -d -o "$TARGETUSER" -g "$TARGETUSER" "$TARGETHOME"/GoFlex
+    install -d -o "$targetuser" -g "$targetuser" "$targethome"/GoFlex
     cp /etc/fstab{,.bak}
     cat configurations/fstab >> /etc/fstab
     systemctl daemon-reload
