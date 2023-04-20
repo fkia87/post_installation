@@ -22,8 +22,8 @@ get_target_user() {
 
 create_dirs() {
     echo -e "${BLUE}\nCreating directories in \"$TARGETHOME\"...${DECOLOR}"
-    install -d -o "$TARGETUSER" -g "$TARGETUSER" "$TARGETHOME"\
-    /{.fonts,.themes,bin,Applications,.icons,.ssh}
+    install -d -o "$TARGETUSER" -g "$TARGETUSER" \
+        "$TARGETHOME"/{.fonts,.themes,bin,Applications,.icons,.ssh}
 }
 
 config_ssh() {
