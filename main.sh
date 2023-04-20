@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2068,SC1091,SC1090
+# shellcheck disable=SC2068,SC1091,SC1090,SC2154
 
 # IMPORT REQUIREMENTS ############################################################################################
 requirements=("resources/bash_colors" "resources/utils")
