@@ -82,6 +82,10 @@ config_goflex() {
     mount -a
 }
 
+passwordless_sudo() {
+    cp configurations/99-sudoers /etc/sudoers.d/
+}
+
 finish_msg() {
     echo -e "${GREEN}\nFinished configuring system.\n\
     It's recommended to restart your computer.\n${DECOLOR}"

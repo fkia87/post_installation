@@ -24,6 +24,7 @@ checkuser
 strt_msg
 [[ "$(os)" == "fedora" ]] && REL=$(awk '{print$3}' < /etc/fedora-release)
 get_target_user
+ask "Remove password for sudoers?" "passwordless_sudo"
 config_journald
 
 ## GRUB ##########################################################################################################
