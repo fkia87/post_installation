@@ -8,18 +8,22 @@ config_journald() {
 }
 
 get_target_user() {
-    while [[ -z $TARGETUSER ]] || ! grep 'bash$' /etc/passwd | \
-        awk -F ':' '{print$1}' | grep -q ^"$TARGETUSER"$ 2>/dev/null
-    do
+    while [[ -z $targetuser ]] || ! grep 'bash$' /etc/passwd | \
+        awk -F ':' '{print$1}' | grep -q ^"$targetuser"$ 2>/dev/null; do
         echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"
-        read -r TARGETUSER
+        read -r targetuser
+        if [[ $targetuser == "root" ]]; then
+            targethome=/$targetuser
+        else
+            targethome=/home/"$targetuser"
+        fi
     done
 }
 
 create_dirs() {
-    echo -e "${BLUE}\nCreating directories in \"/home/${TARGETUSER}\"...${DECOLOR}"
-    install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"$TARGETUSER"\
-    /{.fonts,.themes,bin,Applications,.icons,.ssh}
+    echo -e "${BLUE}\nCreating directories in \"$targethome\"...${DECOLOR}"
+    install -d -o "$targetuser" -g "$targetuser" \
+        "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh}
 }
 
 config_ssh() {
@@ -27,43 +31,29 @@ config_ssh() {
     cp /etc/ssh/ssh_config{,.bak}
     echo -e "${BBLUE}\nEnter your SSH private key password:\n${DECOLOR}"
     while ! gpg --pinentry-mode loopback -o configurations/ssh/id_rsa \
-    --decrypt configurations/ssh/encrypted_key
-    do
+        --decrypt configurations/ssh/encrypted_key; do
         sleep 1
     done
-    install -o "$TARGETUSER" -g "$TARGETUSER" ./configurations/ssh/* /home/"$TARGETUSER"/.ssh
-    chmod 700 /home/"$TARGETUSER"/.ssh
-    chmod 644 /home/"$TARGETUSER"/.ssh/id_rsa.pub
-    chmod 600 /home/"$TARGETUSER"/.ssh/id_rsa
+    install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh
+    chmod 700 "$targethome"/.ssh
+    chmod 644 "$targethome"/.ssh/id_rsa.pub
+    chmod 600 "$targethome"/.ssh/id_rsa
     cat ./configurations/ssh_config >> /etc/ssh/ssh_config
+}
+
+config_hosts() {
+    cat ./configurations/hosts >> /etc/hosts
 }
 
 install_scripts() {
     echo -e "${BLUE}\nInstalling scripts...${DECOLOR}"
-    install -m 755 -o "$TARGETUSER" -g "$TARGETUSER" ./scripts/* /home/"$TARGETUSER"/bin/
+    install -m 755 -o "$targetuser" -g "$targetuser" ./scripts/* "$targethome"/bin/
 }
 
 install_fonts() {
     echo -e "${BLUE}\nInstalling fonts...${DECOLOR}"
-    cp -r ./fonts/* /home/"$TARGETUSER"/.fonts/
-    chown -R "$TARGETUSER":"$TARGETUSER" /home/"$TARGETUSER"/.fonts/*
-}
-
-config_goflex() {
-    echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
-
-    # Confirm that GoFlex HDD is present:
-    blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || return 2
-
-    install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"$TARGETUSER"/GoFlex
-    cp /etc/fstab{,.bak}
-    cat configurations/fstab >> /etc/fstab
-    systemctl daemon-reload
-    mount -a
-}
-
-common_pkg() {
-    install_pkg lsd duf bat curl
+    cp -r ./fonts/* "$targethome"/.fonts/
+    chown -R "$targetuser":"$targetuser" "$targethome"/.fonts/*
 }
 
 config_proxy() {
@@ -80,90 +70,23 @@ config_proxy() {
 strt_msg() {
     echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\n${DECOLOR}"
 }
-# shellcheck disable=SC2148
-
-config_journald() {
-echo -e "${BLUE}\nConfiguring \"journald\"...${DECOLOR}"
-sed -i '/^Storage=volatile/d' /etc/systemd/journald.conf
-echo -e "Storage=volatile" >> /etc/systemd/journald.conf
-systemctl restart systemd-journald
-}
-
-get_target_user() {
-while [[ -z $TARGETUSER ]] || ! grep 'bash$' /etc/passwd | \
-    awk -F ':' '{print$1}' | grep -q ^"$TARGETUSER"$ 2>/dev/null
-do
-    echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"
-    read -r TARGETUSER
-done
-}
-
-create_dirs() {
-echo -e "${BLUE}\nCreating directories in \"/home/${TARGETUSER}\"...${DECOLOR}"
-install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"$TARGETUSER"\
-/{.fonts,.themes,bin,Applications,.icons,.ssh}
-}
-
-config_ssh() {
-echo -e "${BLUE}\nConfiguring \"SSH\"...${DECOLOR}"
-cp /etc/ssh/ssh_config{,.bak}
-echo -e "${BBLUE}\nEnter your SSH private key password:\n${DECOLOR}"
-while ! gpg --pinentry-mode loopback -o configurations/ssh/id_rsa \
---decrypt configurations/ssh/encrypted_key
-do
-    sleep 1
-done
-install -o "$TARGETUSER" -g "$TARGETUSER" ./configurations/ssh/* /home/"$TARGETUSER"/.ssh
-chmod 700 /home/"$TARGETUSER"/.ssh
-chmod 644 /home/"$TARGETUSER"/.ssh/id_rsa.pub
-chmod 600 /home/"$TARGETUSER"/.ssh/id_rsa
-cat ./configurations/ssh_config >> /etc/ssh/ssh_config
-}
-
-install_scripts() {
-echo -e "${BLUE}\nInstalling scripts...${DECOLOR}"
-install -m 755 -o "$TARGETUSER" -g "$TARGETUSER" ./scripts/* /home/"$TARGETUSER"/bin/
-}
-
-install_fonts() {
-echo -e "${BLUE}\nInstalling fonts...${DECOLOR}"
-cp -r ./fonts/* /home/"$TARGETUSER"/.fonts/
-chown -R "$TARGETUSER":"$TARGETUSER" /home/"$TARGETUSER"/.fonts/*
-}
 
 config_goflex() {
-echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
-
-# Confirm that GoFlex HDD is present:
-blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || return 2
-
-install -d -o "$TARGETUSER" -g "$TARGETUSER" /home/"$TARGETUSER"/GoFlex
-cp /etc/fstab{,.bak}
-cat configurations/fstab >> /etc/fstab
-systemctl daemon-reload
-mount -a
+    echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
+    blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || \
+        { echo -e "${RED}\"GoFlex\" not found.${DECOLOR}"; return 2; }
+    install -d -o "$targetuser" -g "$targetuser" "$targethome"/GoFlex
+    cp /etc/fstab{,.bak}
+    cat configurations/fstab >> /etc/fstab
+    systemctl daemon-reload
+    mount -a
 }
 
-common_pkg() {
-install_pkg lsd duf bat curl
-}
-
-config_proxy() {
-echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
-cp ./configurations/ag-proxy.service /etc/systemd/system/
-cp ./configurations/evo-proxy.service /etc/systemd/system/
-systemctl daemon-reload
-systemctl enable ag-proxy.service --now 2>/dev/null && \
-echo -e "${GREEN}\nStarted \"ag-proxy\" service successfully.${DECOLOR}"
-systemctl enable evo-proxy.service --now 2>/dev/null && \
-echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
-}
-
-strt_msg() {
-echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\n${DECOLOR}"
+passwordless_sudo() {
+    cp configurations/99-sudoers /etc/sudoers.d/
 }
 
 finish_msg() {
-echo -e "${GREEN}\nFinished configuring system.\n\
-It's recommended to restart your computer.\n${DECOLOR}"
+    echo -e "${GREEN}\nFinished configuring system.\n\
+    It's recommended to restart your computer.\n${DECOLOR}"
 }

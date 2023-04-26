@@ -16,6 +16,3 @@ Host backup-64.33
 	Hostname 172.16.64.33
 	User f.kia
 	Port 4141
-Host myserver
-	Hostname 185.232.152.106
-	User ubuntu

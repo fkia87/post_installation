@@ -1,16 +1,15 @@
 #!/bin/bash
-# shellcheck disable=SC2068,SC1091,SC1090
+# shellcheck disable=SC2068,SC1091,SC1090,SC2154
 
 # IMPORT REQUIREMENTS ############################################################################################
-requirements=("resources/pkg_management" "resources/bash_colors" "resources/utils")
+requirements=("resources/bash_colors" "resources/utils")
 for ((i=0; i<${#requirements[@]}; i++)); do
     if ! [[ -d resources ]] || ! [[ -f ${requirements[i]} ]]; then
         rm -rf resources
         wget https://github.com/fkia87/resources/archive/refs/heads/master.zip || \
-        { echo -e "Error downloading required files from Github." >&2; \
-        echo -e "Please check your internet connection." >&2; \
-        exit 1; }
-        unzip master.zip && mv resources* resources
+        { echo -e "Error downloading required files from Github." >&2; exit 1; }
+        unzip master.zip || { echo -e "Command \"unzip master.zip\" failed." >&2; exit 1; }
+        mv resources* resources
         break
     fi
 done
@@ -18,17 +17,14 @@ done
 for file in ${requirements[@]}; do
     source "$file"
 done
+
 ##################################################################################################################
-source common
-
+source ./common
 checkuser
-
 strt_msg
-
 [[ "$(os)" == "fedora" ]] && REL=$(awk '{print$3}' < /etc/fedora-release)
-
 get_target_user
-
+ask "Remove password for sudoers?" "passwordless_sudo"
 config_journald
 
 ## GRUB ##########################################################################################################
@@ -47,6 +43,7 @@ case $(os) in
         ;;
 esac
 
+# Create directories #############################################################################################
 create_dirs
 
 ## DNF ###########################################################################################################
@@ -60,20 +57,27 @@ case $(os) in
         ;;
 esac
 
-ask "Do you want to setup SSH?" "config_ssh"
-ask "Do you want to configure SSH tunnels?" "config_proxy"
+# Hosts, SSH and proxy configuration ####################################################################################
+ask "Setup SSH keys?" "config_ssh"
+ask "Install \"/etc/hosts\"?" "config_hosts"
+ask "Configure SSH tunnels?" "config_proxy"
+
+##################################################################################################################
+install_scripts
 
 # GoFlex #########################################################################################################
+ask "Configure \"GoFlex\"?" "config_goflex"
+
+# Package installation ###########################################################################################
 case $(os) in
     fedora|manjaro)
-        install_scripts
-        config_goflex
-        [[ $? == 2 ]] && echo -e "${RED}\"GoFlex\" hard disk not found.${DECOLOR}"
+        install_pkg lsd duf bat curl
+        ;;
+    ubuntu|debian)
+        install_pkg duf bat curl
+        snap install lsd
         ;;
 esac
-##################################################################################################################
-
-common_pkg
 
 # bachrc #########################################################################################################
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
@@ -85,9 +89,11 @@ case $(os) in
         BASHRC="/etc/bashrc"
         ;;
 esac
-sed -i '/^alias ll/d' /home/"$TARGETUSER"/.bashrc
+[[ $(os) == "ubuntu" ]] || sed -i '/^alias ll/d' "$targethome"/.bashrc
 cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
 
+# Fonts ##########################################################################################################
 ask "Do you want to install fonts?" "install_fonts"
 
+##################################################################################################################
 finish_msg
