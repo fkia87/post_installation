@@ -1,1 +1,2 @@
 alias df='duf '
+alias update='sudo apt update'
