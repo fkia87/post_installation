@@ -1,5 +1,5 @@
 [Unit]
-Description=A tunnel to EVO-VPS
+Description=evo-proxy
 Requires=network.target
 
 [Service]
