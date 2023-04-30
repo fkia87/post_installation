@@ -1,5 +1,5 @@
 [Unit]
-Description=A tunnel to AG-VPS
+Description=ag-proxy
 Requires=network.target
 
 [Service]
