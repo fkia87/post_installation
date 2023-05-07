@@ -71,7 +71,7 @@ ask "Configure \"GoFlex\"?" "config_goflex"
 # Package installation ###########################################################################################
 case $(os) in
     fedora|manjaro)
-        install_pkg lsd duf bat curl
+        install_pkg lsd duf bat curl unrar
         ;;
     ubuntu|debian)
         install_pkg duf bat curl
