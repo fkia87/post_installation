@@ -43,7 +43,7 @@ alias sls='systemctl status '
 alias slr='systemctl restart '
 alias h='head '
 alias t='tail '
-alias cp='rsync -ah --info=progress2 '
+alias cp='rsync -ahR --info=progress2 '
 alias myip='curl eth0.me '
 # Other options be like:
 # INLINE:
