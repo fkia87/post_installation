@@ -23,7 +23,11 @@ done
 source ./common
 checkuser
 strt_msg
-[[ "$(os)" == "fedora" ]] && REL=$(awk '{print$3}' < /etc/fedora-release)
+case "$(os)" in
+    fedora | alma* | rocky*)
+        REL=$(awk '{print$3}' < /etc/"$(os)"-release)
+        ;;
+esac
 get_target_user
 ask "Remove password for sudoers?" "passwordless_sudo"
 config_journald
@@ -36,7 +40,7 @@ case $(os) in
         echo -e "${BLUE}Turning \"SELinux\" off...${DECOLOR}"
         setenforce 0
         ;;
-    manjaro|ubuntu|debian)
+    manjaro | ubuntu | debian)
         echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
         cp /etc/default/grub{,.bak}
         sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="pcie_aspm=off"/' /etc/default/grub
@@ -71,10 +75,10 @@ ask "Configure \"GoFlex\"?" "config_goflex"
 
 # Package installation ###########################################################################################
 case $(os) in
-    fedora|manjaro)
+    fedora | manjaro)
         install_pkg lsd duf bat curl unrar
         ;;
-    ubuntu|debian)
+    ubuntu | debian)
         install_pkg duf bat curl
         snap install lsd
         ;;
@@ -83,10 +87,10 @@ esac
 # bachrc #########################################################################################################
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 case $(os) in
-    manjaro|ubuntu)
+    manjaro | ubuntu)
         BASHRC="/etc/bash.bashrc"
         ;;
-    fedora)
+    fedora | centos | almalinux | rocky)
         BASHRC="/etc/bashrc"
         ;;
 esac
