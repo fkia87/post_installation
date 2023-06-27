@@ -1,8 +1,37 @@
+Host ansible-stage-144.166
+	HostName 172.16.144.166
+	User f.kia
+	Port 4141
+Host backup-64.33
+	Hostname 172.16.64.33
+	User f.kia
+	Port 4141
+Host deployer
+	Hostname 172.16.144.87
+Host nofilter
+	Hostname 172.15.1.149
+	User behzad
+Host dev_sakku
+	Hostname 172.16.147.55
+	User ubuntu
+Host runner-gitlab
+	Hostname 172.16.144.45
+	User fkia
+	Port 2244
 Host ag
-        Hostname 193.37.213.206
-        Port 2244
-        User root
-Host evo
-        Hostname 191.101.166.157
-        Port 2244
-        User root
+	Hostname ag
+	User fkia
+	Port 2244
+Host compute07
+	Hostname compute07
+	User f.kia
+	Port 4141
+Host saba
+	Hostname saba
+	User root
+	Port 2244
+Host ahmadian
+	Hostname saba
+	User root
+	Port 2244
+StrictHostKeyChecking no
