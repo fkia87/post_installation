@@ -34,4 +34,8 @@ Host ahmadian
 	Hostname saba
 	User root
 	Port 2244
+Host myserver
+	Hostname myserver
+	User root
+	Port 2242
 StrictHostKeyChecking no
