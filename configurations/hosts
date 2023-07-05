@@ -6,6 +6,7 @@
 185.37.54.252	mattermost.ficld.ir
 172.16.64.170	confluence.ficld.ir grafana.ficld.ir monitoring.ficld.ir dashboard-stg1-ceph.ficld.ir ceph-monitor-stg1.ficld.ir
 172.16.144.173	stg1.public.cloud.ficld.ir
+172.16.144.241	dev-stg1.public.cloud.ficld.ir
 172.16.144.166	host166 h166
 172.16.144.87	kolla-deployer
 172.16.144.11   maas.ficld.ir

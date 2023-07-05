@@ -57,6 +57,7 @@ install_fonts() {
 }
 
 config_proxy() {
+    ask "You should configure ssh keys first. Continue?" "config_ssh" || return
     echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
     cp ./configurations/ag-proxy.service /etc/systemd/system/
     cp ./configurations/evo-proxy.service /etc/systemd/system/
