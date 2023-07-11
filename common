@@ -59,12 +59,14 @@ install_fonts() {
 config_proxy() {
     ask "You should configure ssh keys first. Continue?" "config_ssh"
     echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
-    for service in $(find ./configurations/ -name '*proxy.service'); do
-        cp $service /etc/systemd/system/
+    while IFS= read -r -d '' service
+    #for service in $(find ./configurations/ -name '*proxy.service')
+    do
+        cp "$service" /etc/systemd/system/
         systemctl daemon-reload
-        systemctl enable ${service##*/} --now 2>/dev/null && \
+        systemctl enable "${service##*/}" --now 2>/dev/null && \
         echo -e "${GREEN}\nStarted \"${service##*/}\" successfully.${DECOLOR}"
-    done
+    done < <(find ./configurations/ -name '*proxy.service')
 }
 
 strt_msg() {
