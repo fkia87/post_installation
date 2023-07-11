@@ -60,7 +60,6 @@ config_proxy() {
     ask "You should configure ssh keys first. Continue?" "config_ssh"
     echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
     while IFS= read -r -d '' service
-    #for service in $(find ./configurations/ -name '*proxy.service')
     do
         cp "$service" /etc/systemd/system/
         systemctl daemon-reload
