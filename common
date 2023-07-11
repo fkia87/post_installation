@@ -57,15 +57,14 @@ install_fonts() {
 }
 
 config_proxy() {
-    ask "You should configure ssh keys first. Continue?" "config_ssh" || return
+    ask "You should configure ssh keys first. Continue?" "config_ssh"
     echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
-    cp ./configurations/ag-proxy.service /etc/systemd/system/
-    cp ./configurations/evo-proxy.service /etc/systemd/system/
-    systemctl daemon-reload
-    systemctl enable ag-proxy.service --now 2>/dev/null && \
-    echo -e "${GREEN}\nStarted \"ag-proxy\" service successfully.${DECOLOR}"
-    systemctl enable evo-proxy.service --now 2>/dev/null && \
-    echo -e "${GREEN}\nStarted \"evo-proxy\" service successfully.${DECOLOR}"
+    for service in $(find ./configurations/ -name '*proxy.service'); do
+        cp $service /etc/systemd/system/
+        systemctl daemon-reload
+        systemctl enable ${service##*/} --now 2>/dev/null && \
+        echo -e "${GREEN}\nStarted \"${service##*/}\" successfully.${DECOLOR}"
+    done
 }
 
 strt_msg() {
