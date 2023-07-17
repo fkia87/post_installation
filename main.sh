@@ -30,23 +30,26 @@ case "$(os)" in
 esac
 get_target_user
 ask "Remove password for sudoers?" "passwordless_sudo"
-config_journald
+ask "Config journald?" "config_journald"
 
 ## GRUB ##########################################################################################################
-case $(os) in
-    fedora)
-        echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
-        grubby --update-kernel ALL --args "selinux=0 pcie_aspm=off"
-        echo -e "${BLUE}Turning \"SELinux\" off...${DECOLOR}"
-        setenforce 0
-        ;;
-    manjaro | ubuntu | debian)
-        echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
-        cp /etc/default/grub{,.bak}
-        sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="pcie_aspm=off"/' /etc/default/grub
-        update-grub 2>/dev/null
-        ;;
-esac
+function config_grub() {
+        case $(os) in
+        fedora)
+            echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
+            grubby --update-kernel ALL --args "selinux=0 pcie_aspm=off"
+            echo -e "${BLUE}Turning \"SELinux\" off...${DECOLOR}"
+            setenforce 0
+            ;;
+        manjaro | ubuntu | debian)
+            echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
+            cp /etc/default/grub{,.bak}
+            sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="pcie_aspm=off"/' /etc/default/grub
+            update-grub 2>/dev/null
+            ;;
+    esac
+}
+ask "Grub configurations? (SELinux, pcie_aspm, ...)" "config_grub"
 
 # Create directories #############################################################################################
 create_dirs
@@ -73,20 +76,23 @@ install_scripts
 ask "Configure \"GoFlex\"?" "config_goflex"
 
 # Package installation ###########################################################################################
-case $(os) in
-    fedora | manjaro)
-        install_pkg lsd duf bat curl unrar
-        ;;
-    ubuntu | debian)
-        install_pkg duf bat curl
-        snap install lsd
-        ;;
-esac
+function useful_packages() {
+    case $(os) in
+        fedora | manjaro)
+            install_pkg lsd duf bat curl unrar
+            ;;
+        ubuntu | debian)
+            install_pkg duf bat curl
+            snap install lsd
+            ;;
+    esac
+}
+ask "Install usefule packages? (duf, bat, curl, ...)" "useful_packages"
 
 # bachrc #########################################################################################################
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
 case $(os) in
-    manjaro | ubuntu)
+    manjaro | ubuntu | debian)
         BASHRC="/etc/bash.bashrc"
         ;;
     fedora | centos | almalinux | rocky)
