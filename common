@@ -59,7 +59,7 @@ install_fonts() {
 config_proxy() {
     ask "You should configure ssh keys first. Continue?" "config_ssh"
     echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
-    while IFS= read -r -d '' service
+    while IFS= read -r service
     do
         cp "$service" /etc/systemd/system/
         systemctl daemon-reload
