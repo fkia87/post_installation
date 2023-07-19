@@ -34,7 +34,7 @@ ask "Config journald?" "config_journald"
 ask "Set default scale for QT applications to 2?" "set_qt_scale_2"
 
 ## GRUB ##########################################################################################################
-function config_grub() {
+config_grub() {
         case $(os) in
         fedora)
             echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
@@ -77,7 +77,7 @@ install_scripts
 ask "Configure \"GoFlex\"?" "config_goflex"
 
 # Package installation ###########################################################################################
-function useful_packages() {
+useful_packages() {
     case $(os) in
         fedora | manjaro)
             install_pkg lsd duf bat curl unrar
