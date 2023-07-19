@@ -26,6 +26,10 @@ create_dirs() {
         "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh}
 }
 
+set_qt_scale_2 () {
+    echo "export QT_SCALE_FACTOR=2" >> "$targethome"/.bash_profile
+}
+
 config_ssh() {
     echo -e "${BLUE}\nConfiguring \"SSH\"...${DECOLOR}"
     cp /etc/ssh/ssh_config{,.bak}

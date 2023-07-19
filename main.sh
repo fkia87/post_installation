@@ -31,6 +31,7 @@ esac
 get_target_user
 ask "Remove password for sudoers?" "passwordless_sudo"
 ask "Config journald?" "config_journald"
+ask "Set default scale for QT applications to 2?" "set_qt_scale_2"
 
 ## GRUB ##########################################################################################################
 function config_grub() {
