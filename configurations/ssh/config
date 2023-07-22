@@ -6,8 +6,6 @@ Host backup-64.33
 	Hostname 172.16.64.33
 	User f.kia
 	Port 4141
-Host deployer
-	Hostname 172.16.144.87
 Host nofilter
 	Hostname 172.15.1.149
 	User behzad
