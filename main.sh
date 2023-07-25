@@ -80,13 +80,14 @@ ask "Configure \"GoFlex\"?" "config_goflex"
 useful_packages() {
     case $(os) in
         fedora | manjaro)
-            install_pkg lsd duf bat curl unrar
+            pkg_to_install+=(lsd unrar)
             ;;
         ubuntu | debian)
-            install_pkg duf bat curl
             snap install lsd
             ;;
     esac
+    pkg_to_install+=(duf bat curl colorized-logs)
+    install_pkg ${pkg_to_install[@]}
 }
 ask "Install usefule packages? (duf, bat, curl, ...)" "useful_packages"
 
