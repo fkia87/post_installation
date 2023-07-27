@@ -112,4 +112,5 @@ sed -i '/# POST INSTALLATION/Q' "$BASHRC" \
 ask "Do you want to install fonts?" "install_fonts"
 
 ##################################################################################################################
+rm -rf resources
 finish_msg
