@@ -58,11 +58,14 @@ create_dirs
 ## DNF ###########################################################################################################
 case $(os) in
     fedora)
-        echo -e "${BLUE}Writing \"DNF\" configurations...${DECOLOR}"
-        cp ./configurations/dnf.conf /etc/dnf/dnf.conf
-        echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
-        dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"${REL}".noarch.rpm \
-        https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"${REL}".noarch.rpm
+        config_dnf() {
+            echo -e "${BLUE}Writing \"DNF\" configurations...${DECOLOR}"
+            cp ./configurations/dnf.conf /etc/dnf/dnf.conf
+            echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
+            dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"${REL}".noarch.rpm \
+            https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"${REL}".noarch.rpm
+        }
+        ask "Config dnf and rpmfusion?" "config_dnf"
         ;;
 esac
 
@@ -101,8 +104,9 @@ case $(os) in
         BASHRC="/etc/bashrc"
         ;;
 esac
-[[ $(os) == "ubuntu" ]] || sed -i '/^alias ll/d' "$targethome"/.bashrc
-cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
+sed -i '/^alias ll/d' "$targethome"/.bashrc
+sed -i '/# POST INSTALLATION/Q' "$BASHRC" \
+    && cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
 
 # Fonts ##########################################################################################################
 ask "Do you want to install fonts?" "install_fonts"

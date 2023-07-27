@@ -1,18 +1,3 @@
 
 ServerAliveInterval 60
-
 StrictHostKeyChecking no
-
-# For RPI OS you may need to add this line to work around some problems 
-# related to SSH connection establishment below the line "Host *":
-
-# KexAlgorithms ecdh-sha2-nistp521
-
-Host ansible-stage-144.166
-	HostName 172.16.144.166
-	User f.kia
-	Port 4141
-Host backup-64.33
-	Hostname 172.16.64.33
-	User f.kia
-	Port 4141

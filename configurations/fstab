@@ -1,1 +1,1 @@
-UUID=e0886b21-1596-4626-b131-2137ec7394fa /home/fkia/GoFlex	  ext4	  defaults	  0 2
+UUID=e0886b21-1596-4626-b131-2137ec7394fa /home/fkia/GoFlex	  ext4	  defaults,nofail	  0 2

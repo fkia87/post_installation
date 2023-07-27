@@ -27,6 +27,7 @@ create_dirs() {
 }
 
 set_qt_scale_2 () {
+    sed -i '/export QT_SCALE_FACTOR=2/d' "$targethome"/.bash_profile
     echo "export QT_SCALE_FACTOR=2" >> "$targethome"/.bash_profile
 }
 
@@ -42,11 +43,22 @@ config_ssh() {
     chmod 700 "$targethome"/.ssh
     chmod 644 "$targethome"/.ssh/id_rsa.pub
     chmod 600 "$targethome"/.ssh/id_rsa
-    cat ./configurations/ssh_config >> /etc/ssh/ssh_config
+    sed -i '/^ServerAliveInterval/d' /etc/ssh/ssh_config
+    sed -i '/^StrictHostKeyChecking/d' /etc/ssh/ssh_config
+    cat << EOF >> /etc/ssh/ssh_config
+    ServerAliveInterval 60
+    StrictHostKeyChecking no
+EOF
 }
 
 config_hosts() {
-    cat ./configurations/hosts >> /etc/hosts
+    local tmpfile=/tmp/tmp_hosts
+    diff ./configurations/hosts /etc/hosts \
+        | grep '^<' \
+        | sed 's/^< //g' \
+        | tee $tmpfile > /dev/null
+    cat $tmpfile >> /etc/hosts
+    rm -f $tmpfile
 }
 
 install_scripts() {
@@ -82,6 +94,7 @@ config_goflex() {
         { echo -e "${RED}\"GoFlex\" not found.${DECOLOR}"; return 2; }
     install -d -o "$targetuser" -g "$targetuser" "$targethome"/GoFlex
     cp /etc/fstab{,.bak}
+    sed -i '/UUID=e0886b21-1596-4626-b131-2137ec7394fa/d' /etc/fstab
     cat configurations/fstab >> /etc/fstab
     systemctl daemon-reload
     mount -a
