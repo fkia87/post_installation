@@ -20,10 +20,6 @@ Host ag
 	Hostname ag
 	User fkia
 	Port 2244
-Host compute07
-	Hostname compute07
-	User f.kia
-	Port 4141
 Host saba
 	Hostname saba
 	User root
@@ -36,4 +32,160 @@ Host myserver
 	Hostname myserver
 	User root
 	Port 2242
+	Host production-c1
+	Hostname production-c1
+	User f.kia
+	Port 4141
+Host production-c2
+	Hostname production-c2
+	User f.kia
+	Port 4141
+Host production-c3
+	Hostname production-c3
+	User f.kia
+	Port 4141
+Host production-w1
+	Hostname production-w1
+	User f.kia
+	Port 4141
+Host production-w2
+	Hostname production-w2
+	User f.kia
+	Port 4141
+Host production-w3
+	Hostname production-w3
+	User f.kia
+	Port 4141
+Host production-w4
+	Hostname production-w4
+	User f.kia
+	Port 4141
+Host production-w5
+	Hostname production-w5
+	User f.kia
+	Port 4141
+Host production-w6
+	Hostname production-w6
+	User f.kia
+	Port 4141
+Host production-w7
+	Hostname production-w7
+	User f.kia
+	Port 4141
+Host production-w8
+	Hostname production-w8
+	User f.kia
+	Port 4141
+Host production-w9
+	Hostname production-w9
+	User f.kia
+	Port 4141
+Host production-w10
+	Hostname production-w10
+	User f.kia
+	Port 4141
+Host production-w11
+	Hostname production-w11
+	User f.kia
+	Port 4141
+Host production-w12
+	Hostname production-w12
+	User f.kia
+	Port 4141
+Host production-w13
+	Hostname production-w13
+	User f.kia
+	Port 4141
+Host production-w14
+	Hostname production-w14
+	User f.kia
+	Port 4141
+Host production-w15
+	Hostname production-w15
+	User f.kia
+	Port 4141
+Host production-w16
+	Hostname production-w16
+	User f.kia
+	Port 4141
+Host production-w17
+	Hostname production-w17
+	User f.kia
+	Port 4141
+Host production-w18
+	Hostname production-w18
+	User f.kia
+	Port 4141
+Host production-w19
+	Hostname production-w19
+	User f.kia
+	Port 4141
+Host production-w20
+	Hostname production-w20
+	User f.kia
+	Port 4141
+Host production-w21
+	Hostname production-w21
+	User f.kia
+	Port 4141
+Host production-w22
+	Hostname production-w22
+	User f.kia
+	Port 4141
+Host production-w23
+	Hostname production-w23
+	User f.kia
+	Port 4141
+Host production-w24
+	Hostname production-w24
+	User f.kia
+	Port 4141
+Host production-w25
+	Hostname production-w25
+	User f.kia
+	Port 4141
+Host production-w26
+	Hostname production-w26
+	User f.kia
+	Port 4141
+Host production-w27
+	Hostname production-w27
+	User f.kia
+	Port 4141
+Host production-w28
+	Hostname production-w28
+	User f.kia
+	Port 4141
+Host production-w29
+	Hostname production-w29
+	User f.kia
+	Port 4141
+Host production-w30
+	Hostname production-w30
+	User f.kia
+	Port 4141
+Host production-n1
+	Hostname production-n1
+	User f.kia
+	Port 4141
+Host production-n2
+	Hostname production-n2
+	User f.kia
+	Port 4141
+Host production-n3
+	Hostname production-n3
+	User f.kia
+	Port 4141
+Host production-dmaster
+	Hostname production-dmaster
+	User f.kia
+	Port 4141
+Host production-dslave1
+	Hostname production-dslave1
+	User f.kia
+	Port 4141
+Host production-dslave2
+	Hostname production-dslave2
+	User f.kia
+	Port 4141
 StrictHostKeyChecking no

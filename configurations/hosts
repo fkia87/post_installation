@@ -11,3 +11,50 @@
 172.16.144.87	kolla-deployer
 172.16.144.11   maas.ficld.ir
 217.160.171.251 saba ahmadian
+
+172.16.64.106   production-c1
+172.16.64.107   production-c2
+172.16.64.108   production-c3
+
+172.16.64.103   production-n1
+172.16.64.104   production-n2
+172.16.64.105   production-n3
+
+172.16.64.100   production-m1
+172.16.64.101   production-m2
+172.16.64.102   production-m3
+
+172.16.64.148   production-dmaster
+172.16.64.138   production-dslave1
+172.16.64.139   production-dslave2
+
+172.16.64.10    production-w1
+172.16.64.11    production-w2
+172.16.64.12    production-w3
+172.16.64.13    production-w4
+172.16.64.23    production-w5
+172.16.64.24    production-w6
+172.16.64.25    production-w7
+172.16.64.26    production-w8
+172.16.64.27    production-w9
+172.16.64.28    production-w10
+172.16.64.34    production-w11
+172.16.64.35    production-w12
+172.16.64.36    production-w13
+172.16.64.37    production-w14
+172.16.64.38    production-w15
+172.16.64.39    production-w16
+172.16.64.40    production-w17
+172.16.64.41    production-w18
+172.16.64.31    production-w19
+172.16.64.47    production-w20
+172.16.64.44    production-w21
+172.16.64.45    production-w22
+172.16.64.46    production-w23
+172.16.64.49    production-w24
+172.16.64.50    production-w25
+172.16.64.51    production-w26
+172.16.64.52    production-w27
+172.16.64.55    production-w28
+172.16.64.42    production-w29
+172.16.64.43    production-w30
