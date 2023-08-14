@@ -34,6 +34,7 @@ bind "set completion-ignore-case on"
 bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
 
+alias sudo='sudo '
 alias weather='wttr'
 alias weather_in='wttr'
 alias ip='ip -c -h -p '
