@@ -52,13 +52,8 @@ EOF
 }
 
 config_hosts() {
-    local tmpfile=/tmp/tmp_hosts
-    diff ./configurations/hosts /etc/hosts \
-        | grep '^<' \
-        | sed 's/^< //g' \
-        | tee $tmpfile > /dev/null
-    cat $tmpfile >> /etc/hosts
-    rm -f $tmpfile
+    sed -i '/# POST INSTALLATION/Q' /etc/hosts \
+        && cat ./configurations/hosts >> /etc/hosts
 }
 
 install_scripts() {
