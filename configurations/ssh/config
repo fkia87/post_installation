@@ -20,6 +20,10 @@ Host ag
 	Hostname ag
 	User fkia
 	Port 2244
+Host ag-hiddify
+	Hostname ag-hiddify
+	User root
+	Port 2244
 Host saba
 	Hostname saba
 	User root
@@ -32,7 +36,7 @@ Host myserver
 	Hostname myserver
 	User root
 	Port 2242
-	Host production-c1
+Host production-c1
 	Hostname production-c1
 	User f.kia
 	Port 4141
