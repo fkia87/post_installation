@@ -1,16 +1,19 @@
-193.37.213.206          ag
-191.101.166.157         evo
-172.16.64.251	public.cloud.ficld.ir
-172.16.64.250	solar.ficld.ir
-172.24.0.10 rancher.ficld.ir gitlab.ficld.ir jira.ficld.ir nexus.ficld.ir registry.ficld.ir nextcloud.ficld.ir awx.ficld.ir
-185.37.54.252	mattermost.ficld.ir
-172.16.64.170	confluence.ficld.ir grafana.ficld.ir monitoring.ficld.ir dashboard-stg1-ceph.ficld.ir ceph-monitor-stg1.ficld.ir
-172.16.144.173	stg1.public.cloud.ficld.ir
+# POST INSTALLATION
+193.37.213.206  ag
+185.203.118.172 ag-hiddify
+191.101.166.157 evo
+#172.16.64.251	public.cloud.ficld.ir
+#172.16.64.250	solar.ficld.ir
+#172.24.0.10    rancher.ficld.ir gitlab.ficld.ir jira.ficld.ir nexus.ficld.ir registry.ficld.ir nextcloud.ficld.ir awx.ficld.ir
+#185.37.54.252	mattermost.ficld.ir
+#172.16.64.170	confluence.ficld.ir grafana.ficld.ir monitoring.ficld.ir dashboard-stg1-ceph.ficld.ir ceph-monitor-stg1.ficld.ir
+#172.16.144.173	stg1.public.cloud.ficld.ir
 172.16.144.241	dev-stg1.public.cloud.ficld.ir
 172.16.144.166	host166 h166
 172.16.144.87	kolla-deployer
-172.16.144.11   maas.ficld.ir
+#172.16.144.11  maas.ficld.ir
 217.160.171.251 saba ahmadian
+51.89.93.155    farimaah
 
 172.16.64.106   production-c1
 172.16.64.107   production-c2
