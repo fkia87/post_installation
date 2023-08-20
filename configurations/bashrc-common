@@ -21,7 +21,7 @@ ex() {
 	fi
 }
 
-bash_debug () {
+bash_debug() {
 	export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 	bash -x "$1"
 }
