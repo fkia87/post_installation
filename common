@@ -5,6 +5,8 @@ config_journald() {
     sed -i '/^Storage=volatile/d' /etc/systemd/journald.conf
     echo -e "Storage=volatile" >> /etc/systemd/journald.conf
     #systemctl restart systemd-journald
+    # shellcheck disable=SC2034
+    REBOOT=1
 }
 
 get_target_user() {
@@ -29,6 +31,8 @@ create_dirs() {
 set_qt_scale_2 () {
     sed -i '/export QT_SCALE_FACTOR=2/d' "$targethome"/.bash_profile
     echo "export QT_SCALE_FACTOR=2" >> "$targethome"/.bash_profile
+    # shellcheck disable=SC2034
+    REBOOT=1
 }
 
 config_ssh() {
@@ -79,6 +83,38 @@ config_proxy() {
     done < <(find ./configurations/ -name '*proxy.service')
 }
 
+config_grub() {
+        case $(os) in
+        fedora)
+            echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
+            grubby --update-kernel ALL --args "selinux=0 pcie_aspm=off"
+            echo -e "${BLUE}Turning \"SELinux\" off...${DECOLOR}"
+            setenforce 0
+            ;;
+        manjaro | ubuntu | debian)
+            echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
+            cp /etc/default/grub{,.bak}
+            sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="pcie_aspm=off"/' /etc/default/grub
+            update-grub 2>/dev/null
+            ;;
+    esac
+    # shellcheck disable=SC2034
+    REBOOT=1
+}
+
+useful_packages() {
+    case $(os) in
+        fedora | manjaro)
+            pkg_to_install+=(lsd unrar)
+            ;;
+        ubuntu | debian)
+            snap install lsd
+            ;;
+    esac
+    pkg_to_install+=(duf bat curl colorized-logs)
+    install_pkg ${pkg_to_install[@]}
+}
+
 strt_msg() {
     echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\n${DECOLOR}"
 }
@@ -100,6 +136,7 @@ passwordless_sudo() {
 }
 
 finish_msg() {
-    echo -e "${GREEN}\nFinished configuring system.\n\
-    It's recommended to restart your computer.\n${DECOLOR}"
+    echo -e "${GREEN}\nFinished configuring system.${DECOLOR}"
+    [[ "$REBOOT" == "1" ]] && \
+        echo -e "${GREEN}It is recommended to restart your computer.\n${DECOLOR}"
 }

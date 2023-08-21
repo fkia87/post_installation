@@ -34,22 +34,6 @@ ask "Config journald?" "config_journald"
 ask "Set default scale for QT applications to 2?" "set_qt_scale_2"
 
 ## GRUB ##########################################################################################################
-config_grub() {
-        case $(os) in
-        fedora)
-            echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
-            grubby --update-kernel ALL --args "selinux=0 pcie_aspm=off"
-            echo -e "${BLUE}Turning \"SELinux\" off...${DECOLOR}"
-            setenforce 0
-            ;;
-        manjaro | ubuntu | debian)
-            echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
-            cp /etc/default/grub{,.bak}
-            sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="pcie_aspm=off"/' /etc/default/grub
-            update-grub 2>/dev/null
-            ;;
-    esac
-}
 ask "Grub configurations? (SELinux, pcie_aspm, ...)" "config_grub"
 
 # Create directories #############################################################################################
@@ -81,18 +65,6 @@ install_scripts
 ask "Configure \"GoFlex\"?" "config_goflex"
 
 # Package installation ###########################################################################################
-useful_packages() {
-    case $(os) in
-        fedora | manjaro)
-            pkg_to_install+=(lsd unrar)
-            ;;
-        ubuntu | debian)
-            snap install lsd
-            ;;
-    esac
-    pkg_to_install+=(duf bat curl colorized-logs)
-    install_pkg ${pkg_to_install[@]}
-}
 ask "Install usefule packages? (duf, bat, curl, ...)" "useful_packages"
 
 # bachrc #########################################################################################################
