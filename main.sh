@@ -70,7 +70,8 @@ case $(os) in
 esac
 
 # Hosts, SSH and proxy configuration ####################################################################################
-ask "Configure SSH tunnels?" "config_proxy" || ask "Setup SSH keys?" "config_ssh"
+ask "Configure SSH tunnels?" "config_proxy" || ask "Setup SSH keys?" "config_ssh" || \
+ask "Copy SSH config file?" "install -o $targetuser -g $targetuser ./configurations/ssh/* $targethome/.ssh"
 ask "Install \"/etc/hosts\"?" "config_hosts"
 
 ##################################################################################################################
