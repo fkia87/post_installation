@@ -112,6 +112,8 @@ useful_packages() {
             ;;
     esac
     pkg_to_install+=(duf bat curl colorized-logs)
+
+    # shellcheck disable=SC2068
     install_pkg ${pkg_to_install[@]}
 }
 
