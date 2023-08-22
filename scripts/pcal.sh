@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2220,SC2213
+# shellcheck disable=SC2220,SC2213,SC2046
 
 BREAKS=(-61 9 38 199 426 686 756 818 1111 1181 1210 1635 2060 2097 2192 2262 2324 2394 2456 3178)
 DAY_NAMES_FA=(Sh Ye Do Se Ch Pa Jo)
@@ -372,9 +372,9 @@ main() {
   read -r input_data
 
   if [[ $gregorian -eq 1 ]]; then
-    to_gregorian "$(parse_input "$input_data")"
+    to_gregorian $(parse_input "$input_data")
   else
-    to_jalaali "$(parse_input "$input_data")"
+    to_jalaali $(parse_input "$input_data")
   fi
 }
 
