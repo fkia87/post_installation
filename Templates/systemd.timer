@@ -1,0 +1,39 @@
+[Unit]
+#Description=
+#Documentation=
+#Requires= This directive lists any units upon which this unit essentially depends. If the current unit is activated, the units listed here must successfully activate as well, else this unit will fail. These units are started in parallel with the current unit by default.
+#Wants= This directive is similar to Requires=, but less strict. Systemd will attempt to start any units listed here when this unit is activated. If these units are not found or fail to start, the current unit will continue to function.
+#BindsTo= This directive is similar to Requires=, but also causes the current unit to stop when the associated unit terminates.
+#Before= The units listed in this directive will not be started until the current unit is marked as started if they are activated at the same time.
+#After= The units listed in this directive will be started before starting the current unit.
+#Conflicts= This can be used to list units that cannot be run at the same time as the current unit. Starting a unit with this relationship will cause the other units to be stopped.
+#Condition...=
+#Assert...=
+
+[Install]
+# The directives within dictate what should happen when the unit is enabled.
+#WantedBy=
+#RequiredBy=
+#Alias= This directive allows the unit to be enabled under another name as well.
+#Also= This directive allows units to be enabled or disabled as a set. Supporting units that should always be available when this unit is active can be listed here. They will be managed as a group for installation tasks.
+#DefaultInstance= For template units (covered later) which can produce unit instances with unpredictable names, this can be used as a fallback value for the name if an appropriate name is not provided.
+
+[Timer]
+#OnActiveSec= This directive allows the associated unit to be activated relative to the .timer unit’s activation.
+#OnBootSec= This directive is used to specify the amount of time after the system is booted when the associated unit should be activated.
+#OnStartupSec= This directive is similar to the above timer, but in relation to when the systemd process itself was started.
+#OnUnitActiveSec= This sets a timer according to when the associated unit was last activated.
+#OnUnitInactiveSec= This sets the timer in relation to when the associated unit was last marked as inactive.
+#OnCalendar= This allows you to activate the associated unit by specifying an absolute instead of relative to an event.
+#AccuracySec= This unit is used to set the level of accuracy with which the timer should be adhered to. By default, the associated unit will be activated within one minute of the timer being reached. The value of this directive will determine the upper bounds on the window in which systemd schedules the activation to occur.
+#Unit= This directive is used to specify the unit that should be activated when the timer elapses. If unset, systemd will look for a .service unit with a name that matches this unit.
+#Persistent= If this is set, systemd will trigger the associated unit when the timer becomes active if it would have been triggered during the period in which the timer was inactive.
+#WakeSystem= Setting this directive allows you to wake a system from suspend if the timer is reached when in that state.
+
+#  Important unit specifiers
+#%n: Full unit name
+#%p: Prefix name
+#%i: Instance name (Is the part of the instantiated unit name between the "@" character and the type suffix. %I has the same meaning but also replaces the forbidden characters for ASCII codes.)
+#%H: Stands for the hostname of the running system at the point in time the unit configuration is loaded.
+#%t: Represents the runtime directory, which is either /run for the root user, or the value of the XDG_RUNTIME_DIR variable for unprivileged users.
+#%a: Architecture (x86,x86-64,arm64,...)
