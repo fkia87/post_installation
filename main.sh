@@ -59,7 +59,8 @@ ask "Copy SSH config file?" "install -o $targetuser -g $targetuser ./configurati
 ask "Install \"/etc/hosts\"?" "config_hosts"
 
 ##################################################################################################################
-install_scripts
+ask "Install scripts?" "install_scripts"
+ask "Install Templates?" "install_templates"
 
 # GoFlex #########################################################################################################
 ask "Configure \"GoFlex\"?" "config_goflex"

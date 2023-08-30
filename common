@@ -65,6 +65,12 @@ install_scripts() {
     install -m 755 -o "$targetuser" -g "$targetuser" ./scripts/* "$targethome"/bin/
 }
 
+install_templates() {
+    [[ -d "$targethome"/Templates/ ]] || \
+        { echo -e "No \"Templates\" directory found in $targethome." >&2; return 1; }
+    install -o "$targetuser" -g "$targetuser" ./Templates/* "$targethome"/Templates/
+}
+
 install_fonts() {
     echo -e "${BLUE}\nInstalling fonts...${DECOLOR}"
     cp -r ./fonts/* "$targethome"/.fonts/
