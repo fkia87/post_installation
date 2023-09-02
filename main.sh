@@ -83,7 +83,7 @@ sed -i '/# POST INSTALLATION/Q' "$BASHRC" \
     && cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
 
 # Fonts ##########################################################################################################
-ask "Do you want to install fonts?" "install_fonts"
+ask "Install fonts?" "install_fonts"
 
 ##################################################################################################################
 rm -rf resources
