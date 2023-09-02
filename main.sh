@@ -66,7 +66,7 @@ ask "Install Templates?" "install_templates"
 ask "Configure \"GoFlex\"?" "config_goflex"
 
 # Package installation ###########################################################################################
-ask "Install usefule packages? (duf, bat, curl, ...)" "useful_packages"
+ask "Install useful packages? (duf, bat, curl, ...)" "useful_packages"
 
 # bachrc #########################################################################################################
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
