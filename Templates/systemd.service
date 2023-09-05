@@ -36,7 +36,7 @@
 #TimeoutSec= This configures the amount of time that systemd will wait when stopping or stopping the service before marking it as failed or forcefully killing it. You can set separate timeouts with TimeoutStartSec= and TimeoutStopSec= as well.
 
 # Special variables
-# $MAINPIPD: PID of the main process
+# $MAINPID: PID of the main process
 
 # Important unit specifiers
 #%n: Full unit name
