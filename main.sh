@@ -2,23 +2,26 @@
 # shellcheck disable=SC2068,SC1091,SC1090,SC2154
 
 # IMPORT REQUIREMENTS ############################################################################################
-requirements=("resources/bash_colors" "resources/utils")
-for ((i=0; i<${#requirements[@]}; i++)); do
-    if ! [[ -d resources ]] || ! [[ -f ${requirements[i]} ]]; then
-        rm -rf resources
-        wget https://github.com/fkia87/resources/archive/refs/heads/master.zip || \
+install_resources() {
+    [[ $UID == "0" ]] || { echo "You are not root." >&2; exit 1; }
+    local resources_latest_version
+    resources_latest_version=$(
+        curl -v https://github.com/fkia87/resources/releases/latest 2>&1 | \
+        grep -i location | rev | cut -d / -f 1 | rev | sed 's/\r//g'
+    )
+    echo -e "Downloading resources..."
+    rm -rf "$resources_latest_version".tar.gz
+    wget https://github.com/fkia87/resources/archive/refs/tags/"$resources_latest_version".tar.gz || \
         { echo -e "Error downloading required files from Github." >&2; exit 1; }
-        unzip master.zip || { echo -e "Command \"unzip master.zip\" failed." >&2; exit 1; }
-        rm -f master.zip
-        mv resources* resources
-        break
-    fi
-done
+    tar xvf ./"$resources_latest_version".tar.gz || { echo -e "Extraction failed." >&2; exit 1; }
+    cd ./resources-"${resources_latest_version/v/}" || exit 2
+    ./INSTALL.sh
+    cd .. || exit 2
+    rm -rf ./resources*
+    . /etc/profile
+}
 
-for file in ${requirements[@]}; do
-    source "$file"
-done
-
+install_resources
 ##################################################################################################################
 source ./common
 checkuser
