@@ -85,7 +85,8 @@ alias myip='curl eth0.me '
 #    2ip.ru
 alias externalip='myip '
 alias publicip='myip '
-alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python - '
+alias speedtest='curl -s \
+	https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python - '
 alias dps='docker ps '
 alias dvls='docker volume ls '
 alias dvi='docker volume inspect '
