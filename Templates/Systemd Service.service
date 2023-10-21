@@ -33,7 +33,7 @@
 #ExecStopPost= This can be used to specify commands to execute following the stop command.
 #Restart= always|on-success|on-failure|on-abnormal|on-abort|on-watchdog
 #RestartSec= If automatically restarting the service is enabled, this specifies the amount of time to wait before attempting to restart the service.
-#TimeoutSec= This configures the amount of time that systemd will wait when stopping or stopping the service before marking it as failed or forcefully killing it. You can set separate timeouts with TimeoutStartSec= and TimeoutStopSec= as well.
+#TimeoutSec= This configures the amount of time that systemd will wait when starting or stopping the service before marking it as failed or forcefully killing it. You can set separate timeouts with TimeoutStartSec= and TimeoutStopSec= as well.
 
 # Special variables
 # $MAINPID: PID of the main process
