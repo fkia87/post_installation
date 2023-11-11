@@ -73,6 +73,10 @@ ask "Configure \"GoFlex\"?" "config_goflex"
 
 # Package installation ############################################################################
 ask "Install useful packages? (duf, bat, curl, ...)" "useful_packages"
+# Autostart xbanish (Hide mouse cursor when typing) ###############################################
+autostart_dir="$targethome/.config/autostart"
+mkdir -p "$autostart_dir"
+cp ./configurations/xbanish.desktop "$autostart_dir"
 
 # bachrc ##########################################################################################
 echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"

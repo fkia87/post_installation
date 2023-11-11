@@ -111,7 +111,7 @@ config_grub() {
 useful_packages() {
     case $(os) in
         fedora | manjaro)
-            pkg_to_install+=(lsd unrar)
+            pkg_to_install+=(lsd unrar xbanish)
             ;;
         ubuntu | debian)
             snap install lsd
