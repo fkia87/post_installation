@@ -139,6 +139,12 @@ config_goflex() {
     mount -a
 }
 
+autostart_xbanish() {
+    autostart_dir="$targethome/.config/autostart"
+    mkdir -p "$autostart_dir"
+    cp ./configurations/xbanish.desktop "$autostart_dir"
+}
+
 passwordless_sudo() {
     cp configurations/99-sudoers /etc/sudoers.d/
 }
