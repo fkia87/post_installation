@@ -8,6 +8,6 @@
 # "\u" ----> username
 
 alias ll='lsd -lAhig --color always --header --group-directories-first --date relative \
-    --icon-theme unicode --icon always '
+    --icon-theme unicode --icon always --total-size '
 alias df='duf '
 alias update='sudo dnf update'

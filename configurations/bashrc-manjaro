@@ -1,6 +1,6 @@
 # shellcheck disable=all
 
 alias ll='lsd -lAhig --color always --header --group-directories-first --date relative \
-    --icon always '
+    --icon always --total-size '
 alias df='duf '
 alias update='sudo pamac update'
