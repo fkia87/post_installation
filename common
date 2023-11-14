@@ -111,13 +111,13 @@ config_grub() {
 useful_packages() {
     case $(os) in
         fedora | manjaro)
-            pkg_to_install+=(lsd unrar xbanish btop)
+            pkg_to_install+=(unrar xbanish btop)
             ;;
         ubuntu | debian)
-            snap install lsd
+            :
             ;;
     esac
-    pkg_to_install+=(duf bat curl colorized-logs)
+    pkg_to_install+=(duf bat curl colorized-logs lsd)
 
     # shellcheck disable=SC2068
     install_pkg ${pkg_to_install[@]}
