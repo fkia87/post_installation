@@ -1,5 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC2220,SC2213,SC2046
+# cSpell:disable
 
 BREAKS=(-61 9 38 199 426 686 756 818 1111 1181 1210 1635 2060 2097 2192 2262 2324 2394 2456 3178)
 DAY_NAMES_FA=(Sh Ye Do Se Ch Pa Jo)

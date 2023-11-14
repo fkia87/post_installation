@@ -1,3 +1,6 @@
-alias ll='lsd -lAhi --color always --header --group-directories-first --date relative '
+# shellcheck disable=all
+
+alias ll='lsd -lAhig --color always --header --group-directories-first --date relative \
+    --icon always '
 alias df='duf '
 alias update='sudo pamac update'
