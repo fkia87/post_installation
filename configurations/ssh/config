@@ -192,4 +192,8 @@ Host production-dslave2
 	Hostname production-dslave2
 	User f.kia
 	Port 4141
+Host damavand-n1
+	Hostname damavand-n1
+	User ubuntu
+	Port 22
 StrictHostKeyChecking no
