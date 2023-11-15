@@ -78,7 +78,7 @@ ask "Install useful packages? (duf, bat, curl, ...)" "useful_packages"
 ask "Autostart xbanish (Hide mouse cursor when typing)?" "autostart_xbanish"
 
 # bachrc ##########################################################################################
-echo -e "${BLUE}\nConfiguring \"bashrc\"...${DECOLOR}"
+echo -e "${BLUE}\nConfiguring \"bashrc\"...\n${DECOLOR}"
 case $(os) in
     manjaro | ubuntu | debian)
         BASHRC="/etc/bash.bashrc"

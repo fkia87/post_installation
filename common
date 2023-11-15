@@ -1,4 +1,5 @@
 # shellcheck disable=SC2148,SC2317
+# cSpell: disable
 
 config_journald() {
     echo -e "${BLUE}\nConfiguring \"journald\"...${DECOLOR}"
@@ -11,19 +12,22 @@ config_journald() {
 
 get_target_user() {
     while [[ -z $targetuser ]] || ! grep 'bash$' /etc/passwd | \
-        awk -F ':' '{print$1}' | grep -q ^"$targetuser"$ 2>/dev/null; do
-        echo -e "${BLUE}\nEnter your target Linux username:${DECOLOR}"
-        read -r targetuser
-        if [[ $targetuser == "root" ]]; then
-            targethome=/$targetuser
-        else
-            targethome=/home/"$targetuser"
-        fi
+        awk -F ':' '{print$1}' | grep -q ^"${targetuser:-fkia}"$ 2>/dev/null; do
+        read -r -p "Enter your target Linux username [fkia]: " targetuser
+        targetuser=${targetuser:-fkia}
+        case "$targetuser" in
+            root)
+                targethome=/$targetuser
+                ;;
+            * )
+                targethome=/home/"$targetuser"
+                ;;
+        esac
     done
 }
 
 create_dirs() {
-    echo -e "${BLUE}\nCreating directories in \"$targethome\"...${DECOLOR}"
+    echo -e "${BLUE}\nCreating directories in \"$targethome\"...\n${DECOLOR}"
     install -d -o "$targetuser" -g "$targetuser" \
         "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh}
 }

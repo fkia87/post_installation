@@ -7,7 +7,13 @@
 172.16.144.87	kolla-deployer
 217.160.171.251 saba ahmadian
 
+172.17.5.1      damavand-c1
+172.17.5.2      damavand-c2
+172.17.5.3      damavand-c3
+
 172.17.5.4      damavand-n1
+172.17.5.5      damavand-n2
+172.17.5.6      damavand-n3
 
 172.16.64.106   production-c1
 172.16.64.107   production-c2

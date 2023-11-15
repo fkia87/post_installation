@@ -196,4 +196,25 @@ Host damavand-n1
 	Hostname damavand-n1
 	User ubuntu
 	Port 22
-StrictHostKeyChecking no
+Host damavand-n2
+	Hostname damavand-n2
+	User ubuntu
+	Port 22
+Host damavand-n3
+	Hostname damavand-n3
+	User ubuntu
+	Port 22
+Host damavand-c1
+	Hostname damavand-c1
+	User ubuntu
+	Port 22
+Host damavand-c2
+	Hostname damavand-c2
+	User ubuntu
+	Port 22
+Host damavand-c3
+	Hostname damavand-c3
+	User ubuntu
+	Port 22
+
+	StrictHostKeyChecking no
