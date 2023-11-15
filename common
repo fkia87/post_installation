@@ -29,7 +29,7 @@ get_target_user() {
 create_dirs() {
     echo -e "${BLUE}\nCreating directories in \"$targethome\"...\n${DECOLOR}"
     install -d -o "$targetuser" -g "$targetuser" \
-        "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh}
+        "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh,.config/terminator}
 }
 
 set_qt_scale_2 () {
@@ -37,6 +37,11 @@ set_qt_scale_2 () {
     echo "export QT_SCALE_FACTOR=2" >> "$targethome"/.bash_profile
     # shellcheck disable=SC2034
     REBOOT=1
+}
+
+config_terminator() {
+    install -m 644 -o "$targetuser" -g "$targetuser" configurations/terminator.config \
+        "$targethome"/.config/terminator/config
 }
 
 config_ssh() {

@@ -71,6 +71,9 @@ ask "Install Templates?" "install_templates"
 # GoFlex ##########################################################################################
 ask "Configure \"GoFlex\"?" "config_goflex"
 
+# Terminator ######################################################################################
+ask "Configure \"Terminator\"?" "config_terminator"
+
 # Package installation ############################################################################
 ask "Install useful packages? (duf, bat, curl, ...)" "useful_packages"
 
