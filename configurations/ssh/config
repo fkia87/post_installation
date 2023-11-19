@@ -236,4 +236,28 @@ Host damavand-dns01
 	Hostname damavand-dns01
 	User ubuntu
 	Port 22
+Host damavand-ceph-mon-01
+	Hostname damavand-ceph-mon-01
+	User ubuntu
+	Port 5454
+Host damavand-ceph-mon-02
+	Hostname damavand-ceph-mon-02
+	User ubuntu
+	Port 5454
+Host damavand-ceph-mon-03
+	Hostname damavand-ceph-mon-03
+	User ubuntu
+	Port 5454
+Host damavand-ceph-mgr-01
+	Hostname damavand-ceph-mgr-01
+	User ubuntu
+	Port 5454
+Host damavand-ceph-mgr-02
+	Hostname damavand-ceph-mgr-02
+	User ubuntu
+	Port 5454
+Host damavand-ceph-mgr-03
+	Hostname damavand-ceph-mgr-03
+	User ubuntu
+	Port 5454
 	StrictHostKeyChecking no
