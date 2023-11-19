@@ -1,19 +1,19 @@
 Host ansible-stage-144.166
-	HostName 172.16.144.166
+	HostName ansible-stage-144.166
 	User f.kia
 	Port 4141
 Host backup-64.33
-	Hostname 172.16.64.33
+	Hostname backup-64.33
 	User f.kia
 	Port 4141
 Host nofilter
-	Hostname 172.15.1.149
+	Hostname nofilter
 	User behzad
 Host dev_sakku
-	Hostname 172.16.147.55
+	Hostname dev_sakku
 	User ubuntu
 Host runner-gitlab
-	Hostname 172.16.144.45
+	Hostname runner-gitlab
 	User fkia
 	Port 2244
 Host ag
@@ -216,5 +216,24 @@ Host damavand-c3
 	Hostname damavand-c3
 	User ubuntu
 	Port 22
-
+Host damavand-w1
+	Hostname damavand-w1
+	User administrator
+	Port 22
+Host damavand-w2
+	Hostname damavand-w2
+	User administrator
+	Port 22
+Host damavand-deployer
+	Hostname damavand-deployer
+	User ubuntu
+	Port 22
+Host damavand-ntp01
+	Hostname damavand-ntp01
+	User ubuntu
+	Port 22
+Host damavand-dns01
+	Hostname damavand-dns01
+	User ubuntu
+	Port 22
 	StrictHostKeyChecking no
