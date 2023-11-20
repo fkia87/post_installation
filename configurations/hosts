@@ -33,13 +33,16 @@
 172.17.11.2     damavand-deployer
 172.17.11.3     damavand-dns01
 
-172.17.5.20     damavand-ceph-mon-01
-172.17.5.21     damavand-ceph-mon-02
-172.17.5.22     damavand-ceph-mon-03
+172.17.8.1      damavand-ceph-mon-01
+172.17.8.2      damavand-ceph-mon-02
+172.17.8.3      damavand-ceph-mon-03
 
-172.17.5.23     damavand-ceph-mgr-01
-172.17.5.24     damavand-ceph-mgr-02
-172.17.5.25     damavand-ceph-mgr-03
+172.17.8.4      damavand-ceph-mgr-01
+172.17.8.5      damavand-ceph-mgr-02
+172.17.8.6      damavand-ceph-mgr-03
+
+172.17.8.7      damavand-ceph-osd-01
+172.17.8.9      damavand-ceph-osd-03
 
 # TEBIYAN ##############################################################
 172.16.64.106   production-c1
