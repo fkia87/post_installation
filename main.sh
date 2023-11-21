@@ -18,10 +18,10 @@ install_resources() {
     ./INSTALL.sh
     cd .. || exit 2
     rm -rf ./resources*
-    . /etc/profile
 }
 
 install_resources
+. /etc/profile
 ###################################################################################################
 source ./common
 checkuser
