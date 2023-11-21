@@ -9,11 +9,11 @@ install_resources() {
         curl -v https://github.com/fkia87/resources/releases/latest 2>&1 | \
         grep -i location | rev | cut -d / -f 1 | rev | sed 's/\r//g'
     )
-    echo -e "Downloading resources..."
+    echo -e "\nDownloading resources...\n"
     rm -rf "$resources_latest_version".tar.gz
     wget https://github.com/fkia87/resources/archive/refs/tags/"$resources_latest_version".tar.gz \
-        || { echo -e "Error downloading required files from Github." >&2; exit 1; }
-    tar xvf ./"$resources_latest_version".tar.gz || { echo -e "Extraction failed." >&2; exit 1; }
+        || { echo -e "\nError downloading required files from Github.\n" >&2; exit 1; }
+    tar xvf ./"$resources_latest_version".tar.gz || { echo -e "\nExtraction failed.\n" >&2; exit 1; }
     cd ./resources-"${resources_latest_version/v/}" || exit 2
     ./INSTALL.sh
     cd .. || exit 2
@@ -46,9 +46,9 @@ create_dirs
 case $(os) in
     fedora)
         config_dnf() {
-            echo -e "${BLUE}Writing \"DNF\" configurations...${DECOLOR}"
+            echo -e "${BLUE}Writing \"DNF\" configurations...\n${DECOLOR}"
             cp ./configurations/dnf.conf /etc/dnf/dnf.conf
-            echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
+            echo -e "${BLUE}Installing \"rpm fusion repositories\"...\n${DECOLOR}"
             dnf -y install \
             https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"${REL}".noarch.rpm \
             https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"${REL}"\

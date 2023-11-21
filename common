@@ -2,7 +2,7 @@
 # cSpell: disable
 
 config_journald() {
-    echo -e "${BLUE}\nConfiguring \"journald\"...${DECOLOR}"
+    echo -e "${BLUE}\nConfiguring \"journald\"...\n${DECOLOR}"
     sed -i '/^Storage=volatile/d' /etc/systemd/journald.conf
     echo -e "Storage=volatile" >> /etc/systemd/journald.conf
     #systemctl restart systemd-journald
@@ -45,7 +45,7 @@ config_terminator() {
 }
 
 config_ssh() {
-    echo -e "${BLUE}\nConfiguring \"SSH\"...${DECOLOR}"
+    echo -e "${BLUE}\nConfiguring \"SSH\"...\n${DECOLOR}"
     cp /etc/ssh/ssh_config{,.bak}
     echo -e "${BBLUE}\nEnter your SSH private key password:\n${DECOLOR}"
     while ! gpg --pinentry-mode loopback -o configurations/ssh/id_rsa \
@@ -70,44 +70,44 @@ config_hosts() {
 }
 
 install_scripts() {
-    echo -e "${BLUE}\nInstalling scripts...${DECOLOR}"
+    echo -e "${BLUE}\nInstalling scripts...\n${DECOLOR}"
     install -m 755 -o "$targetuser" -g "$targetuser" ./scripts/* "$targethome"/bin/
 }
 
 install_templates() {
     [[ -d "$targethome"/Templates/ ]] || \
-        { echo -e "No \"Templates\" directory found in $targethome." >&2; return 1; }
+        { echo -e "\nNo \"Templates\" directory found in $targethome.\n" >&2; return 1; }
     install -o "$targetuser" -g "$targetuser" ./Templates/* "$targethome"/Templates/
 }
 
 install_fonts() {
-    echo -e "${BLUE}\nInstalling fonts...${DECOLOR}"
+    echo -e "${BLUE}\nInstalling fonts...\n${DECOLOR}"
     cp -r ./fonts/* "$targethome"/.fonts/
     chown -R "$targetuser":"$targetuser" "$targethome"/.fonts/*
 }
 
 config_proxy() {
     ask "You should configure ssh keys first. Continue?" "config_ssh"
-    echo -e "${BLUE}\nConfiguring VPN proxy services...${DECOLOR}"
+    echo -e "${BLUE}\nConfiguring VPN proxy services...\n${DECOLOR}"
     while IFS= read -r service
     do
         cp "$service" /etc/systemd/system/
         systemctl daemon-reload
         systemctl enable "${service##*/}" --now 2>/dev/null && \
-        echo -e "${GREEN}\nStarted \"${service##*/}\" successfully.${DECOLOR}"
+        echo -e "${GREEN}\nStarted \"${service##*/}\" successfully.\n${DECOLOR}"
     done < <(find ./configurations/ -name '*proxy.service')
 }
 
 config_grub() {
         case $(os) in
         fedora)
-            echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
+            echo -e "${BLUE}\nUpdating kernel parameters...\n${DECOLOR}"
             grubby --update-kernel ALL --args "selinux=0 pcie_aspm=off"
-            echo -e "${BLUE}Turning \"SELinux\" off...${DECOLOR}"
+            echo -e "${BLUE}Turning \"SELinux\" off...\n${DECOLOR}"
             setenforce 0
             ;;
         manjaro | ubuntu | debian)
-            echo -e "${BLUE}\nUpdating kernel parameters...${DECOLOR}"
+            echo -e "${BLUE}\nUpdating kernel parameters...\n${DECOLOR}"
             cp /etc/default/grub{,.bak}
             sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="pcie_aspm=off"/' /etc/default/grub
             update-grub 2>/dev/null
@@ -137,9 +137,9 @@ strt_msg() {
 }
 
 config_goflex() {
-    echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...${DECOLOR}"
+    echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...\n${DECOLOR}"
     blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || \
-        { echo -e "${RED}\"GoFlex\" not found.${DECOLOR}"; return 2; }
+        { echo -e "${RED}\n\"GoFlex\" not found.\n${DECOLOR}"; return 2; }
     install -d -o "$targetuser" -g "$targetuser" "$targethome"/GoFlex
     cp /etc/fstab{,.bak}
     sed -i '/UUID=e0886b21-1596-4626-b131-2137ec7394fa/d' /etc/fstab
