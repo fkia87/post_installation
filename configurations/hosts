@@ -42,6 +42,7 @@
 172.17.8.6      damavand-ceph-mgr-03
 
 172.17.8.7      damavand-ceph-osd-01
+172.17.8.8      damavand-ceph-osd-02
 172.17.8.9      damavand-ceph-osd-03
 
 # TEBIYAN ##############################################################

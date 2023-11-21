@@ -264,6 +264,10 @@ Host damavand-ceph-osd-01
 	Hostname damavand-ceph-osd-01
 	User administrator
 	Port 5454
+Host damavand-ceph-osd-02
+	Hostname damavand-ceph-osd-02
+	User administrator
+	Port 5454
 Host damavand-ceph-osd-03
 	Hostname damavand-ceph-osd-03
 	User administrator
