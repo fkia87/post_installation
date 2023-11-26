@@ -274,6 +274,6 @@ Host damavand-ceph-osd-03
 	Port 5454
 Host maas-server
 	Hostname maas-server
-	User ubuntu
+	User awx
 	Port 22
 StrictHostKeyChecking no
