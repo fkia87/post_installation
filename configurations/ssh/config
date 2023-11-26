@@ -272,8 +272,8 @@ Host damavand-ceph-osd-03
 	Hostname damavand-ceph-osd-03
 	User administrator
 	Port 5454
-Host maas-server
-	Hostname maas-server
+Host maas-server-01
+	Hostname maas-server-01
 	User awx
-	Port 22
+	Port 4141
 StrictHostKeyChecking no
