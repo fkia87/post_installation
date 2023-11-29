@@ -1,0 +1,16 @@
+{
+    "block_domain": "geosite:category-ads-all\ndomain:appcenter.ms\ndomain:firebase.io\ndomain:crashlytics.com",
+    "custom": "{\"rules\":[]}",
+    "def_outbound": "proxy",
+    "direct_dns": "localhost",
+    "direct_dns_strategy": "prefer_ipv4",
+    "direct_domain": "geosite:cn",
+    "direct_ip": "geoip:cn\ngeoip:private\ngeoip:ir\n",
+    "dns_final_out": "proxy",
+    "dns_routing": true,
+    "domain_strategy": "prefer_ipv4",
+    "remote_dns": "https://8.8.8.8/dns-query",
+    "remote_dns_strategy": "prefer_ipv4",
+    "sniffing_mode": 1,
+    "use_dns_object": false
+}

@@ -132,6 +132,17 @@ useful_packages() {
     install_pkg ${pkg_to_install[@]}
 }
 
+install_nekoray_routes() {
+    echo -e "${BLUE}\nInstalling \"Nekoray\" routes...\n${DECOLOR}"
+    local dest="$targethome"/Applications/nekoray/config/routes_box
+    if [[ -d "$dest" ]]; then
+        install -m 644 configurations/my_nekoray_routes "$dest"
+    else
+        echo -en "${YELLOW}\nDirectory \"$dest\" not found \"Nekoray\""
+        echo -e " probably is not installed.\n${DECOLOR}"
+    fi
+}
+
 strt_msg() {
     echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\n${DECOLOR}"
 }
