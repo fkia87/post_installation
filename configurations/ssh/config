@@ -276,4 +276,8 @@ Host maas-server-01
 	Hostname maas-server-01
 	User awx
 	Port 4141
+Host sakku-stage-cloud-installer
+	Hostname sakku-stage-cloud-installer
+	User ubuntu
+	Port 22
 StrictHostKeyChecking no
