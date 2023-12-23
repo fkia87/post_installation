@@ -17,7 +17,7 @@
 
 172.16.144.45   runner-gitlab
 
-172.16.159.250  maas-server-01
+172.16.146.10  maas-server-01
 
 # SAKKU STAGE ##########################################################
 172.16.147.55   sakku-stage-cloud-installer
