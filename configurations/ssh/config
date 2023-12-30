@@ -168,6 +168,14 @@ Host production-w30
 	Hostname production-w30
 	User f.kia
 	Port 4141
+Host production-w31
+	Hostname production-w31
+	User ubuntu
+	Port 22
+Host production-w32
+	Hostname production-w32
+	User ubuntu
+	Port 22
 Host production-n1
 	Hostname production-n1
 	User f.kia
