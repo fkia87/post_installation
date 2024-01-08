@@ -171,11 +171,11 @@ Host production-w30
 Host production-w31
 	Hostname production-w31
 	User ubuntu
-	Port 22
+	Port 4141
 Host production-w32
 	Hostname production-w32
 	User ubuntu
-	Port 22
+	Port 4141
 Host production-n1
 	Hostname production-n1
 	User f.kia
