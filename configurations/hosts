@@ -4,102 +4,101 @@
 217.160.171.251 saba ahmadian
 
 # FICLD ################################################################
-172.16.144.241	dev-stg1.public.cloud.ficld.ir
+172.16.144.241	        dev-stg1.public.cloud.ficld.ir
 
-172.24.0.10     private-registry.ficld.ir chat.lalavij.ir
+172.24.0.10             private-registry.ficld.ir chat.lalavij.ir
 
-172.16.144.87	kolla-deployer
-172.16.144.166  ansible-stage-144.166 host166 h166
+172.16.144.87	        kolla-deployer
+172.16.144.166          ansible-stage-144.166 host166 h166
 
-172.16.147.55   dev_sakku
+172.16.147.55           dev_sakku
 
-172.15.1.149    nofilter
+172.15.1.149            nofilter
 
-172.16.144.45   runner-gitlab
+172.16.144.45           runner-gitlab
 
-172.16.146.10  maas-server-01
+172.16.146.10           maas-server-01
 
 # SAKKU STAGE ##########################################################
-172.16.147.55   sakku-stage-cloud-installer
+172.16.147.55           sakku-stage-cloud-installer
 
 # DAMAVAND #############################################################
-172.17.5.1      damavand-c1
-172.17.5.2      damavand-c2
-172.17.5.3      damavand-c3
+172.17.5.1              damavand-c1
+172.17.5.2              damavand-c2
+172.17.5.3              damavand-c3
 
-172.17.5.4      damavand-n1
-172.17.5.5      damavand-n2
-172.17.5.6      damavand-n3
+172.17.5.4              damavand-n1
+172.17.5.5              damavand-n2
+172.17.5.6              damavand-n3
 
-172.17.5.10     damavand-w1
-172.17.5.11     damavand-w2
+172.17.5.10             damavand-w1
+172.17.5.11             damavand-w2
 
-172.17.11.1     damavand-ntp01
-172.17.11.2     damavand-deployer
-172.17.11.3     damavand-dns01
+172.17.11.1             damavand-ntp01
+172.17.11.2             damavand-deployer
+172.17.11.3             damavand-dns01
 
-172.17.8.1      damavand-ceph-mon-01
-172.17.8.2      damavand-ceph-mon-02
-172.17.8.3      damavand-ceph-mon-03
+172.17.8.1              damavand-ceph-mon-01
+172.17.8.2              damavand-ceph-mon-02
+172.17.8.3              damavand-ceph-mon-03
 
-172.17.8.4      damavand-ceph-mgr-01
-172.17.8.5      damavand-ceph-mgr-02
-172.17.8.6      damavand-ceph-mgr-03
+172.17.8.4              damavand-ceph-mgr-01
+172.17.8.5              damavand-ceph-mgr-02
+172.17.8.6              damavand-ceph-mgr-03
 
-172.17.8.7      damavand-ceph-osd-01
-172.17.8.8      damavand-ceph-osd-02
-172.17.8.9      damavand-ceph-osd-03
+172.17.8.7              damavand-ceph-osd-01
+172.17.8.8              damavand-ceph-osd-02
+172.17.8.9              damavand-ceph-osd-03
 
 # TEBIYAN ##############################################################
-172.16.64.106   production-c1
-172.16.64.107   production-c2
-172.16.64.108   production-c3
+172.16.64.106           production-c1
+172.16.64.107           production-c2
+172.16.64.108           production-c3
 
-172.16.64.103   production-n1
-172.16.64.104   production-n2
-172.16.64.105   production-n3
+172.16.64.103           production-n1
+172.16.64.104           production-n2
+172.16.64.105           production-n3
 
-172.16.64.100   production-m1
-172.16.64.101   production-m2
-172.16.64.102   production-m3
+172.16.64.100           production-m1
+172.16.64.101           production-m2
+172.16.64.102           production-m3
 
-172.16.64.148   production-dmaster
-172.16.64.138   production-dslave1
-172.16.64.139   production-dslave2
+172.16.64.148           production-dmaster
+172.16.64.138           production-dslave1
+172.16.64.139           production-dslave2
 
-172.16.64.10    production-w1
-172.16.64.11    production-w2
-172.16.64.12    production-w3
-172.16.64.13    production-w4
-172.16.64.23    production-w5
-172.16.64.24    production-w6
-172.16.64.25    production-w7
-172.16.64.26    production-w8
-172.16.64.27    production-w9
-172.16.64.28    production-w10
-172.16.64.34    production-w11
-172.16.64.35    production-w12
-172.16.64.36    production-w13
-172.16.64.37    production-w14
-172.16.64.38    production-w15
-172.16.64.39    production-w16
-172.16.64.40    production-w17
-172.16.64.41    production-w18
-172.16.64.31    production-w19
-172.16.64.47    production-w20
-172.16.64.44    production-w21
-172.16.64.45    production-w22
-172.16.64.46    production-w23
-172.16.64.49    production-w24
-172.16.64.50    production-w25
-172.16.64.51    production-w26
-172.16.64.52    production-w27
-172.16.64.55    production-w28
-172.16.64.42    production-w29
-172.16.64.43    production-w30
-172.16.146.4    production-w31
-172.16.146.2    production-w32
+172.16.64.10            production-w1
+172.16.64.11            production-w2
+172.16.64.12            production-w3
+172.16.64.13            production-w4
+172.16.64.23            production-w5
+172.16.64.24            production-w6
+172.16.64.25            production-w7
+172.16.64.26            production-w8
+172.16.64.27            production-w9
+172.16.64.28            production-w10
+172.16.64.34            production-w11
+172.16.64.35            production-w12
+172.16.64.36            production-w13
+172.16.64.37            production-w14
+172.16.64.38            production-w15
+172.16.64.39            production-w16
+172.16.64.40            production-w17
+172.16.64.41            production-w18
+172.16.64.31            production-w19
+172.16.64.47            production-w20
+172.16.64.44            production-w21
+172.16.64.45            production-w22
+172.16.64.46            production-w23
+172.16.64.49            production-w24
+172.16.64.50            production-w25
+172.16.64.51            production-w26
+172.16.64.52            production-w27
+172.16.64.55            production-w28
+172.16.64.42            production-w29
+172.16.64.43            production-w30
+172.16.146.192          production-w31
 
 
-172.16.64.33    backup-64.33
+172.16.64.33            backup-64.33
 ########################################################################
