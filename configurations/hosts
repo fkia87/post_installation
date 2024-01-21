@@ -11,7 +11,7 @@
 172.16.144.87	        kolla-deployer
 172.16.144.166          ansible-stage-144.166 host166 h166
 
-172.16.147.55           dev_sakku
+172.16.147.55           dev-sakku
 
 172.15.1.149            nofilter
 
