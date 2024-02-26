@@ -6,16 +6,9 @@
 # FICLD ################################################################
 172.16.144.241	        dev-stg1.public.cloud.ficld.ir
 
-172.24.0.10             private-registry.ficld.ir chat.lalavij.ir
-
-172.16.144.87	        kolla-deployer
 172.16.144.166          ansible-stage-144.166 host166 h166
 
-172.16.147.55           dev-sakku
-
 172.15.1.149            nofilter
-
-172.16.144.45           runner-gitlab
 
 172.16.146.10           maas-server-01
 
