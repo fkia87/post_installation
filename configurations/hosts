@@ -44,6 +44,7 @@
 172.17.8.9              damavand-ceph-osd-03
 
 172.17.11.9             damavand-maas
+172.17.11.9             damavand-gitlab
 
 # TEBIYAN ##############################################################
 172.16.64.106           production-c1
