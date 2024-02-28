@@ -43,6 +43,8 @@
 172.17.8.8              damavand-ceph-osd-02
 172.17.8.9              damavand-ceph-osd-03
 
+172.17.11.9             damavand-maas
+
 # TEBIYAN ##############################################################
 172.16.64.106           production-c1
 172.16.64.107           production-c2
