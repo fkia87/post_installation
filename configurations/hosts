@@ -14,6 +14,8 @@
 172.16.147.55           sakku-stage-cloud-installer
 
 # DAMAVAND #############################################################
+172.17.0.250            public.cloud.damavand.cloud
+
 172.17.5.1              damavand-c1
 172.17.5.2              damavand-c2
 172.17.5.3              damavand-c3
