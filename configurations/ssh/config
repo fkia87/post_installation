@@ -279,6 +279,9 @@ Host damavand-ceph-osd-03
 Host damavand-maas
 	Hostname damavand-maas
 	User ubuntu
+Host damavand-gitlab
+	Hostname damavand-gitlab
+	User ubuntu
 Host maas-server-01
 	Hostname maas-server-01
 	User awx
