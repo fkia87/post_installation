@@ -1,0 +1,14 @@
+{
+    "registry-mirrors": [
+      "https://registry.ficld.ir"
+    ],
+    "insecure-registries": [],
+    "debug": false,
+    "experimental": false,
+    "bip": "10.16.1.1/24",
+    "default-address-pools": [
+      { "base": "10.16.2.0/18", "size": 24 },
+      { "base": "10.116.2.0/18", "size": 24 }
+    ]
+  }
+  
