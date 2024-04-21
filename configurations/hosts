@@ -10,6 +10,7 @@
 
 172.16.146.10           maas-server-01
 
+172.16.144.51           cdn-dev-env
 # SAKKU STAGE ##########################################################
 172.16.147.55           sakku-stage-cloud-installer
 
