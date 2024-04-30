@@ -300,7 +300,7 @@ Host ibm-zvm
 	Port 22
 	# Password: ubuntu
 Host ibm-server
-	Hostname ibmibm-server
+	Hostname ibm-server
 	User ubuntu
 	Port 22
 	# Password: ubuntu
