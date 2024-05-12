@@ -304,4 +304,9 @@ Host ibm-server
 	User ubuntu
 	Port 22
 	# Password: ubuntu
+Host cinder-dev
+	Hostname cinder-dev
+	User ubuntu
+	Port 22
+	# Password: ubuntu
 StrictHostKeyChecking no
