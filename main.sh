@@ -7,7 +7,7 @@ install_resources() {
     local resources_latest_version
     resources_latest_version=$(
         curl -v https://github.com/fkia87/resources/releases/latest 2>&1 | \
-        grep -i location | rev | cut -d / -f 1 | rev | sed 's/\r//g'
+        grep -i '< location:' | rev | cut -d / -f 1 | rev | sed 's/\r//g'
     )
     echo -e "\nDownloading resources...\n"
     rm -rf "$resources_latest_version".tar.gz
