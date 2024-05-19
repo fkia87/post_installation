@@ -1,6 +1,25 @@
 #!/bin/bash
 # shellcheck disable=SC2068,SC1091,SC1090,SC2154
 
+print_help() {
+    printf "%s\n" "
+-----------------------------------+---------------------------------------------------------------
+             Switches              |                         Description
+-----------------------------------+---------------------------------------------------------------
+    --update-hosts, --host         |       Update only /etc/hosts and ~/.ssh/config files
+-----------------------------------+---------------------------------------------------------------
+           --help, -h              |       Show this help message
+-----------------------------------+---------------------------------------------------------------
+"
+}
+
+case $1 in
+    --help | -h)
+        print_help
+        exit 0
+        ;;
+esac
+
 # IMPORT REQUIREMENTS #############################################################################
 install_resources() {
     [[ $UID == "0" ]] || { echo "You are not root." >&2; exit 1; }
@@ -32,6 +51,16 @@ case "$(os)" in
         ;;
 esac
 get_target_user
+###################################################################################################
+case $1 in
+    --update-hosts | --host*)
+        echo -e "${BLUE}Updating SSH configurations...\n${DECOLOR}"
+        install -o $targetuser -g $targetuser ./configurations/ssh/* $targethome/.ssh
+        config_hosts
+        exit 0
+        ;;
+esac
+
 ask "Remove password for sudoers?" "passwordless_sudo"
 ask "Config journald?" "config_journald"
 ask "Set default scale for QT applications to 2?" "set_qt_scale_2"

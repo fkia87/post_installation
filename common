@@ -65,6 +65,7 @@ EOF
 }
 
 config_hosts() {
+    echo -e "${BLUE}Updating /etc/hosts...\n${DECOLOR}"
     sed -i '/# POST INSTALLATION/Q' /etc/hosts \
         && cat ./configurations/hosts >> /etc/hosts
 }

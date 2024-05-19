@@ -34,7 +34,7 @@
 
 172.17.11.1             damavand-ntp01
 172.17.11.2             damavand-deployer
-172.17.11.3             damavand-dns01
+172.17.11.3             damavand-dns01 webmin.damavand.ir
 
 172.17.8.1              damavand-ceph-mon-01
 172.17.8.2              damavand-ceph-mon-02
