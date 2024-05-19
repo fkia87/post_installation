@@ -60,7 +60,7 @@ case $1 in
         exit 0
         ;;
 esac
-
+###################################################################################################
 ask "Remove password for sudoers?" "passwordless_sudo"
 ask "Config journald?" "config_journald"
 ask "Set default scale for QT applications to 2?" "set_qt_scale_2"
