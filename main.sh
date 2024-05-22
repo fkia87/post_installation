@@ -8,6 +8,8 @@ print_help() {
 -----------------------------------+---------------------------------------------------------------
     --update-hosts, --host         |       Update only /etc/hosts and ~/.ssh/config files
 -----------------------------------+---------------------------------------------------------------
+            --bashrc               |       Update only bashrc files
+-----------------------------------+---------------------------------------------------------------
            --help, -h              |       Show this help message
 -----------------------------------+---------------------------------------------------------------
 "
@@ -37,6 +39,7 @@ install_resources() {
     ./INSTALL.sh
     cd .. || exit 2
     rm -rf ./resources*
+    rm -rf "$resources_latest_version".tar.gz
 }
 
 install_resources
@@ -52,14 +55,27 @@ case "$(os)" in
 esac
 get_target_user
 ###################################################################################################
-case $1 in
-    --update-hosts | --host*)
-        echo -e "${BLUE}Updating SSH configurations...\n${DECOLOR}"
-        install -o $targetuser -g $targetuser ./configurations/ssh/* $targethome/.ssh
-        config_hosts
-        exit 0
-        ;;
-esac
+while [[ $# -gt 0 ]]; do
+    quit_after=1
+    case $1 in
+        --update-hosts | --host*)
+            echo -e "${BLUE}\nUpdating SSH configurations...\n${DECOLOR}"
+            install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh
+            config_hosts
+            shift 1
+            ;;
+        --bashrc)
+            config_bashrc
+            shift 1
+            ;;
+    esac
+done
+
+if [[ $quit_after -eq 1 ]]; then
+    rm -rf resources
+    finish_msg
+    exit 0
+fi
 ###################################################################################################
 ask "Remove password for sudoers?" "passwordless_sudo"
 ask "Config journald?" "config_journald"
@@ -110,18 +126,7 @@ ask "Install useful packages? (duf, bat, curl, ...)" "useful_packages"
 ask "Autostart xbanish (Hide mouse cursor when typing)?" "autostart_xbanish"
 
 # bachrc ##########################################################################################
-echo -e "${BLUE}\nConfiguring \"bashrc\"...\n${DECOLOR}"
-case $(os) in
-    manjaro | ubuntu | debian)
-        BASHRC="/etc/bash.bashrc"
-        ;;
-    fedora | centos | almalinux | rocky)
-        BASHRC="/etc/bashrc"
-        ;;
-esac
-sed -i '/^alias ll/d' "$targethome"/.bashrc
-sed -i '/# POST INSTALLATION/Q' "$BASHRC" \
-    && cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
+ask "Config bashrc?" "config_bashrc"
 
 # Fonts ###########################################################################################
 ask "Install fonts?" "install_fonts"

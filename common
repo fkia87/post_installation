@@ -32,6 +32,21 @@ create_dirs() {
         "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh,.config/terminator}
 }
 
+config_bashrc() {
+    echo -e "${BLUE}\nConfiguring \"bashrc\"...\n${DECOLOR}"
+    case $(os) in
+        manjaro | ubuntu | debian)
+            BASHRC="/etc/bash.bashrc"
+            ;;
+        fedora | centos | almalinux | rocky)
+            BASHRC="/etc/bashrc"
+            ;;
+    esac
+    sed -i '/^alias ll/d' "$targethome"/.bashrc
+    sed -i '/# POST INSTALLATION/Q' "$BASHRC" \
+        && cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
+}
+
 set_qt_scale_2 () {
     sed -i '/export QT_SCALE_FACTOR=2/d' "$targethome"/.bash_profile
     echo "export QT_SCALE_FACTOR=2" >> "$targethome"/.bash_profile
@@ -65,7 +80,7 @@ EOF
 }
 
 config_hosts() {
-    echo -e "${BLUE}Updating /etc/hosts...\n${DECOLOR}"
+    echo -e "${BLUE}\nUpdating /etc/hosts...\n${DECOLOR}"
     sed -i '/# POST INSTALLATION/Q' /etc/hosts \
         && cat ./configurations/hosts >> /etc/hosts
 }
