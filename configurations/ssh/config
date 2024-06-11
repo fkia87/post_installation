@@ -309,4 +309,8 @@ Host cinder-dev
 	User ubuntu
 	Port 22
 	# Password: ubuntu
+Host ionos-usa
+	Hostname ionos-usa
+	User root
+	Port 2244
 StrictHostKeyChecking no
