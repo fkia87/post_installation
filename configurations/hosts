@@ -8,6 +8,7 @@
 192.168.2.240           ibm-zvm ibm-zvm.salkhorde.ir
 192.168.2.123           ibm-server
 192.168.2.190           cinder-dev
+
 # FICLD ################################################################
 172.16.144.166          ansible-stage-144.166 host166 h166
 
@@ -16,6 +17,9 @@
 172.16.146.10           maas-server-01
 
 172.16.144.54           cdn-dev-env
+
+172.16.144.85           awx.hamed.cloud
+
 # SAKKU STAGE ##########################################################
 172.16.147.55           sakku-stage-cloud-installer
 
