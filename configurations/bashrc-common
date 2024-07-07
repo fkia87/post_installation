@@ -50,6 +50,7 @@ alias slr='sl restart '
 alias h='head '
 alias t='tail '
 alias ping='ping -OD '
+alias jctl='journalctl '
 #alias cp='rsync -ahR --info=progress2 '
 alias myip='curl -S eth0.me '
 # Other options be like:
