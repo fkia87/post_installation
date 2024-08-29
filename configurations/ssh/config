@@ -313,4 +313,8 @@ Host ionos-usa
 	Hostname ionos-usa
 	User root
 	Port 22
+Host pooyanit-fin
+	Hostname pooyanit-fin
+	User root
+	Port 22
 StrictHostKeyChecking no
