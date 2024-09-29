@@ -3,6 +3,14 @@
 # Usage:
 # [size=<disk_size>] [ram=<ram_size>] [vcpus=<number>] virt-install.sh <qcow2_image_path> [vm_name]
 
+[[ $1 == "-h" || $1 == "--help" ]] && \
+    { 
+        echo "Usage:";
+        echo -n "[size=<disk_size>] [ram=<ram_size>] [vcpus=<number>] ";
+        echo "virt-install.sh <qcow2_image_path> [vm_name]"
+        exit 0; 
+    }
+
 file=${1##*/}; file=${file:?Please enter QCOW2 file name.}
 symlinkdir=libvirt-images
 def_vm_name=${file%.qcow2}-$(od -An -N2 -tu < /dev/urandom | tr -d ' ')
@@ -18,7 +26,8 @@ virt-install --version > /dev/null 2>&1 || { echo "\"virt-install\" is not insta
 cp "$file" ./$symlinkdir/"${2:-$def_vm_name}".qcow2 && \
 qemu-img resize ./$symlinkdir/"${2:-$def_vm_name}".qcow2 "${size:-$def_size}"
 
-virt-install  --name "${2:-$def_vm_name}" \
+virt-install \
+    --name "${2:-$def_vm_name}" \
     --memory "${ram:-4096}" \
     --cpu host --vcpus "${vcpus:-4}" \
     --osinfo detect=on,require=off \
