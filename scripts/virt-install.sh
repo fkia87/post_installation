@@ -36,4 +36,6 @@ virt-install \
     --graphics vnc,port=5901,listen=0.0.0.0 \
     --redirdev none \
     --network "network=default,model=virtio" \
-    --cloud-init user-data=./cloudinit-config.yml
+    --cloud-init user-data=./cloudinit-config.yml \
+    --noautoconsole \
+    # --noreboot
