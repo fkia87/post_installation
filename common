@@ -87,8 +87,7 @@ config_hosts() {
 
 install_scripts() {
     echo -e "${BLUE}Installing scripts...${DECOLOR}"
-    destination="$targethome"/bin/
-    mkdir -p "$destination"
+    destination=/usr/local/bin
     install -m 755 -o "$targetuser" -g "$targetuser" ./scripts/* "$destination"
 }
 
