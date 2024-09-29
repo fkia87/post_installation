@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Usage:
-# [size=<disk_size>] [ram=<ram_size>] [vcpus=<number>] virt-install.sh <qcow2_image_path> [vm_name]
+# [size=<disk_size>] [ram=<ram_megabytes>] [vcpus=<number>] virt-install.sh <qcow2_image_path> [vm_name]
 
 [[ $1 == "-h" || $1 == "--help" ]] && \
     { 
         echo "Usage:";
-        echo -n "[size=<disk_size>] [ram=<ram_size>] [vcpus=<number>] ";
+        echo -n "[size=<disk_size>] [ram=<ram_megabytes>] [vcpus=<number>] ";
         echo "virt-install.sh <qcow2_image_path> [vm_name]"
         exit 0; 
     }
