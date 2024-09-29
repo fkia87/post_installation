@@ -17,8 +17,8 @@ def_vm_name=${file%.qcow2}-$(od -An -N2 -tu < /dev/urandom | tr -d ' ')
 def_size=20G
 
 [[ $UID == "0" ]] || { echo "You are not root."; exit 1; }
-[[ -L ./$symlinkdir ]] || ln -s /var/lib/libvirt/images ./$symlinkdir
 [[ -s ./cloudinit-config.yml ]] || { echo "\"./cloudinit-config.yml\" is not accessible."; exit 1; }
+[[ -L ./$symlinkdir ]] || ln -s /var/lib/libvirt/images ./$symlinkdir
 [[ -s $1 ]] || { echo "\"$1\" is not accessible."; exit 1; }
 
 virt-install --version > /dev/null 2>&1 || { echo "\"virt-install\" is not installed."; exit 1; }
