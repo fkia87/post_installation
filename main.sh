@@ -68,6 +68,13 @@ while [[ $# -gt 0 ]]; do
             config_bashrc
             shift 1
             ;;
+        --install-script* | --script*)
+            install_scripts
+            shift 1
+            ;;
+        *)
+            shift 1
+            ;;
     esac
 done
 
