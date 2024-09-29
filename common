@@ -2,7 +2,7 @@
 # cSpell: disable
 
 config_journald() {
-    echo -e "${BLUE}\nConfiguring \"journald\"...\n${DECOLOR}"
+    echo -e "${BLUE}Configuring \"journald\"...${DECOLOR}"
     sed -i '/^Storage=volatile/d' /etc/systemd/journald.conf
     echo -e "Storage=volatile" >> /etc/systemd/journald.conf
     #systemctl restart systemd-journald
@@ -27,13 +27,13 @@ get_target_user() {
 }
 
 create_dirs() {
-    echo -e "${BLUE}\nCreating directories in \"$targethome\"...\n${DECOLOR}"
+    echo -e "${BLUE}Creating directories in \"$targethome\"...${DECOLOR}"
     install -d -o "$targetuser" -g "$targetuser" \
         "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh,.config/terminator}
 }
 
 config_bashrc() {
-    echo -e "${BLUE}\nConfiguring \"bashrc\"...\n${DECOLOR}"
+    echo -e "${BLUE}Configuring \"bashrc\"...${DECOLOR}"
     case $(os) in
         manjaro | ubuntu | debian)
             BASHRC="/etc/bash.bashrc"
@@ -60,9 +60,9 @@ config_terminator() {
 }
 
 config_ssh() {
-    echo -e "${BLUE}\nConfiguring \"SSH\"...\n${DECOLOR}"
+    echo -e "${BLUE}Configuring \"SSH\"...${DECOLOR}"
     cp /etc/ssh/ssh_config{,.bak}
-    echo -e "${BBLUE}\nEnter your SSH private key password:\n${DECOLOR}"
+    echo -e "${BBLUE}Enter your SSH private key password:${DECOLOR}"
     while ! gpg --pinentry-mode loopback -o configurations/ssh/id_rsa \
         --decrypt configurations/ssh/encrypted_key; do
         sleep 1
@@ -80,50 +80,52 @@ EOF
 }
 
 config_hosts() {
-    echo -e "${BLUE}\nUpdating /etc/hosts...\n${DECOLOR}"
+    echo -e "${BLUE}Updating /etc/hosts...${DECOLOR}"
     sed -i '/# POST INSTALLATION/Q' /etc/hosts \
         && cat ./configurations/hosts >> /etc/hosts
 }
 
 install_scripts() {
-    echo -e "${BLUE}\nInstalling scripts...\n${DECOLOR}"
-    install -m 755 -o "$targetuser" -g "$targetuser" ./scripts/* "$targethome"/bin/
+    echo -e "${BLUE}Installing scripts...${DECOLOR}"
+    destination="$targethome"/bin/
+    mkdir -p "$destination"
+    install -m 755 -o "$targetuser" -g "$targetuser" ./scripts/* "$destination"
 }
 
 install_templates() {
     [[ -d "$targethome"/Templates/ ]] || \
-        { echo -e "\nNo \"Templates\" directory found in $targethome.\n" >&2; return 1; }
+        { echo -e "No \"Templates\" directory found in $targethome." >&2; return 1; }
     install -o "$targetuser" -g "$targetuser" ./Templates/* "$targethome"/Templates/
 }
 
 install_fonts() {
-    echo -e "${BLUE}\nInstalling fonts...\n${DECOLOR}"
+    echo -e "${BLUE}Installing fonts...${DECOLOR}"
     cp -r ./fonts/* "$targethome"/.fonts/
     chown -R "$targetuser":"$targetuser" "$targethome"/.fonts/*
 }
 
 config_proxy() {
     ask "You should configure ssh keys first. Continue?" "config_ssh"
-    echo -e "${BLUE}\nConfiguring VPN proxy services...\n${DECOLOR}"
+    echo -e "${BLUE}Configuring VPN proxy services...${DECOLOR}"
     while IFS= read -r service
     do
         cp "$service" /etc/systemd/system/
         systemctl daemon-reload
         systemctl enable "${service##*/}" --now 2>/dev/null && \
-        echo -e "${GREEN}\nStarted \"${service##*/}\" successfully.\n${DECOLOR}"
+        echo -e "${GREEN}Started \"${service##*/}\" successfully.${DECOLOR}"
     done < <(find ./configurations/ -name '*proxy.service')
 }
 
 config_grub() {
         case $(os) in
         fedora)
-            echo -e "${BLUE}\nUpdating kernel parameters...\n${DECOLOR}"
+            echo -e "${BLUE}Updating kernel parameters...${DECOLOR}"
             grubby --update-kernel ALL --args "selinux=0 pcie_aspm=off"
-            echo -e "${BLUE}Turning \"SELinux\" off...\n${DECOLOR}"
+            echo -e "${BLUE}Turning \"SELinux\" off...${DECOLOR}"
             setenforce 0
             ;;
         manjaro | ubuntu | debian)
-            echo -e "${BLUE}\nUpdating kernel parameters...\n${DECOLOR}"
+            echo -e "${BLUE}Updating kernel parameters...${DECOLOR}"
             cp /etc/default/grub{,.bak}
             sed -i 's/^GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="pcie_aspm=off"/' /etc/default/grub
             update-grub 2>/dev/null
@@ -149,24 +151,24 @@ useful_packages() {
 }
 
 install_nekoray_routes() {
-    echo -e "${BLUE}\nInstalling \"Nekoray\" routes...\n${DECOLOR}"
+    echo -e "${BLUE}Installing \"Nekoray\" routes...${DECOLOR}"
     local dest="$targethome"/Applications/nekoray/config/routes_box
     if [[ -d "$dest" ]]; then
         install -m 644 configurations/my_nekoray_routes "$dest"
     else
-        echo -en "${YELLOW}\nDirectory \"$dest\" not found \"Nekoray\""
-        echo -e " probably is not installed.\n${DECOLOR}"
+        echo -en "${YELLOW}Directory \"$dest\" not found \"Nekoray\""
+        echo -e " probably is not installed.${DECOLOR}"
     fi
 }
 
 strt_msg() {
-    echo -e "${BOLD}\n###### Starting post installation script for \"$(os)\" ######\n${DECOLOR}"
+    echo -e "${BOLD}###### Starting post installation script for \"$(os)\" ######${DECOLOR}"
 }
 
 config_goflex() {
-    echo -e "${BLUE}\nConfiguring \"GoFlex\" auto mount...\n${DECOLOR}"
+    echo -e "${BLUE}Configuring \"GoFlex\" auto mount...${DECOLOR}"
     blkid | grep e0886b21-1596-4626-b131-2137ec7394fa || \
-        { echo -e "${RED}\n\"GoFlex\" not found.\n${DECOLOR}"; return 2; }
+        { echo -e "${RED}\"GoFlex\" not found.${DECOLOR}"; return 2; }
     install -d -o "$targetuser" -g "$targetuser" "$targethome"/GoFlex
     cp /etc/fstab{,.bak}
     sed -i '/UUID=e0886b21-1596-4626-b131-2137ec7394fa/d' /etc/fstab
@@ -186,7 +188,7 @@ passwordless_sudo() {
 }
 
 finish_msg() {
-    echo -e "${GREEN}\nFinished configuring system.${DECOLOR}"
+    echo -e "${GREEN}Finished configuring system.${DECOLOR}"
     [[ "$REBOOT" == "1" ]] && \
-        echo -e "${GREEN}It is recommended to restart your computer.\n${DECOLOR}"
+        echo -e "${GREEN}It is recommended to restart your computer.${DECOLOR}"
 }

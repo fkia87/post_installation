@@ -2,7 +2,7 @@
 # shellcheck disable=SC2068,SC1091,SC1090,SC2154
 
 print_help() {
-    printf "%s\n" "
+    printf "%s" "
 -----------------------------------+---------------------------------------------------------------
              Switches              |                         Description
 -----------------------------------+---------------------------------------------------------------
@@ -30,11 +30,11 @@ install_resources() {
         curl -v https://github.com/fkia87/resources/releases/latest 2>&1 | \
         grep -i '< location:' | rev | cut -d / -f 1 | rev | sed 's/\r//g'
     )
-    echo -e "\nDownloading resources...\n"
+    echo -e "Downloading resources..."
     rm -rf "$resources_latest_version".tar.gz
     wget https://github.com/fkia87/resources/archive/refs/tags/"$resources_latest_version".tar.gz \
-        || { echo -e "\nError downloading required files from Github.\n" >&2; exit 1; }
-    tar xvf ./"$resources_latest_version".tar.gz || { echo -e "\nExtraction failed.\n" >&2; exit 1; }
+        || { echo -e "Error downloading required files from Github." >&2; exit 1; }
+    tar xvf ./"$resources_latest_version".tar.gz || { echo -e "Extraction failed." >&2; exit 1; }
     cd ./resources-"${resources_latest_version/v/}" || exit 2
     ./INSTALL.sh
     cd .. || exit 2
@@ -59,7 +59,7 @@ while [[ $# -gt 0 ]]; do
     quit_after=1
     case $1 in
         --update-hosts | --host*)
-            echo -e "${BLUE}\nUpdating SSH configurations...\n${DECOLOR}"
+            echo -e "${BLUE}Updating SSH configurations...${DECOLOR}"
             install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh
             config_hosts
             shift 1
@@ -98,9 +98,9 @@ create_dirs
 case $(os) in
     fedora)
         config_dnf() {
-            echo -e "${BLUE}Writing \"DNF\" configurations...\n${DECOLOR}"
+            echo -e "${BLUE}Writing \"DNF\" configurations...${DECOLOR}"
             cp ./configurations/dnf.conf /etc/dnf/dnf.conf
-            echo -e "${BLUE}Installing \"rpm fusion repositories\"...\n${DECOLOR}"
+            echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
             dnf -y install \
             https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"${REL}".noarch.rpm \
             https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"${REL}"\
