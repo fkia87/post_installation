@@ -33,7 +33,7 @@ virt-install \
     --osinfo detect=on,require=off \
     --disk "./$symlinkdir/${2:-$def_vm_name}.qcow2,format=qcow2,bus=virtio" \
     --sound none \
-    --graphics vnc,port=5901,listen=0.0.0.0 \
+    --graphics vnc,listen=0.0.0.0 \
     --redirdev none \
     --network "network=default,model=virtio" \
     --cloud-init user-data=./cloudinit-config.yml \

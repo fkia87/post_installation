@@ -19,7 +19,7 @@
 
 172.16.144.54           cdn-dev-env
 
-172.16.144.85           awx.hamed.cloud
+172.24.0.10             haproxy-main
 
 # SAKKU STAGE ##########################################################
 172.16.147.55           sakku-stage-cloud-installer
