@@ -21,6 +21,8 @@
 
 172.24.0.10             haproxy-main
 
+172.24.0.20             haproxy-stage
+
 # SAKKU STAGE ##########################################################
 172.16.147.55           sakku-stage-cloud-installer
 

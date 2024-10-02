@@ -321,4 +321,8 @@ Host haproxy-main
 	Hostname haproxy-main
 	User f.kia
 	Port 4141
-StrictHostKeyChecking no
+Host haproxy-stage
+	Hostname haproxy-stage
+	User f.kia
+	Port 4141
+	StrictHostKeyChecking no
