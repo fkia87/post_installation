@@ -290,8 +290,8 @@ Host sakku-stage-cloud-installer
 	Hostname sakku-stage-cloud-installer
 	User ubuntu
 	Port 22
-Host cdn-dev-env
-	HostName cdn-dev-env
+Host dev-env
+	HostName dev-env
 	User fedora
 	Port 22
 Host ibm-zvm

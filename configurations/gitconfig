@@ -1,0 +1,10 @@
+[user]
+    email = USERNAME@example.com
+    name = USERNAME
+
+[alias]
+    ch = checkout
+    cm = commit -m
+    st = status
+    br = branch
+    lg = log --oneline --graph --decorate --all

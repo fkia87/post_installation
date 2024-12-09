@@ -1,5 +1,8 @@
 # POST INSTALLATION
 # shellcheck disable=SC2148
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    source /usr/share/bash-completion/completions/git
+fi
 ex() {
 	if [ -f "$1" ] ; then
 		case $1 in
