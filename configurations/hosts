@@ -1,14 +1,26 @@
 # POST INSTALLATION
-193.37.213.206  ag
-185.203.118.172 ag-hiddify
-212.132.119.241 saba ahmadian
-212.227.243.206 ionos-usa
-65.108.27.182   pooyanit-fin
+193.37.213.206          ag
+185.203.118.172         ag-hiddify
+212.132.119.241         saba ahmadian
+212.227.243.206         ionos-usa
+65.108.27.182           pooyanit-fin
 
-# IBM ##################################################################
-192.168.2.240           ibm-zvm ibm-zvm.salkhorde.ir
-192.168.2.123           ibm-server
-192.168.2.190           cinder-dev
+# ANP ##################################################################
+
+## ESX
+192.168.2.123           anp-esx-c1 anp-esx-123
+192.168.2.124           anp-esx-w1 anp-esx-124
+192.168.2.118           anp-esx-w2 anp-esx-118
+192.168.2.239           anp-esx-nexus anp-esx-239
+192.168.2.112           anp-esx-kolla anp-esx-112
+192.168.2.190           anp-esx-cinder-dev anp-esx-190 cinder-dev anp-cinder-dev
+
+## z/VM
+192.168.2.198           anp-zvm-198
+192.168.2.177           anp-zvm-177
+192.168.2.128           anp-zvm-128
+192.168.2.240           anp-ibm-240 ibm-240
+192.168.2.241           anp-ibm-241 ibm-241
 
 # FICLD ################################################################
 172.16.144.166          ansible-stage-144.166 host166 h166
