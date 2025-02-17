@@ -31,6 +31,7 @@ qemu-img resize ./$symlinkdir/"${2:-$def_vm_name}".qcow2 "${size:-$DEF_SIZE}"
 virt-install \
     --name "${2:-$def_vm_name}" \
     --memory "${ram:-$DEF_RAM}" \
+    # --boot uefi \
     --cpu host-model --vcpus "${vcpus:-$DEF_VCPUS}" \
     --osinfo detect=on,require=off \
     --disk "./$symlinkdir/${2:-$def_vm_name}.qcow2,format=qcow2,bus=virtio" \
