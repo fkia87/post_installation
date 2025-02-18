@@ -29,7 +29,7 @@
 
 172.16.146.10           maas-server-01
 
-172.16.144.54           dev-env
+172.16.144.54           dev-env cdn-dev-env
 
 172.24.0.10             haproxy-main
 
