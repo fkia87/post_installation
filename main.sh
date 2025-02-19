@@ -16,6 +16,8 @@ print_help() {
 -----------------------------------+-----------------------------------------------------
      --fonts, --install-fonts      |   Install fonts only
 -----------------------------------+-----------------------------------------------------
+           --noresources           |   Don't download and install resources
+-----------------------------------+-----------------------------------------------------
            --help, -h              |   Show this help message
 -----------------------------------+-----------------------------------------------------
 "
@@ -48,7 +50,10 @@ install_resources() {
     rm -rf "$resources_latest_version".tar.gz
 }
 
-install_resources
+# Don't install resources if --noresources is given
+if ! printf '%s\n' "$@" | grep -Fq -- '--noresource'; then
+    install_resources
+fi
 . /etc/profile
 ###################################################################################################
 source ./common
