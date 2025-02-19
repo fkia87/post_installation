@@ -31,7 +31,7 @@ qemu-img resize ./$symlinkdir/"${2:-$def_vm_name}".qcow2 "${size:-$DEF_SIZE}"
 virt-install \
     --name "${2:-$def_vm_name}" \
     --memory "${ram:-$DEF_RAM}" \
-    # --boot uefi \
+    `# --boot uefi` \
     --cpu host-model --vcpus "${vcpus:-$DEF_VCPUS}" \
     --osinfo detect=on,require=off \
     --disk "./$symlinkdir/${2:-$def_vm_name}.qcow2,format=qcow2,bus=virtio" \
@@ -39,6 +39,6 @@ virt-install \
     --graphics vnc,listen=0.0.0.0 \
     --redirdev none \
     --network "network=default,model=virtio" \
-    --cloud-init user-data=${cloudinit:-$DEF_CLINIT} \
+    --cloud-init user-data="${cloudinit:-$DEF_CLINIT}" \
     --noautoconsole \
     # --noreboot
