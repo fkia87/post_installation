@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DEF_RAM=4096
-DEF_VCPUS=4
+DEF_RAM=2048
+DEF_VCPUS=2
 DEF_SIZE=20G
 DEF_CLINIT=./cloudinit-config.yml
 
