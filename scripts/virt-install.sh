@@ -1,45 +1,104 @@
 #!/bin/bash
+set -eo pipefail
 
-DEF_RAM=2048
-DEF_VCPUS=2
-DEF_SIZE=20G
-DEF_CLINIT=./cloudinit-config.yml
+: "${ram:=2048}"
+: "${vcpus:=2}"
+: "${size:=20G}"
+: "${sound:=none}"
+: "${uefi:=off}"
 
-[[ $1 == "-h" || $1 == "--help" ]] && \
-    { 
-        echo "Usage:";
-        echo -n "[size=<disk_size>] [ram=<ram_megabytes>] [vcpus=<number>] [uefi=on] ";
-        echo "[cloudinit=<cloudinit_path>] virt-install.sh <qcow2_image_path> [vm_name]"
-        echo -e "\nDefault values:\nsize=$DEF_SIZE\nram=$DEF_RAM"
-        echo -e "vcpus=$DEF_VCPUS\ncloudinit=$DEF_CLINIT\nuefi=off";
-        exit 0; 
-    }
+: "${SYM_LINK_DIR:=libvirt-images}"
+: "${GET_IP_MAX_RETRIES:=50}"
+
+print_help() {
+    echo "Usage:"
+    echo "  size=<int_gig> \\"
+    echo "  ram=<int_meg> \\"
+    echo "  vcpus=<int> \\"
+    echo "  uefi=on|off \\"
+    echo "  sound=none|default \\"
+    echo "  cloudinit_file=/path/to/cloudinit.yml \\"
+    echo "  virt-install.sh <qcow2_image_path> [vm_name]"
+    echo
+    echo "Default values:"
+    echo "  size=$size"
+    echo "  ram=$ram"
+    echo "  vcpus=$vcpus"
+    echo "  sound=$sound"
+    echo "  uefi=$uefi"
+    echo "  cloudinit_file=''"
+    exit 0
+}
+
+[[ $1 == "-h" || $1 == "--help" || $# == 0 ]] && print_help
+
+err() {
+    echo -e "${RED}$1${DECOLOR}"
+    exit 1
+}
+
+get_clinit_opt() {
+    # --cloud-init defaults to: root-password-generate=on,disable=on
+    if [[ -n $cloudinit_file ]]; then
+        echo "user-data=$cloudinit_file"
+    else
+        echo "root-password-generate=on,disable=on"
+    fi
+}
+
+check_commands() {
+    # Exit if any of the given commands is not available
+    for cmd in "$@"; do
+        command -v "$cmd" > /dev/null 2>&1 || err "'$cmd' is not installed."
+    done
+}
+
+get_vm_ip() {
+    local max_retries=$GET_IP_MAX_RETRIES
+    while : 
+    do
+        ipaddress=$(virsh domifaddr "$1" | tail -2 | head -1 | \
+            awk '{print$4}' | cut -d '/' -f 1)
+        [[ -n $ipaddress ]] && \
+            { echo "$ipaddress"; break; }
+        (( --max_retries )) || err "\nFailed to get the IP address."
+        sleep 1
+    done
+}
+
+[[ $UID == "0" ]] || err "You are not root."
+[[ -n $cloudinit_file ]] && [[ ! -s $cloudinit_file ]] && \
+    err "'$cloudinit_file' is not accessible."
+check_commands virt-install virsh
 
 file=$1
-[[ -s $file ]] || { echo "\"$file\" is not accessible."; exit 1; }
+[[ -s $file ]] || err "'$file' is not accessible."
 file_name=${file##*/}; file_name=${file_name:?Please enter QCOW2 file name.}
-symlinkdir=libvirt-images
 def_vm_name=${file_name%.qcow2}-$(od -An -N2 -tu < /dev/urandom | tr -d ' ')
+vm_name=${2:-$def_vm_name}
 
-[[ $UID == "0" ]] || { echo "You are not root."; exit 1; }
-# [[ -s ./cloudinit-config.yml ]] || { echo "\"./cloudinit-config.yml\" is not accessible."; exit 1; }
-[[ -L ./$symlinkdir ]] || ln -s /var/lib/libvirt/images ./$symlinkdir
+[[ -L ./$SYM_LINK_DIR ]] || ln -s /var/lib/libvirt/images ./"$SYM_LINK_DIR"
 
-virt-install --version > /dev/null 2>&1 || { echo "\"virt-install\" is not installed."; exit 1; }
-
-cp "$file" ./$symlinkdir/"${2:-$def_vm_name}".qcow2 && \
-qemu-img resize ./$symlinkdir/"${2:-$def_vm_name}".qcow2 "${size:-$DEF_SIZE}" && \
-virt-install \
-    --name "${2:-$def_vm_name}" \
-    --memory "${ram:-$DEF_RAM}" \
-    --boot uefi="${uefi:-off}" \
-    --cpu host-model --vcpus "${vcpus:-$DEF_VCPUS}" \
-    --osinfo detect=on,require=off \
-    --disk "./$symlinkdir/${2:-$def_vm_name}.qcow2,format=qcow2,bus=virtio" \
-    --sound none \
-    --graphics vnc,listen=0.0.0.0 \
-    --redirdev none \
-    --network "network=default,model=virtio" \
-    --cloud-init user-data="${cloudinit:-$DEF_CLINIT}" \
-    --noautoconsole \
-    # --noreboot
+echo -e "Copying image file to: './$SYM_LINK_DIR/$vm_name.qcow2'..."
+cp "$file" "./$SYM_LINK_DIR/$vm_name.qcow2" && \
+    echo "Resizing image..." && \
+    qemu-img resize "./$SYM_LINK_DIR/$vm_name.qcow2" "$size" && \
+    echo -e "Creating VM $vm_name..." && \
+    virt-install -q \
+        --name "$vm_name" \
+        --memory "$ram" \
+        --boot uefi="$uefi" \
+        --cpu host-model --vcpus "$vcpus" \
+        --osinfo detect=on,require=off \
+        --disk "./$SYM_LINK_DIR/$vm_name.qcow2,format=qcow2,bus=virtio" \
+        --sound "$sound" \
+        --graphics spice,listen=none \
+        --redirdev none \
+        --network "network=default,model=virtio" \
+        --cloud-init "$(get_clinit_opt)" \
+        --noautoconsole && \
+        # --noreboot
+        # --graphics vnc,listen=0.0.0.0
+    echo -e "${GREEN}VM created successfully.${DECOLOR}"
+    echo -e "Waiting for IP address..."
+    echo -e "VM IP: $(get_vm_ip "$vm_name")"
