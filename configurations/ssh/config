@@ -294,18 +294,18 @@ Host cdn-dev-env
 	HostName cdn-dev-env
 	User fedora
 	Port 22
-Host ibm-zvm
-	Hostname ibm-zvm
+Host anp-ibm-240
+	Hostname anp-ibm-240
 	User root
 	Port 22
 	# Password: ubuntu
-Host ibm-server
-	Hostname ibm-server
-	User ubuntu
-	Port 22
-	# Password: ubuntu
-Host cinder-dev
-	Hostname cinder-dev
+# Host ibm-server
+# 	Hostname ibm-server
+# 	User ubuntu
+# 	Port 22
+# 	# Password: ubuntu
+Host anp-esx-cinder-dev
+	Hostname anp-esx-cinder-dev
 	User ubuntu
 	Port 22
 	# Password: ubuntu
