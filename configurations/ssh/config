@@ -1,3 +1,4 @@
+StrictHostKeyChecking no
 Host ansible-stage-144.166
 	HostName ansible-stage-144.166
 	User f.kia
@@ -294,11 +295,15 @@ Host cdn-dev-env
 	HostName cdn-dev-env
 	User fedora
 	Port 22
-Host anp-ibm-240 ibm-240
-	Hostname anp-ibm-240
+Host anp-zvm-240
+	Hostname anp-zvm-240
 	User root
 	Port 22
-Host anp-esx-cinder-dev anp-esx-190 cinder-dev anp-cinder-dev
+Host anp-zvm-237
+	Hostname anp-zvm-237
+	User root
+	Port 22
+Host anp-esx-cinder-dev
 	Hostname anp-esx-cinder-dev
 	User ubuntu
 	Port 22
@@ -318,4 +323,7 @@ Host haproxy-stage
 	Hostname haproxy-stage
 	User f.kia
 	Port 4141
-	StrictHostKeyChecking no
+Host sharif-server
+	Hostname sharif-server
+	User ubuntu
+	Port 22
