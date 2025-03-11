@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck disable=SC2068,SC1091,SC1090,SC2154
 
-trap 'tput cnorm' SIGINT
+trap 'tput cnorm; exit' SIGINT
 
 print_help() {
     printf "%s" "
