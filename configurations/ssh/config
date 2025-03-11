@@ -327,3 +327,7 @@ Host sharif-server
 	Hostname sharif-server
 	User ubuntu
 	Port 22
+Host serverha-iran-ubuntu24
+	Hostname serverha-iran-ubuntu24
+	User fkia
+	Port 22
