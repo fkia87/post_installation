@@ -28,7 +28,7 @@ get_target_user() {
 
 create_dirs() {
     echo -e "${BLUE}Creating directories in \"$targethome\"...${DECOLOR}"
-    : groupadd -U "$targetuser" "$targetuser"
+    groupadd -U "$targetuser" "$targetuser" 2> /dev/null || :
     install -d -o "$targetuser" -g "$targetuser" \
         "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh,.config/terminator}
 }
