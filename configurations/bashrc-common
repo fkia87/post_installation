@@ -41,6 +41,7 @@ bind "set completion-map-case on"
 bind "set show-all-if-ambiguous on"
 
 alias sudo='sudo '
+alias mtr='mtr -b '
 alias pokemon='curl pkmn.li'
 alias pkmn='pokemon'
 alias weather='wttr'
