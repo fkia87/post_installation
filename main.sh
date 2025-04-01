@@ -62,8 +62,11 @@ source ./common
 checkuser
 strt_msg
 case "$(os)" in
-    fedora | alma* | rocky*)
+    fedora | alma*)
         REL=$(awk '{print$3}' < /etc/"$(os)"-release)
+        ;;
+    rocky*)
+        REL=$(awk '{print$4}' < /etc/"$(os)"-release | cut -d . -f 1)
         ;;
 esac
 get_target_user
@@ -126,6 +129,17 @@ case $(os) in
             https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"${REL}".noarch.rpm \
             https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"${REL}"\
             .noarch.rpm
+        }
+        ask "Config dnf and rpmfusion?" "config_dnf"
+        ;;
+    rocky*)
+        config_dnf() {
+            echo -e "${BLUE}Writing \"DNF\" configurations...${DECOLOR}"
+            cp ./configurations/dnf.conf /etc/dnf/dnf.conf
+            echo -e "${BLUE}Installing \"EPEL\" and \"rpm fusion repositories\"...${DECOLOR}"
+            dnf -y install epel-release \
+            https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-"${REL}".noarch.rpm \
+            https://mirrors.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-"${REL}".noarch.rpm
         }
         ask "Config dnf and rpmfusion?" "config_dnf"
         ;;

@@ -118,7 +118,7 @@ config_proxy() {
 
 config_grub() {
         case $(os) in
-        fedora)
+        fedora | rocky)
             echo -e "${BLUE}Updating kernel parameters...${DECOLOR}"
             grubby --update-kernel ALL --args "selinux=0 pcie_aspm=off"
             echo -e "${BLUE}Turning \"SELinux\" off...${DECOLOR}"
@@ -138,13 +138,16 @@ config_grub() {
 useful_packages() {
     case $(os) in
         fedora | manjaro)
-            pkg_to_install+=(unrar xbanish btop fping)
+            pkg_to_install+=(unrar xbanish btop fping duf colorized-logs lsd)
             ;;
         ubuntu | debian)
-            pkg_to_install+=(fping)
+            pkg_to_install+=(fping duf colorized-logs lsd)
+            ;;
+        rocky)
+            pkg_to_install+=(unrar xbanish btop fping)
             ;;
     esac
-    pkg_to_install+=(duf bat curl colorized-logs lsd)
+    pkg_to_install+=(bat curl)
 
     # shellcheck disable=SC2068
     install_pkg ${pkg_to_install[@]}
