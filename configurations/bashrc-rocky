@@ -1,13 +1,11 @@
 # shellcheck disable=all
 
-[[ $UID == "0" ]] && PS1='[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[00;36m\]\w\[\033[00m\]]# '
-[[ $UID != "0" ]] && PS1='[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[00;36m\]\w\[\033[00m\]]$ '
+# [[ $UID == "0" ]] && PS1='[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[00;36m\]\w\[\033[00m\]]# '
+# [[ $UID != "0" ]] && PS1='[\[\033[01;32m\]\u@\h\[\033[00m\] \[\033[00;36m\]\w\[\033[00m\]]$ '
 # "\W" ----> current directory name
 # "\w" ----> current directory full path
 # "\h" ----> hostname
 # "\u" ----> username
 
-alias ll='lsd -lAhig --color always --header --group-directories-first --date relative \
-    --icon-theme unicode --icon always --total-size '
-alias df='duf '
+alias ll='ls -lah '
 alias update='sudo dnf update'

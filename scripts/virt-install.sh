@@ -82,7 +82,7 @@ vm_name=${2:-$def_vm_name}
 echo -e "Copying image file to: './$SYM_LINK_DIR/$vm_name.qcow2'..."
 cp "$file" "./$SYM_LINK_DIR/$vm_name.qcow2" && \
     echo "Resizing image..." && \
-    qemu-img resize "./$SYM_LINK_DIR/$vm_name.qcow2" "$size" && \
+    qemu-img resize --shrink "./$SYM_LINK_DIR/$vm_name.qcow2" "$size" && \
     echo -e "Creating VM $vm_name..." && \
     virt-install -q \
         --name "$vm_name" \
@@ -99,6 +99,6 @@ cp "$file" "./$SYM_LINK_DIR/$vm_name.qcow2" && \
         --noautoconsole && \
         # --noreboot
         # --graphics vnc,listen=0.0.0.0
-    echo -e "${GREEN}VM created successfully.${DECOLOR}"
-    echo -e "Waiting for IP address..."
+    echo -e "${GREEN}VM created successfully.${DECOLOR}" && \
+    echo -e "Waiting for IP address..." && \
     echo -e "VM IP: $(get_vm_ip "$vm_name")"
