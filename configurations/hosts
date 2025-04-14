@@ -77,6 +77,11 @@
 172.17.11.9             damavand-maas
 172.17.11.7             damavand-gitlab gitlab.damavand.cloud
 
+172.17.32.1             damavand-cdn-kuber-m1
+172.17.32.2             damavand-cdn-kuber-w1
+172.17.32.3             damavand-cdn-kuber-w2
+217.218.198.198         damavand-cdn-haproxy
+
 # TEBIYAN ##############################################################
 172.16.64.106           production-c1
 172.16.64.107           production-c2
@@ -125,7 +130,6 @@
 172.16.64.42            production-w29
 172.16.64.43            production-w30
 172.16.64.56            production-w31
-
 
 172.16.64.33            backup-64.33
 ########################################################################

@@ -331,3 +331,19 @@ Host serverha-iran-ubuntu24
 	Hostname serverha-iran-ubuntu24
 	User fkia
 	Port 22
+Host damavand-cdn-kuber-m1
+	Hostname damavand-cdn-kuber-m1
+	User f.kia
+	Port 22
+Host damavand-cdn-kuber-w1
+	Hostname damavand-cdn-kuber-w1
+	User f.kia
+	Port 22
+Host damavand-cdn-kuber-w2
+	Hostname damavand-cdn-kuber-w2
+	User f.kia
+	Port 22
+Host damavand-cdn-haproxy
+	Hostname damavand-cdn-haproxy
+	User ubuntu
+	Port 4141
