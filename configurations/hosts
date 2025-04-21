@@ -35,7 +35,7 @@
 
 172.16.146.10           maas-server-01
 
-172.16.144.54           dev-env cdn-dev-env
+172.16.144.52           dev-env cdn-dev-env
 
 172.24.0.10             haproxy-main
 
@@ -60,7 +60,7 @@
 
 172.17.11.1             damavand-ntp01
 172.17.11.2             damavand-deployer
-172.17.11.3             damavand-dns01 webmin.damavand.ir
+172.17.11.3             damavand-dns01
 
 172.17.8.1              damavand-ceph-mon-01
 172.17.8.2              damavand-ceph-mon-02
@@ -75,7 +75,8 @@
 172.17.8.9              damavand-ceph-osd-03
 
 172.17.11.9             damavand-maas
-172.17.11.8             damavand-gitlab gitlab.damavand.cloud
+172.17.11.8             damavand-gitlab
+172.17.11.4             damavand-nexus
 
 172.17.32.1             damavand-cdn-kuber-m1
 172.17.32.2             damavand-cdn-kuber-w1

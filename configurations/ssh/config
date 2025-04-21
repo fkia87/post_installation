@@ -347,3 +347,7 @@ Host damavand-cdn-haproxy
 	Hostname damavand-cdn-haproxy
 	User ubuntu
 	Port 4141
+Host damavand-nexus
+	Hostname damavand-nexus
+	User f.kia
+	Port 22
