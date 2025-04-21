@@ -23,6 +23,8 @@ get_target_user() {
                 targethome=/home/"$targetuser"
                 ;;
         esac
+        export targetuser
+        export targethome
     done
 }
 
