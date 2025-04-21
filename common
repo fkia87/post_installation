@@ -109,7 +109,8 @@ config_proxy() {
     echo -e "${BLUE}Configuring VPN proxy services...${DECOLOR}"
     while IFS= read -r service
     do
-        cp "$service" /etc/systemd/system/
+        # cp "$service" /etc/systemd/system/
+        envsubst < "$service" > /etc/systemd/system/"${service##*/}"
         systemctl daemon-reload
         systemctl enable "${service##*/}" --now 2>/dev/null && \
         echo -e "${GREEN}Started \"${service##*/}\" successfully.${DECOLOR}"
