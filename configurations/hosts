@@ -44,6 +44,52 @@
 # SAKKU STAGE ##########################################################
 172.16.147.55           sakku-stage-cloud-installer
 
+# CDN ##################################################################
+94.232.170.195          cdn-haproxy
+
+# S.KHANDAN ############################################################
+
+# OPENSTACK
+172.18.0.17             s.khandan-opstk-w1
+172.18.0.18             s.khandan-opstk-w2
+172.18.0.1              s.khandan-opstk-c1
+172.18.0.2              s.khandan-opstk-c2
+172.18.0.3              s.khandan-opstk-c3
+172.18.0.9              s.khandan-opstk-dns1
+172.18.0.10             s.khandan-opstk-dns2
+172.18.0.11             s.khandan-opstk-dns3
+172.18.0.12             s.khandan-opstk-m1
+172.18.0.13             s.khandan-opstk-m2
+172.18.0.14             s.khandan-opstk-m3
+172.18.0.4              s.khandan-opstk-n1
+172.18.0.5              s.khandan-opstk-n2
+172.18.0.6              s.khandan-opstk-n3
+
+# CEPH
+172.18.8.4              s.khandan-ceph-mgr1
+172.18.8.5              s.khandan-ceph-mgr2
+172.18.8.6              s.khandan-ceph-mgr3
+
+172.18.8.1              s.khandan-ceph-mon1
+172.18.8.2              s.khandan-ceph-mon2
+172.18.8.3              s.khandan-ceph-mon3
+
+172.18.8.7              s.khandan-ceph-osd1
+172.18.8.8              s.khandan-ceph-osd2
+172.18.8.9              s.khandan-ceph-osd3
+
+# INTERNAL SERVICES
+172.18.31.1             s.khandan-dns
+172.18.31.4             s.khandan-ntp1
+172.18.31.5             s.khandan-ntp2
+172.18.31.6             s.khandan-nexus
+172.18.31.7             s.khandan-ansible-deployer
+172.18.31.8             s.khandan-ipa1
+172.18.31.9             s.khandan-ipa2
+172.18.31.10            s.khandan-gitlab
+172.18.31.11            s.khandan-monitoring-central
+172.18.8.10             s.khandan-monitoring-ceph
+
 # DAMAVAND #############################################################
 172.17.0.250            public.cloud.damavand.cloud
 
