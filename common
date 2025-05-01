@@ -62,6 +62,12 @@ config_terminator() {
         "$targethome"/.config/terminator/config
 }
 
+install_ssh_config() {
+    install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh && \
+        echo -e "${BLUE}Removing known SSH hosts...${DECOLOR}" && \
+        rm -f "$targethome"/.ssh/known_hosts 2> /dev/null
+}
+
 config_ssh() {
     echo -e "${BLUE}Configuring \"SSH\"...${DECOLOR}"
     cp /etc/ssh/ssh_config{,.bak}
@@ -80,6 +86,7 @@ config_ssh() {
     ServerAliveInterval 60
     StrictHostKeyChecking no
 EOF
+    install_ssh_config
 }
 
 config_hosts() {

@@ -76,7 +76,7 @@ while [[ $# -gt 0 ]]; do
     case $1 in
         --update-hosts | --host*)
             echo -e "${BLUE}Updating SSH configurations...${DECOLOR}"
-            install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh
+            install_ssh_config
             config_hosts
             shift 1
             ;;
@@ -146,9 +146,9 @@ case $(os) in
 esac
 
 # Hosts, SSH and proxy configuration ##############################################################
-ask "Configure SSH tunnels?" "config_proxy" || ask "Setup SSH keys?" "config_ssh" || \
-ask "Copy SSH config file?" "install -o $targetuser -g $targetuser ./configurations/ssh/* \
-$targethome/.ssh"
+ask "Configure SSH tunnels?" "config_proxy" || \
+    ask "Setup SSH keys?" "config_ssh" || \
+    ask "Copy SSH config file?" "install_ssh_config"
 ask "Install \"/etc/hosts\"?" "config_hosts"
 
 ###################################################################################################
