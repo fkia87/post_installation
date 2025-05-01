@@ -1,6 +1,5 @@
 # POST INSTALLATION
 193.37.213.206          ag
-185.203.118.172         ag-hiddify
 212.132.119.241         saba ahmadian
 212.227.243.206         ionos-usa
 65.108.27.182           pooyanit-fin
@@ -27,18 +26,12 @@
 # SHARIF ###############################################################
 192.168.242.61          sharif-server
 
-
 # FICLD ################################################################
-172.16.144.166          ansible-stage-144.166 host166 h166
-
+172.16.144.166          ansible-stage-144.166
 172.15.1.149            nofilter
-
 172.16.146.10           maas-server-01
-
 172.16.144.52           dev-env cdn-dev-env
-
 172.24.0.10             haproxy-main
-
 172.24.0.20             haproxy-stage
 
 # SAKKU STAGE ##########################################################
@@ -50,59 +43,59 @@
 # S.KHANDAN ############################################################
 
 # OPENSTACK
-172.18.0.17             s.khandan-opstk-w1
-172.18.0.18             s.khandan-opstk-w2
-172.18.0.1              s.khandan-opstk-c1
-172.18.0.2              s.khandan-opstk-c2
-172.18.0.3              s.khandan-opstk-c3
-172.18.0.9              s.khandan-opstk-dns1
-172.18.0.10             s.khandan-opstk-dns2
-172.18.0.11             s.khandan-opstk-dns3
-172.18.0.12             s.khandan-opstk-m1
-172.18.0.13             s.khandan-opstk-m2
-172.18.0.14             s.khandan-opstk-m3
-172.18.0.4              s.khandan-opstk-n1
-172.18.0.5              s.khandan-opstk-n2
-172.18.0.6              s.khandan-opstk-n3
+172.18.0.17             seyedkhandan-opstk-w1
+172.18.0.18             seyedkhandan-opstk-w2
+172.18.0.1              seyedkhandan-opstk-c1
+172.18.0.2              seyedkhandan-opstk-c2
+172.18.0.3              seyedkhandan-opstk-c3
+172.18.0.9              seyedkhandan-opstk-dns1
+172.18.0.10             seyedkhandan-opstk-dns2
+172.18.0.11             seyedkhandan-opstk-dns3
+172.18.0.12             seyedkhandan-opstk-m1
+172.18.0.13             seyedkhandan-opstk-m2
+172.18.0.14             seyedkhandan-opstk-m3
+172.18.0.4              seyedkhandan-opstk-n1
+172.18.0.5              seyedkhandan-opstk-n2
+172.18.0.6              seyedkhandan-opstk-n3
 
 # CEPH
-172.18.8.4              s.khandan-ceph-mgr1
-172.18.8.5              s.khandan-ceph-mgr2
-172.18.8.6              s.khandan-ceph-mgr3
+172.18.8.4              seyedkhandan-ceph-mgr1
+172.18.8.5              seyedkhandan-ceph-mgr2
+172.18.8.6              seyedkhandan-ceph-mgr3
 
-172.18.8.1              s.khandan-ceph-mon1
-172.18.8.2              s.khandan-ceph-mon2
-172.18.8.3              s.khandan-ceph-mon3
+172.18.8.1              seyedkhandan-ceph-mon1
+172.18.8.2              seyedkhandan-ceph-mon2
+172.18.8.3              seyedkhandan-ceph-mon3
 
-172.18.8.7              s.khandan-ceph-osd1
-172.18.8.8              s.khandan-ceph-osd2
-172.18.8.9              s.khandan-ceph-osd3
+172.18.8.7              seyedkhandan-ceph-osd1
+172.18.8.8              seyedkhandan-ceph-osd2
+172.18.8.9              seyedkhandan-ceph-osd3
 
 # INTERNAL SERVICES
-172.18.31.1             s.khandan-dns
-172.18.31.4             s.khandan-ntp1
-172.18.31.5             s.khandan-ntp2
-172.18.31.6             s.khandan-nexus
-172.18.31.7             s.khandan-ansible-deployer
-172.18.31.8             s.khandan-ipa1
-172.18.31.9             s.khandan-ipa2
-172.18.31.10            s.khandan-gitlab
-172.18.31.11            s.khandan-monitoring-central
-172.18.8.10             s.khandan-monitoring-ceph
+172.18.31.1             seyedkhandan-dns
+172.18.31.4             seyedkhandan-ntp1
+172.18.31.5             seyedkhandan-ntp2
+172.18.31.6             seyedkhandan-nexus
+172.18.31.7             seyedkhandan-ansible-deployer
+172.18.31.8             seyedkhandan-ipa1
+172.18.31.9             seyedkhandan-ipa2
+172.18.31.10            seyedkhandan-gitlab
+172.18.31.11            seyedkhandan-monitoring-central
+172.18.8.10             seyedkhandan-monitoring-ceph
 
 # DAMAVAND #############################################################
 172.17.0.250            public.cloud.damavand.cloud
 
-172.17.5.1              damavand-c1
-172.17.5.2              damavand-c2
-172.17.5.3              damavand-c3
+172.17.5.1              damavand-opstk-c1
+172.17.5.2              damavand-opstk-c2
+172.17.5.3              damavand-opstk-c3
 
-172.17.5.4              damavand-n1
-172.17.5.5              damavand-n2
-172.17.5.6              damavand-n3
+172.17.5.4              damavand-opstk-n1
+172.17.5.5              damavand-opstk-n2
+172.17.5.6              damavand-opstk-n3
 
-172.17.5.10             damavand-w1
-172.17.5.11             damavand-w2
+172.17.5.10             damavand-opstk-w1
+172.17.5.11             damavand-opstk-w2
 
 172.17.11.1             damavand-ntp01
 172.17.11.2             damavand-deployer
@@ -129,54 +122,54 @@
 172.17.32.3             damavand-cdn-kuber-w2
 217.218.198.198         damavand-cdn-haproxy
 
-# TEBIYAN ##############################################################
-172.16.64.106           production-c1
-172.16.64.107           production-c2
-172.16.64.108           production-c3
+# TEBYAN ##############################################################
+172.16.64.106           tebyan-opstk-c1
+172.16.64.107           tebyan-opstk-c2
+172.16.64.108           tebyan-opstk-c3
 
-172.16.64.103           production-n1
-172.16.64.104           production-n2
-172.16.64.105           production-n3
+172.16.64.103           tebyan-opstk-n1
+172.16.64.104           tebyan-opstk-n2
+172.16.64.105           tebyan-opstk-n3
 
-172.16.64.100           production-m1
-172.16.64.101           production-m2
-172.16.64.102           production-m3
+172.16.64.100           tebyan-opstk-m1
+172.16.64.101           tebyan-opstk-m2
+172.16.64.102           tebyan-opstk-m3
 
-172.16.64.148           production-dmaster
-172.16.64.138           production-dslave1
-172.16.64.139           production-dslave2
+172.16.64.148           tebyan-opstk-dmaster
+172.16.64.138           tebyan-opstk-dslave1
+172.16.64.139           tebyan-opstk-dslave2
 
-172.16.64.10            production-w1
-172.16.64.11            production-w2
-172.16.64.12            production-w3
-172.16.64.13            production-w4
-172.16.64.23            production-w5
-172.16.64.24            production-w6
-172.16.64.25            production-w7
-172.16.64.26            production-w8
-172.16.64.27            production-w9
-172.16.64.28            production-w10
-172.16.64.34            production-w11
-172.16.64.35            production-w12
-172.16.64.36            production-w13
-172.16.64.37            production-w14
-172.16.64.38            production-w15
-172.16.64.39            production-w16
-172.16.64.40            production-w17
-172.16.64.41            production-w18
-172.16.64.31            production-w19
-172.16.64.47            production-w20
-172.16.64.44            production-w21
-172.16.64.45            production-w22
-172.16.64.46            production-w23
-172.16.64.49            production-w24
-172.16.64.50            production-w25
-172.16.64.51            production-w26
-172.16.64.52            production-w27
-172.16.64.55            production-w28
-172.16.64.42            production-w29
-172.16.64.43            production-w30
-172.16.64.56            production-w31
+172.16.64.10            tebyan-opstk-w1
+172.16.64.11            tebyan-opstk-w2
+172.16.64.12            tebyan-opstk-w3
+172.16.64.13            tebyan-opstk-w4
+172.16.64.23            tebyan-opstk-w5
+172.16.64.24            tebyan-opstk-w6
+172.16.64.25            tebyan-opstk-w7
+172.16.64.26            tebyan-opstk-w8
+172.16.64.27            tebyan-opstk-w9
+172.16.64.28            tebyan-opstk-w10
+172.16.64.34            tebyan-opstk-w11
+172.16.64.35            tebyan-opstk-w12
+172.16.64.36            tebyan-opstk-w13
+172.16.64.37            tebyan-opstk-w14
+172.16.64.38            tebyan-opstk-w15
+172.16.64.39            tebyan-opstk-w16
+172.16.64.40            tebyan-opstk-w17
+172.16.64.41            tebyan-opstk-w18
+172.16.64.31            tebyan-opstk-w19
+172.16.64.47            tebyan-opstk-w20
+172.16.64.44            tebyan-opstk-w21
+172.16.64.45            tebyan-opstk-w22
+172.16.64.46            tebyan-opstk-w23
+172.16.64.49            tebyan-opstk-w24
+172.16.64.50            tebyan-opstk-w25
+172.16.64.51            tebyan-opstk-w26
+172.16.64.52            tebyan-opstk-w27
+172.16.64.55            tebyan-opstk-w28
+172.16.64.42            tebyan-opstk-w29
+172.16.64.43            tebyan-opstk-w30
+172.16.64.56            tebyan-opstk-w31
 
-172.16.64.33            backup-64.33
+172.16.64.33            tebyan-backup-64.33
 ########################################################################
