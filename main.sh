@@ -61,14 +61,16 @@ fi
 source ./common
 checkuser
 strt_msg
-case "$(os)" in
-    fedora | alma*)
-        REL=$(awk '{print$3}' < /etc/"$(os)"-release)
-        ;;
-    rocky*)
-        REL=$(awk '{print$4}' < /etc/"$(os)"-release | cut -d . -f 1)
-        ;;
-esac
+eval "$(cat /etc/os-release)"
+REL=${VERSION_ID%%.*}
+# case "$(os)" in
+#     fedora | alma*)
+#         REL=$(awk '{print$3}' < /etc/"$(os)"-release)
+#         ;;
+#     rocky*)
+#         REL=$(awk '{print$4}' < /etc/"$(os)"-release | cut -d . -f 1)
+#         ;;
+# esac
 get_target_user
 ###################################################################################################
 while [[ $# -gt 0 ]]; do
