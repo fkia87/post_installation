@@ -54,16 +54,23 @@ install_resources() {
 
 # Don't install resources if --noresource is given
 noresource_given=false
+new_args=()
 for arg in "$@"; do
     if [[ "$arg" =~ --noresource ]]; then
         noresource_given=true
-        break
+    else
+        new_args+=("$arg")
     fi
 done
+
+# remove --noresource from arguments
+# This command actually replaces current arguments with $new_args we 
+# just created:
+set -- "${new_args[@]}"
+
+# Install resources if --noresource is not given
 $noresource_given || install_resources
-# if ! printf '%s\n' "$@" | grep -Fq -- '--noresource'; then
-#     install_resources
-# fi
+
 . /etc/profile
 ###################################################################################################
 source ./common
