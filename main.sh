@@ -52,10 +52,18 @@ install_resources() {
     rm -rf "$resources_latest_version".tar.gz
 }
 
-# Don't install resources if --noresources is given
-if ! printf '%s\n' "$@" | grep -Fq -- '--noresource'; then
-    install_resources
-fi
+# Don't install resources if --noresource is given
+noresource_given=false
+for arg in "$@"; do
+    if [[ "$arg" =~ --noresource ]]; then
+        noresource_given=true
+        break
+    fi
+done
+$noresource_given || install_resources
+# if ! printf '%s\n' "$@" | grep -Fq -- '--noresource'; then
+#     install_resources
+# fi
 . /etc/profile
 ###################################################################################################
 source ./common
