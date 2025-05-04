@@ -47,7 +47,7 @@ config_bashrc() {
     esac
     sed -i '/^alias ll/d' "$targethome"/.bashrc
     sed -i '/# POST INSTALLATION/Q' "$BASHRC" \
-        && cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC"
+        && cat ./configurations/bashrc-{common,"$(os)"} >> "$BASHRC" 2> /dev/null
 }
 
 set_qt_scale_2 () {
@@ -60,6 +60,12 @@ set_qt_scale_2 () {
 config_terminator() {
     install -m 644 -o "$targetuser" -g "$targetuser" configurations/terminator.config \
         "$targethome"/.config/terminator/config
+}
+
+install_ssh_config() {
+    install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh && \
+        echo -e "${BLUE}Removing known SSH hosts...${DECOLOR}" && \
+        rm -f "$targethome"/.ssh/known_hosts 2> /dev/null
 }
 
 config_ssh() {
@@ -80,6 +86,7 @@ config_ssh() {
     ServerAliveInterval 60
     StrictHostKeyChecking no
 EOF
+    install_ssh_config
 }
 
 config_hosts() {

@@ -54,23 +54,40 @@ install_resources() {
     rm -rf "$resources_latest_version".tar.gz
 }
 
-# Don't install resources if --noresources is given
-if ! printf '%s\n' "$@" | grep -Fq -- '--noresource'; then
-    install_resources
-fi
+# Don't install resources if --noresource is given
+noresource_given=false
+new_args=()
+for arg in "$@"; do
+    if [[ "$arg" =~ --noresource ]]; then
+        noresource_given=true
+    else
+        new_args+=("$arg")
+    fi
+done
+
+# remove --noresource from arguments
+# This command actually replaces current arguments with $new_args we 
+# just created:
+set -- "${new_args[@]}"
+
+# Install resources if --noresource is not given
+$noresource_given || install_resources
+
 . /etc/profile
 ###################################################################################################
 source ./common
 checkuser
 strt_msg
-case "$(os)" in
-    fedora | alma*)
-        REL=$(awk '{print$3}' < /etc/"$(os)"-release)
-        ;;
-    rocky*)
-        REL=$(awk '{print$4}' < /etc/"$(os)"-release | cut -d . -f 1)
-        ;;
-esac
+eval "$(cat /etc/os-release)"
+REL=${VERSION_ID%%.*}
+# case "$(os)" in
+#     fedora | alma*)
+#         REL=$(awk '{print$3}' < /etc/"$(os)"-release)
+#         ;;
+#     rocky*)
+#         REL=$(awk '{print$4}' < /etc/"$(os)"-release | cut -d . -f 1)
+#         ;;
+# esac
 get_target_user
 ###################################################################################################
 while [[ $# -gt 0 ]]; do
@@ -78,7 +95,7 @@ while [[ $# -gt 0 ]]; do
     case $1 in
         --update-hosts | --host*)
             echo -e "${BLUE}Updating SSH configurations...${DECOLOR}"
-            install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh
+            install_ssh_config
             config_hosts
             shift 1
             ;;
@@ -153,9 +170,9 @@ case $(os) in
 esac
 
 # Hosts, SSH and proxy configuration ##############################################################
-ask "Configure SSH tunnels?" "config_proxy" || ask "Setup SSH keys?" "config_ssh" || \
-ask "Copy SSH config file?" "install -o $targetuser -g $targetuser ./configurations/ssh/* \
-$targethome/.ssh"
+ask "Configure SSH tunnels?" "config_proxy" || \
+    ask "Setup SSH keys?" "config_ssh" || \
+    ask "Copy SSH config file?" "install_ssh_config"
 ask "Install \"/etc/hosts\"?" "config_hosts"
 
 ###################################################################################################
