@@ -2,6 +2,7 @@ StrictHostKeyChecking no
 
 Host nofilter
 User behzad
+Port 22
 
 Host ag
 User fkia
@@ -11,16 +12,12 @@ Host saba ahmadian
 User root
 Port 2244
 
-Host tebyan-* ansible-stage-144.166 haproxy-main haproxy-stage
+Host tebyan-* ansible-stage-144.166 haproxy-main haproxy-stage damavand-gitlab
 User f.kia
 Port 4141
 
-Host damavand-opstk-n* damavand-opstk-c* damavand-deployer cdn-haproxy damavand-ntp01 dev_sakku damavand-dns01 sharif-server damavand-maas damavand-gitlab sakku-stage-cloud-installer
+Host damavand-deployer cdn-haproxy damavand-ntp01 dev_sakku damavand-webmin sharif-server damavand-maas sakku-stage-cloud-installer
 User ubuntu
-Port 22
-
-Host damavand-opstk-w*
-User administrator
 Port 22
 
 Host damavand-ceph-osd-*
@@ -55,7 +52,7 @@ Host serverha-iran-ubuntu24
 User fkia
 Port 22
 
-Host damavand-cdn-kuber-* damavand-nexus
+Host damavand-cdn-kuber-* damavand-nexus damavand-haproxy damavand-gitlab-runner damavand-opstk-*
 User f.kia
 Port 22
 
