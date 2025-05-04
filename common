@@ -198,3 +198,31 @@ finish_msg() {
     [[ "$REBOOT" == "1" ]] && \
         echo -e "${GREEN}It is recommended to restart your computer.${DECOLOR}"
 }
+
+_configure_krew() {
+    sudo -E -u "$targetuser" ./configure_krew.sh
+    config_bashrc
+}
+
+kubernetes_stuff() {
+    echo -e "${BLUE}Configuring \"Kubernetes\" client...${DECOLOR}"
+    
+    echo -e "Checking the installation of \"kubectl\"..."
+    command -v kubectl > /dev/null || install_pkg kubectl
+
+    echo -e "Configuring \"Krew\" and its plugins..."
+    _configure_krew
+    # export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+    
+    echo -e "Copying kubectl aliases..."
+    cp -f configurations/kubectl_aliases.txt "$targethome"
+    
+    echo -e "Updating user's \"bashrc\"..."
+    sed -i '/# POST INSTALLATION/Q' "$targethome"/.bashrc
+    cat << EOF >> "$targethome"/.bashrc
+# POST INSTALLATION
+source ~/kubectl_aliases.txt
+export KUBECONFIG=\$(find $targethome/.kube/kubeconfig-* | paste -sd ":" -)
+export KUBECONFIG=\$KUBECONFIG:$targethome/.kube/config
+EOF
+}

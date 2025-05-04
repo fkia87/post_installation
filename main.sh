@@ -18,6 +18,8 @@ print_help() {
 -----------------------------------+-----------------------------------------------------
      --fonts, --install-fonts      |   Install fonts only
 -----------------------------------+-----------------------------------------------------
+       --kube, --kubernetes        |   Install Kubernetes client and Krew
+-----------------------------------+-----------------------------------------------------
            --noresources           |   Don't download and install resources
 -----------------------------------+-----------------------------------------------------
            --help, -h              |   Show this help message
@@ -96,6 +98,10 @@ while [[ $# -gt 0 ]]; do
             install_fonts
             shift 1
             ;;
+        --kube*)
+            kubernetes_stuff
+            shift 1
+            ;;
         *)
             shift 1
             ;;
@@ -111,6 +117,7 @@ fi
 ask "Remove password for sudoers?" "passwordless_sudo"
 ask "Config journald?" "config_journald"
 ask "Set default scale for QT applications to 2?" "set_qt_scale_2"
+ask "Configure Kubernetes client?" "kubernetes_stuff"
 
 ## GRUB ###########################################################################################
 ask "Grub configurations? (SELinux, pcie_aspm, ...)" "config_grub"
