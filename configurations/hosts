@@ -90,9 +90,9 @@
 172.17.5.2              damavand-opstk-c2
 172.17.5.3              damavand-opstk-c3
 
-172.17.5.4              damavand-opstk-n1
-172.17.5.5              damavand-opstk-n2
-172.17.5.6              damavand-opstk-n3
+172.17.0.4              damavand-opstk-n1
+172.17.0.5              damavand-opstk-n2
+172.17.0.6              damavand-opstk-n3
 
 172.17.5.10             damavand-opstk-w1
 172.17.5.11             damavand-opstk-w2
