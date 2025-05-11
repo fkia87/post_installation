@@ -72,7 +72,8 @@
 172.18.8.9              seyedkhandan-ceph-osd3
 
 # INTERNAL SERVICES
-172.18.31.1             seyedkhandan-dns
+172.18.31.1             seyedkhandan-dns1
+172.18.31.2             seyedkhandan-dns2
 172.18.31.4             seyedkhandan-ntp1
 172.18.31.5             seyedkhandan-ntp2
 172.18.31.6             seyedkhandan-nexus
