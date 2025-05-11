@@ -126,7 +126,7 @@
 172.17.32.1             damavand-cdn-kuber-m1
 172.17.32.2             damavand-cdn-kuber-w1
 172.17.32.3             damavand-cdn-kuber-w2
-217.218.198.198         damavand-cdn-haproxy
+78.39.188.72            damavand-cdn-haproxy
 
 # TEBYAN ##############################################################
 172.16.64.106           tebyan-opstk-c1

@@ -33,6 +33,17 @@ calc() {
 	awk "BEGIN{ print $* }"
 }
 
+backup() {
+	if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+		printf "Create hard link backup of files or directories.\n"
+		printf "Usage: backup <file> [<file> ...]\n"
+		return
+	fi
+	for item in "$@"; do
+		cp -rTl "$item" "${item%/}".bak
+	done
+}
+
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 

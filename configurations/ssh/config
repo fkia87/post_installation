@@ -58,7 +58,7 @@ Port 22
 
 Host damavand-cdn-haproxy
 User ubuntu
-Port 4141
+Port 22
 
 Host seyedkhandan-opstk-w*
 User f.kia
