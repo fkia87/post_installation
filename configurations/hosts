@@ -37,9 +37,6 @@
 # SAKKU STAGE ##########################################################
 172.16.147.55           sakku-stage-cloud-installer
 
-# CDN ##################################################################
-94.232.170.195          cdn-haproxy
-
 # S.KHANDAN ############################################################
 
 # OPENSTACK
@@ -98,6 +95,8 @@
 172.17.5.10             damavand-opstk-w1
 172.17.5.11             damavand-opstk-w2
 
+172.17.11.22            damavand-opstk-m1
+
 172.17.5.12             damavand-opstk-d1
 172.17.5.13             damavand-opstk-d2
 172.17.5.14             damavand-opstk-d3
@@ -130,6 +129,28 @@
 78.39.188.72            damavand-cdn-haproxy
 
 # TEBYAN ##############################################################
+94.232.170.195          tebyan-cdn-haproxy-router
+172.16.48.40            tebyan-cdn-controller-haproxy
+172.16.48.1             tebyan-cdn-controller-kuber-m1
+172.16.48.2             tebyan-cdn-controller-kuber-w1
+172.16.48.3             tebyan-cdn-controller-kuber-w2
+172.16.48.4             tebyan-cdn-controller-kuber-w3
+94.232.170.212          tebyan-cdn-kuber-m1
+94.232.170.171          tebyan-cdn-kuber-w1
+94.232.170.168          tebyan-cdn-kuber-w2
+
+94.232.170.162          tebyan-cdn-test-haproxy-router
+172.16.147.84           tebyan-cdn-test-haproxy
+172.24.0.133            tebyan-cdn-pretest-kuber-m1
+172.24.0.250            tebyan-cdn-pretest-kuber-w1
+172.24.0.238            tebyan-cdn-pretest-kuber-w2
+172.24.0.224            tebyan-cdn-test-kuber-m1
+172.24.0.130            tebyan-cdn-test-kuber-m2
+172.24.0.158            tebyan-cdn-test-kuber-m3
+172.24.0.202            tebyan-cdn-test-kuber-w1
+172.24.0.182            tebyan-cdn-test-kuber-w2
+172.24.0.226            tebyan-cdn-test-kuber-w3
+
 172.16.64.106           tebyan-opstk-c1
 172.16.64.107           tebyan-opstk-c2
 172.16.64.108           tebyan-opstk-c3

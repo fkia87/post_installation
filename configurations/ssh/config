@@ -12,11 +12,20 @@ Host saba ahmadian
 User root
 Port 2244
 
+Host tebyan-cdn-test-* tebyan-cdn-pretest-*
+User ubuntu
+Port 22
+IdentityFile ~/.ssh/iman_id_rsa
+
+Host tebyan-cdn-*
+User ubuntu
+Port 22
+
 Host tebyan-* ansible-stage-144.166 haproxy-main haproxy-stage damavand-gitlab
 User f.kia
 Port 4141
 
-Host damavand-deployer cdn-haproxy damavand-ntp01 dev_sakku damavand-webmin sharif-server damavand-maas sakku-stage-cloud-installer
+Host damavand-deployer damavand-ntp01 dev_sakku damavand-webmin sharif-server damavand-maas sakku-stage-cloud-installer
 User ubuntu
 Port 22
 
