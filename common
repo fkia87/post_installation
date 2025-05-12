@@ -72,10 +72,22 @@ config_ssh() {
     echo -e "${BLUE}Configuring \"SSH\"...${DECOLOR}"
     cp /etc/ssh/ssh_config{,.bak}
     echo -e "${BBLUE}Enter your SSH private key password:${DECOLOR}"
-    while ! gpg --pinentry-mode loopback -o configurations/ssh/id_rsa \
-        --decrypt configurations/ssh/encrypted_key; do
-        sleep 1
+    read -rs password
+    for keyfile in configurations/ssh/*encrypted_key; do
+        echo -e "Decrypting $keyfile..."
+        filename="${keyfile##*/}"
+        user="${filename%%_*}"
+        # decrypted identity file would be 'id_rsa' for my key and '<user>_id_rsa'
+        # for other users keys
+        # Encrypted using this command:
+        # gpg --symmetric -o [<user>_]encrypted_key /path/to/ssh_rsa_file
+        while ! gpg --batch --yes --passphrase "$password" \
+            -o configurations/ssh/"${user}"id_rsa \
+            --decrypt "$keyfile"; do
+            sleep 1
+        done
     done
+    unset password filename user
     install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh
     chmod 700 "$targethome"/.ssh
     chmod 644 "$targethome"/.ssh/id_rsa.pub
