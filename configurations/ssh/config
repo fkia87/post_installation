@@ -15,7 +15,7 @@ Port 2244
 Host tebyan-cdn-test-* tebyan-cdn-pretest-*
 User ubuntu
 Port 22
-IdentityFile ~/.ssh/iman_id_rsa
+IdentityFile ~/.ssh/imanid_rsa
 
 Host tebyan-cdn-*
 User ubuntu
