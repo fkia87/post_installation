@@ -77,7 +77,7 @@ config_ssh() {
         echo -e "Decrypting $keyfile..."
         filename="${keyfile##*/}"
         user="${filename%%_*}"
-        # decrypted identity file would be 'id_rsa' for my key and '<user>_id_rsa'
+        # decrypted identity file would be 'id_rsa' for my key and '<user>id_rsa'
         # for other users keys
         # Encrypted using this command:
         # gpg --symmetric -o [<user>_]encrypted_key /path/to/ssh_rsa_file
@@ -91,7 +91,7 @@ config_ssh() {
     install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh
     chmod 700 "$targethome"/.ssh
     chmod 644 "$targethome"/.ssh/id_rsa.pub
-    chmod 600 "$targethome"/.ssh/id_rsa
+    chmod 600 "$targethome"/.ssh/*id_rsa
     sed -i '/^ServerAliveInterval/d' /etc/ssh/ssh_config
     sed -i '/^StrictHostKeyChecking/d' /etc/ssh/ssh_config
     cat << EOF >> /etc/ssh/ssh_config
