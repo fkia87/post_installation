@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck source=/dev/null
 
 source ~/.bashrc 2> /dev/null
 
