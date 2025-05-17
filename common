@@ -77,7 +77,7 @@ config_ssh() {
     for keyfile in configurations/ssh/*id_rsa; do
         echo -e "Decrypting $keyfile..."
         filename="${keyfile##*/}"
-        # decrypted identity file would be 'id_rsa' for my key and '<user>id_rsa'
+        # decrypted identity file would be 'id_rsa' for my key and '<user>_id_rsa'
         # for other users keys
         # Encrypted using this command:
         # gpg --symmetric -o [<user>_]encrypted_key /path/to/ssh_rsa_file
