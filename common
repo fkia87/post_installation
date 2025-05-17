@@ -170,7 +170,7 @@ useful_packages() {
             pkg_to_install+=(unrar xbanish btop fping)
             ;;
     esac
-    pkg_to_install+=(bat curl)
+    pkg_to_install+=(bat fzf curl)
 
     # shellcheck disable=SC2068
     install_pkg ${pkg_to_install[@]}
