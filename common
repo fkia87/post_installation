@@ -63,36 +63,34 @@ config_terminator() {
 }
 
 install_ssh_config() {
-    install -o "$targetuser" -g "$targetuser" ./configurations/ssh/* "$targethome"/.ssh && \
+    install -o "$targetuser" -g "$targetuser" -m 644 ./configurations/ssh/config "$targethome"/.ssh && \
         echo -e "${BLUE}Removing known SSH hosts...${DECOLOR}" && \
         rm -f "$targethome"/.ssh/known_hosts 2> /dev/null
 }
 
 config_ssh() {
+    set -x
     echo -e "${BLUE}Configuring \"SSH\"...${DECOLOR}"
     cp /etc/ssh/ssh_config{,.bak}
     echo -e "${BBLUE}Enter your SSH private key password:${DECOLOR}"
     read -rs password
-    # for keyfile in configurations/ssh/*encrypted_key; do
-        # echo -e "Decrypting $keyfile..."
-        # filename="${keyfile##*/}"
-        # user="${filename%%_*}"
+    for keyfile in configurations/ssh/*id_rsa; do
+        echo -e "Decrypting $keyfile..."
+        filename="${keyfile##*/}"
         # decrypted identity file would be 'id_rsa' for my key and '<user>id_rsa'
         # for other users keys
         # Encrypted using this command:
         # gpg --symmetric -o [<user>_]encrypted_key /path/to/ssh_rsa_file
         while ! gpg --batch --yes --passphrase "$password" \
-            -o configurations/ssh/id_rsa \
-            --decrypt configurations/ssh/encrypted_key; do
+            -o "$targethome/.ssh/$filename" \
+            --decrypt "$keyfile"; do
             sleep 1
         done
-    # done
-    unset password filename user
-    install -o "$targetuser" -g "$targetuser" ./configurations/ssh/config "$targethome"/.ssh
-    install -o "$targetuser" -g "$targetuser" ./configurations/ssh/*.pub "$targethome"/.ssh
-    install -o "$targetuser" -g "$targetuser" ./configurations/ssh/*id_rsa "$targethome"/.ssh
-    chmod 644 "$targethome"/.ssh/id_rsa.pub
-    chmod 600 "$targethome"/.ssh/id_rsa
+        chown "$targetuser":"$targetuser" "$targethome/.ssh/$filename"
+        chmod 600 "$targethome/.ssh/$filename"
+    done
+    unset password filename
+    install -o "$targetuser" -g "$targetuser" -m 644 ./configurations/ssh/*.pub "$targethome"/.ssh
     chmod 700 "$targethome"/.ssh
     sed -i '/^ServerAliveInterval/d' /etc/ssh/ssh_config
     sed -i '/^StrictHostKeyChecking/d' /etc/ssh/ssh_config
@@ -101,6 +99,7 @@ config_ssh() {
     StrictHostKeyChecking no
 EOF
     install_ssh_config
+    set +x
 }
 
 config_hosts() {
