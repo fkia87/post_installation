@@ -61,7 +61,7 @@ Host serverha-iran-ubuntu24
 User fkia
 Port 22
 
-Host damavand-cdn-kuber-* damavand-nexus damavand-haproxy damavand-gitlab-runner damavand-opstk-*
+Host damavand-cdn-kuber-* damavand-nexus damavand-gitlab-runner damavand-opstk-*
 User f.kia
 Port 22
 
@@ -81,6 +81,6 @@ Host seyedkhandan-ceph-*
 User f.kia
 Port 2024
 
-Host seyedkhandan-*
+Host seyedkhandan-* damavand-haproxy
 User f.kia
 Port 4141
