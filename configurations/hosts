@@ -33,6 +33,7 @@
 172.16.144.52           dev-env cdn-dev-env
 172.24.0.10             haproxy-main
 172.24.0.20             haproxy-stage
+185.37.54.199           peysaz
 
 # SAKKU STAGE ##########################################################
 172.16.147.55           sakku-stage-cloud-installer
@@ -127,6 +128,8 @@
 172.17.32.2             damavand-cdn-kuber-w1
 172.17.32.3             damavand-cdn-kuber-w2
 78.39.188.72            damavand-cdn-haproxy
+
+78.39.188.239           panel.damavand.cloud
 
 # TEBYAN ##############################################################
 94.232.170.195          tebyan-cdn-haproxy-router

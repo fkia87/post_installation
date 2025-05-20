@@ -65,7 +65,7 @@ Host damavand-cdn-kuber-* damavand-nexus damavand-gitlab-runner damavand-opstk-*
 User f.kia
 Port 22
 
-Host damavand-cdn-haproxy
+Host damavand-cdn-haproxy repo.peysaz.ir peysaz
 User ubuntu
 Port 22
 
