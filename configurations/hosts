@@ -33,7 +33,7 @@
 172.16.144.52           dev-env cdn-dev-env
 172.24.0.10             haproxy-main
 172.24.0.20             haproxy-stage
-185.37.54.199           peysaz
+185.37.54.199           peysaz repo.peysaz.ir
 
 # SAKKU STAGE ##########################################################
 172.16.147.55           sakku-stage-cloud-installer

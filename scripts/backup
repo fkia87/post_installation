@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+	printf "Create hard link backup of files or directories in the same location.\n"
+	printf "Usage: backup <path> [<path> ...]\n"
+	exit 0
+fi
+for item in "$@"; do
+	if [[ -f "${item%/}.bak" ]] || [[ -d "${item%/}.bak" ]]; then
+		if [[ "$item" -ef "${item%/}.bak" ]]; then
+			echo "$item: Backup already exists."
+			continue
+		else
+			echo -en "$item: \033[0;31m BACKUP HAS NOT BEEN CREATED! "
+			echo -e "A file with the name '${item%/}.bak' already exists.\033[0m"
+			continue
+		fi
+	fi
+	cp -rTl "$item" "${item%/}.bak" && \
+		echo "$item: Backup created: '${item%/}.bak'"
+done
