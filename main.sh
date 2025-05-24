@@ -80,20 +80,12 @@ checkuser
 strt_msg
 eval "$(cat /etc/os-release)"
 REL=${VERSION_ID%%.*}
-# case "$(os)" in
-#     fedora | alma*)
-#         REL=$(awk '{print$3}' < /etc/"$(os)"-release)
-#         ;;
-#     rocky*)
-#         REL=$(awk '{print$4}' < /etc/"$(os)"-release | cut -d . -f 1)
-#         ;;
-# esac
 get_target_user
 ###################################################################################################
 while [[ $# -gt 0 ]]; do
     quit_after=1
     case $1 in
-        --update-hosts | --host*)
+        --update-host* | --host*)
             echo -e "${BLUE}Updating SSH configurations...${DECOLOR}"
             install_ssh_config
             config_hosts
@@ -103,7 +95,7 @@ while [[ $# -gt 0 ]]; do
             config_bashrc
             shift 1
             ;;
-        --install-scripts* | --scripts*)
+        --install-script* | --script*)
             install_scripts
             shift 1
             ;;
@@ -190,7 +182,7 @@ ask "Configure \"Terminator\"?" "config_terminator"
 ask "Install useful packages? (duf, bat, curl, ...)" "useful_packages"
 
 # Autostart xbanish (Hide mouse cursor when typing) ###############################################
-ask "Autostart xbanish (Hide mouse cursor when typing)?" "autostart_xbanish"
+ask "Autostart xbanish (Hide mouse cursor when typing)?" "config_xbanish"
 
 # bachrc ##########################################################################################
 ask "Config bashrc?" "config_bashrc"
@@ -199,7 +191,7 @@ ask "Config bashrc?" "config_bashrc"
 ask "Install fonts?" "install_fonts"
 
 # Nekoray #########################################################################################
-ask "Install routes for Nekoray?" "install_nekoray_routes"
+# ask "Install routes for Nekoray?" "install_nekoray_routes"
 
 ###################################################################################################
 rm -rf resources

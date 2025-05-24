@@ -161,13 +161,13 @@ config_grub() {
 useful_packages() {
     case $(os) in
         fedora | manjaro)
-            pkg_to_install+=(unrar xbanish btop fping duf colorized-logs lsd)
+            pkg_to_install+=(unrar btop fping duf colorized-logs lsd)
             ;;
         ubuntu | debian)
             pkg_to_install+=(fping duf colorized-logs lsd)
             ;;
         rocky)
-            pkg_to_install+=(unrar xbanish btop fping)
+            pkg_to_install+=(unrar btop fping)
             ;;
     esac
     pkg_to_install+=(bat curl)
@@ -203,7 +203,8 @@ config_goflex() {
     mount -a
 }
 
-autostart_xbanish() {
+config_xbanish() {
+    install_pkg "xbanish"
     autostart_dir="$targethome/.config/autostart"
     mkdir -p "$autostart_dir"
     cp ./configurations/xbanish.desktop "$autostart_dir"
