@@ -120,6 +120,7 @@ while [[ $# -gt 0 ]]; do
             shift 1
             ;;
         *)
+            echo "Invalid option: $1"
             shift 1
             ;;
     esac
