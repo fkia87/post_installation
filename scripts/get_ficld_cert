@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo "Switching context..."
-k ctx ficld-main-rke2
+kubectl ctx ficld-main-rke2
 
 DST="$(mktemp -d)"
 
