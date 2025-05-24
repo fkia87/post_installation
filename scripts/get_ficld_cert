@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "Switching context..."
+k ctx ficld-main-rke2
+
+DST="$(mktemp -d)"
+
+kubectl get secrets -n default ficld-wildcard \
+    --template='{{ index .data "tls.crt" | base64decode }}' > "$DST"/ficld_cullchain.pem
+
+kubectl get secrets -n default ficld-wildcard \
+    --template='{{ index .data "tls.key" | base64decode }}' > "$DST"/ficld_key.pem
+
+cat "$DST"/ficld_cullchain.pem "$DST"/ficld_key.pem > "$DST"/ficld.pem && \
+    echo -e "Wrote '$DST/ficld.pem'"
