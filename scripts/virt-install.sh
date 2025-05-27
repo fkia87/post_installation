@@ -83,11 +83,11 @@ echo -e "Copying image file to: './$SYM_LINK_DIR/$vm_name.qcow2'..."
 cp "$file" "./$SYM_LINK_DIR/$vm_name.qcow2" && \
     echo "Resizing image..." && \
     qemu-img resize --shrink "./$SYM_LINK_DIR/$vm_name.qcow2" "$size" && \
-    echo -e "Creating VM $vm_name..." && \
+    echo -e "Creating VM $vm_name..."
+    [[ $uefi == "on" ]] && alias virt-install='virt-install --boot uefi'
     virt-install -q \
         --name "$vm_name" \
         --memory "$ram" \
-        --boot uefi="$uefi" \
         --cpu host-model --vcpus "$vcpus" \
         --osinfo detect=on,require=off \
         --disk "./$SYM_LINK_DIR/$vm_name.qcow2,format=qcow2,bus=virtio" \
