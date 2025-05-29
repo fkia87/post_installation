@@ -122,5 +122,5 @@ alias aria2c='aria2c -x8 -s8 -j8 '
 alias digg='resolvectl query --cache=no --type=any '
 
 # rsync
-alias srsync='rsync -avP'
+alias srsync='rsync -avPz'
 alias rcp='srsync'
