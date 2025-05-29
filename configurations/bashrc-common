@@ -99,6 +99,8 @@ alias externalip='myip '
 alias publicip='myip '
 alias speedtest='curl -s \
 	https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python - '
+
+# Container tools
 alias docker='docker '
 alias podman='podman '
 alias d='docker '
@@ -118,3 +120,7 @@ alias ins='inspect'
 alias less='less -NF '
 alias aria2c='aria2c -x8 -s8 -j8 '
 alias digg='resolvectl query --cache=no --type=any '
+
+# rsync
+alias srsync='rsync -avP'
+alias rcp='srsync'
