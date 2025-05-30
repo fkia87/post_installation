@@ -124,3 +124,6 @@ alias digg='resolvectl query --cache=no --type=any '
 # rsync
 alias srsync='rsync -avPz'
 alias rcp='srsync'
+
+# git
+alias g='git'
