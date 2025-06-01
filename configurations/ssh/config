@@ -12,7 +12,7 @@ Host saba ahmadian
 User root
 Port 2244
 
-Host tebyan-cdn-test-* tebyan-cdn-pretest-* tebyan-cdn-kuber-* damavand-cdn-kuber-*
+Host tebyan-cdn-test-* tebyan-cdn-pretest-* tebyan-cdn-kuber-* damavand-cdn-*-kuber-*
 User ubuntu
 Port 22
 IdentityFile ~/.ssh/iman_id_rsa
