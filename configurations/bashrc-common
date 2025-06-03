@@ -28,6 +28,8 @@ ex() {
 digg() {
 	local domain="$1"
 	local types=(A AAAA CNAME MX NS TXT SOA SRV PTR SPF)
+	resolvectl flush-caches > /dev/null 2>&1
+	echo -e "DNS records for $domain:\n"
 	for type in "${types[@]}"; do
     	dig +noall +answer "$domain" "$type" || return 1
 	done
