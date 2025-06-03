@@ -25,6 +25,14 @@ ex() {
 	fi
 }
 
+digg() {
+	local domain="$1"
+	local types=(A AAAA CNAME MX NS TXT SOA SRV PTR SPF)
+	for type in "${types[@]}"; do
+    	dig +noall +answer "$domain" "$type" || return 1
+	done
+}
+
 wttr() {
 	curl wttr.in/"$1"
 }
@@ -117,9 +125,10 @@ alias v='volume'
 alias n='network'
 alias i='image'
 alias ins='inspect'
+
+# Utilities
 alias less='less -NF '
 alias aria2c='aria2c -x8 -s8 -j8 '
-alias digg='resolvectl query --cache=no --type=any '
 
 # rsync
 alias srsync='rsync -avPz'
