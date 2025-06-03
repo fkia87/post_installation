@@ -33,6 +33,8 @@ digg() {
     	dig +noall +answer "$domain" "$type" || return 1
 	done
 }
+# Since you may want to use this in a 'watch' command
+export -f digg
 
 wttr() {
 	curl wttr.in/"$1"
