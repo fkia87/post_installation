@@ -11,9 +11,17 @@ config_journald() {
 }
 
 get_target_user() {
-    while [[ -z $targetuser ]] || ! grep 'bash$' /etc/passwd | \
-        awk -F ':' '{print$1}' | grep -q ^"${targetuser:-fkia}"$ 2>/dev/null; do
+    while [[ -z $targetuser ]]; do
         read -r -p "Enter your target Linux username [fkia]: " targetuser
+        
+        # Check if the entered user actually exists or not
+        if ! grep 'bash$' /etc/passwd | \
+            awk -F ':' '{print$1}' | \
+            grep -q ^"${targetuser:-fkia}"$ 2>/dev/null; then
+            echo -e "${targetuser:-fkia}: User not found on the system."
+            unset targetuser
+            continue
+        fi
         targetuser=${targetuser:-fkia}
         case "$targetuser" in
             root)
