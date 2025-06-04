@@ -1,29 +1,31 @@
 #!/bin/bash
-# shellcheck disable=SC2068,SC1091,SC1090,SC2154
+# shellcheck disable=SC2068,SC1091,SC1090,SC2154,SC2034
 
 trap 'tput cnorm; echo; exit 3' SIGINT
 
 print_help() {
     printf "%s" "
------------------------------------+-----------------------------------------------------
-             Switches              |                     Description
------------------------------------+-----------------------------------------------------
+-----------------------------------+------------------------------------------------------------
+             Switches              |                        Description
+-----------------------------------+------------------------------------------------------------
     --update-hosts, --host         |   Update only /etc/hosts and ~/.ssh/config files
------------------------------------+-----------------------------------------------------
+-----------------------------------+------------------------------------------------------------
             --bashrc               |   Update only bashrc files
------------------------------------+-----------------------------------------------------
+-----------------------------------+------------------------------------------------------------
    --scripts, --install-scripts    |   Install scripts only
------------------------------------+-----------------------------------------------------
+-----------------------------------+------------------------------------------------------------
  --templates, --install-templates  |   Install templates only
------------------------------------+-----------------------------------------------------
+-----------------------------------+------------------------------------------------------------
      --fonts, --install-fonts      |   Install fonts only
------------------------------------+-----------------------------------------------------
+-----------------------------------+------------------------------------------------------------
        --kube, --kubernetes        |   Install Kubernetes client and Krew
------------------------------------+-----------------------------------------------------
-           --noresources           |   Don't download and install resources
------------------------------------+-----------------------------------------------------
-           --help, -h              |   Show this help message
------------------------------------+-----------------------------------------------------
+-----------------------------------+------------------------------------------------------------
+  --git-prompt, --bash-git-prompt  |   Install Bash Git Prompt
+-----------------------------------+------------------------------------------------------------
+           --noresources           |   Don't download and install resources (Already installed)
+-----------------------------------+------------------------------------------------------------
+            --help, -h             |   Show this help message
+-----------------------------------+------------------------------------------------------------
 "
 }
 
@@ -35,23 +37,29 @@ case $1 in
 esac
 
 # IMPORT REQUIREMENTS #############################################################################
+for cmd in curl mktemp; do
+    command -v $cmd > /dev/null || { echo -e "$cmd not fount. Exiting..." >&2; exit 1; }
+done
+
+github_get_latest_version() {
+    # Usage: Give it a GitHub URL as the first argument
+    curl -v "${1}/releases/latest" 2>&1 | grep -i '< location:' | rev | cut -d / -f 1 | rev | sed 's/\r//g'
+}
+
 install_resources() {
     [[ $UID == "0" ]] || { echo "You are not root." >&2; exit 1; }
-    local resources_latest_version
-    resources_latest_version=$(
-        curl -v https://github.com/fkia87/resources/releases/latest 2>&1 | \
-        grep -i '< location:' | rev | cut -d / -f 1 | rev | sed 's/\r//g'
-    )
+    local gh_url; gh_url="https://github.com/fkia87/resources"
+    local _latest_version; _latest_version=$(github_get_latest_version "$gh_url")
     echo -e "Downloading resources..."
-    rm -rf "$resources_latest_version".tar.gz
-    wget https://github.com/fkia87/resources/archive/refs/tags/"$resources_latest_version".tar.gz \
-        || { echo -e "Error downloading required files from Github." >&2; exit 1; }
-    tar xvf ./"$resources_latest_version".tar.gz || { echo -e "Extraction failed." >&2; exit 1; }
-    cd ./resources-"${resources_latest_version/v/}" || exit 2
-    ./INSTALL.sh
-    cd .. || exit 2
-    rm -rf ./resources*
-    rm -rf "$resources_latest_version".tar.gz
+    local TMPDIR; TMPDIR=$(mktemp -d)
+    curl -sL --output "$TMPDIR/resources-$_latest_version.tar.gz" \
+        "$gh_url/archive/refs/tags/$_latest_version.tar.gz" \
+        || { echo -e "Error downloading files from Github." >&2; exit 1; }
+    tar xf "$TMPDIR/resources-$_latest_version.tar.gz" -C "$TMPDIR" \
+        || { echo -e "Extraction failed." >&2; exit 1; }
+    # 'v' is removed from the name of the extracted file:
+    "$TMPDIR/resources-${_latest_version#v}/INSTALL.sh"
+    RELOAD=1
 }
 
 # Don't install resources if --noresource is given
@@ -73,7 +81,7 @@ set -- "${new_args[@]}"
 # Install resources if --noresource is not given
 $noresource_given || install_resources
 
-. /etc/profile
+. /etc/profile 2> /dev/null
 ###################################################################################################
 source ./common
 checkuser
@@ -111,6 +119,10 @@ while [[ $# -gt 0 ]]; do
             kubernetes_stuff
             shift 1
             ;;
+        --git-prompt | --bash-git-prompt)
+            install_bash_git_prompt
+            shift 1
+            ;;
         *)
             echo "Ignored invalid option: $1"
             shift 1
@@ -127,6 +139,7 @@ fi
 ask "Remove password for sudoers?" "passwordless_sudo"
 ask "Config journald?" "config_journald"
 ask "Set default scale for QT applications to 2?" "set_qt_scale_2"
+ask "Install 'bash-git-prompt'?" "install_bash_git_prompt"
 ask "Configure Kubernetes client?" "kubernetes_stuff"
 
 ## GRUB ###########################################################################################
