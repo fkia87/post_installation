@@ -54,7 +54,8 @@ ex() {
 rcp() {
 	case $1 in
 		-h | --help)
-			echo "Copy files or directories to/from a remote host."
+			echo "An alternative to 'scp'"
+			echo "Copy files or directories to/from a remote host using 'rsync'."
 			echo "Usage:"
 			echo "  rcp [-p <SSH port>] path/to/local [user]@<remote>:"
 			echo "  rcp [-p <SSH port>] [user]@<remote>: path/to/local"
