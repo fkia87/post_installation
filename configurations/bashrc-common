@@ -51,6 +51,23 @@ ex() {
 	fi
 }
 
+rcp() {
+	case $1 in
+		-h | --help)
+			echo "Copy files or directories to/from a remote host."
+			echo "Usage:"
+			echo "  rcp [-p <SSH port>] path/to/local [user]@<remote>:"
+			echo "  rcp [-p <SSH port>] [user]@<remote>: path/to/local"
+			return
+			;;
+		-p | --port | --ssh-port)
+			local ssh_option="-p $2"
+			shift 2
+			;;
+	esac
+	rsync -avPz -e "ssh ${ssh_option}" "$@"
+}
+
 digg() {
 	local domain="$1"
 	local types=(A AAAA CNAME MX NS TXT SOA SRV PTR SPF)
@@ -77,9 +94,9 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export PS4='+(${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
 
 # better bash completion
-bind "set completion-ignore-case on"
-bind "set completion-map-case on"
-bind "set show-all-if-ambiguous on"
+bind "set completion-ignore-case on" 2> /dev/null
+bind "set completion-map-case on" 2> /dev/null
+bind "set show-all-if-ambiguous on" 2> /dev/null
 
 alias sudo='sudo '
 alias mtr='mtr -b '
@@ -156,10 +173,6 @@ alias ins='inspect'
 # Utilities
 alias less='less -NF '
 alias aria2c='aria2c -x8 -s8 -j8 '
-
-# rsync
-alias srsync='rsync -avPz'
-alias rcp='srsync'
 
 # git
 alias g='git'
