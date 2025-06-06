@@ -65,6 +65,11 @@ rcp() {
 			local ssh_option="-p $2"
 			shift 2
 			;;
+		-p*)
+			# In case you gave port without spaces like -p4141
+			local ssh_option="$1"
+			shift
+			;;
 	esac
 	rsync -avPz -e "ssh ${ssh_option}" "$@"
 }
