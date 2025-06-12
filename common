@@ -271,6 +271,18 @@ install_bash_git_prompt() {
     rm -rf "$targethome/.bash-git-prompt"
     git clone https://github.com/magicmonty/bash-git-prompt.git \
         "$targethome/.bash-git-prompt" --depth=1 && \
-        echo -e "bash-git-prompt installed successfully."
-    config_bashrc
+        echo -e "bash-git-prompt installed successfully." && \
+        config_bashrc && \
+        return
+    err "Could not install bash-git-prompt."
+}
+
+install_gitconfig() {
+    echo -e "${BLUE}Installing .gitconfig...${DECOLOR}"
+    local default_git_mail='user@example.com'
+    read -rp "Git e-mail [$default_git_mail]: " mail
+    git_user=$(echo "${mail:-$default_git_mail}" | cut -d @ -f 1); export git_user
+    export git_mail=${mail:-$default_git_mail}
+    envsubst < ./configurations/gitconfig > "$targethome/.gitconfig" || \
+        err "Problem installing .gitconfig."
 }

@@ -12,13 +12,15 @@ print_help() {
 -----------------------------------+------------------------------------------------------------
             --bashrc               |   Update only bashrc files
 -----------------------------------+------------------------------------------------------------
-   --scripts, --install-scripts    |   Install scripts only
+   --scripts, --install-scripts    |   Install scripts
 -----------------------------------+------------------------------------------------------------
- --templates, --install-templates  |   Install templates only
+ --templates, --install-templates  |   Install templates
 -----------------------------------+------------------------------------------------------------
-     --fonts, --install-fonts      |   Install fonts only
+     --fonts, --install-fonts      |   Install fonts
 -----------------------------------+------------------------------------------------------------
        --kube, --kubernetes        |   Install Kubernetes client and Krew
+-----------------------------------+------------------------------------------------------------
+            --gitconfig            |   Install .gitconfig file
 -----------------------------------+------------------------------------------------------------
   --git-prompt, --bash-git-prompt  |   Install Bash Git Prompt
 -----------------------------------+------------------------------------------------------------
@@ -123,6 +125,10 @@ while [[ $# -gt 0 ]]; do
             install_bash_git_prompt
             shift 1
             ;;
+        --gitconfig)
+            install_gitconfig
+            shift 1
+            ;;
         *)
             echo "Ignored invalid option: $1"
             shift 1
@@ -139,6 +145,7 @@ fi
 ask "Remove password for sudoers?" "passwordless_sudo"
 ask "Config journald?" "config_journald"
 ask "Set default scale for QT applications to 2?" "set_qt_scale_2"
+ask "Install .gitconfig?" install_gitconfig
 ask "Install 'bash-git-prompt'?" "install_bash_git_prompt"
 ask "Configure Kubernetes client?" "kubernetes_stuff"
 

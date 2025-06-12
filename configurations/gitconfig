@@ -1,6 +1,6 @@
 [user]
-    email = USERNAME@example.com
-    name = USERNAME
+    email = $git_mail
+    name = $git_user
 
 [alias]
     ch = checkout
