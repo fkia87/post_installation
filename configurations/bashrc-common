@@ -119,7 +119,7 @@ alias h='head '
 alias t='tail '
 alias ping='ping -OD '
 alias jctl='journalctl '
-$(complete -p journalctl 2> /dev/null ) jctl 2> /dev/null
+_completion_loader journalctl; $(complete -p journalctl 2> /dev/null ) jctl 2> /dev/null
 #alias cp='rsync -ahR --info=progress2 '
 alias myip='curl -S eth0.me '
 # Other options be like:
@@ -165,9 +165,9 @@ alias speedtest='curl -s \
 alias docker='docker '
 alias podman='podman '
 alias d='docker '
-$(complete -p docker 2> /dev/null ) d 2> /dev/null
+_completion_loader docker; $(complete -p docker 2> /dev/null ) d 2> /dev/null
 alias p='podman '
-$(complete -p podman 2> /dev/null ) p 2> /dev/null
+_completion_loader podman; $(complete -p podman 2> /dev/null ) p 2> /dev/null
 alias dc='d compose '
 alias pc='p compose '
 alias dps='d ps '
@@ -185,4 +185,4 @@ alias aria2c='aria2c -x8 -s8 -j8 '
 
 # git
 alias g='git'
-$(complete -p git 2> /dev/null ) g 2> /dev/null
+_completion_loader git; $(complete -p git 2> /dev/null ) g 2> /dev/null
