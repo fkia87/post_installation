@@ -141,9 +141,9 @@
 172.16.48.2             tebyan-cdn-controller-kuber-w1
 172.16.48.3             tebyan-cdn-controller-kuber-w2
 172.16.48.4             tebyan-cdn-controller-kuber-w3
-94.232.170.212          tebyan-cdn-kuber-m1
-94.232.170.171          tebyan-cdn-kuber-w1
-94.232.170.168          tebyan-cdn-kuber-w2
+94.232.170.212          tebyan-cdn-edge-kuber-m1
+94.232.170.171          tebyan-cdn-edge-kuber-w1
+94.232.170.168          tebyan-cdn-edge-kuber-w2
 
 94.232.170.162          tebyan-cdn-test-haproxy-router
 172.16.147.84           tebyan-cdn-test-haproxy
@@ -204,6 +204,39 @@
 172.16.64.42            tebyan-opstk-w29
 172.16.64.43            tebyan-opstk-w30
 172.16.64.56            tebyan-opstk-w31
+
+172.16.144.156          tebyan-opstk-stga-c1
+172.16.144.157          tebyan-opstk-stga-c2
+172.16.144.158          tebyan-opstk-stga-c3
+172.16.144.159          tebyan-opstk-stga-n1
+172.16.144.160          tebyan-opstk-stga-n2
+172.16.144.165          tebyan-opstk-stga-n3
+172.16.144.161          tebyan-opstk-stga-w1
+172.16.144.162          tebyan-opstk-stga-w2
+172.16.144.163          tebyan-opstk-stga-w3
+172.16.144.229          tebyan-opstk-stga-m1
+
+172.16.144.30           tebyan-opstk-stgb-OPSSUBSCV01
+172.16.144.31           tebyan-opstk-stgb-OPSSUBSCV02
+172.16.144.32           tebyan-opstk-stgb-OPSSUBSCV03
+172.16.144.94           tebyan-opstk-stgb-c1
+172.16.144.95           tebyan-opstk-stgb-c2
+172.16.144.96           tebyan-opstk-stgb-c3
+172.16.144.89           tebyan-opstk-stgb-n1
+172.16.144.97           tebyan-opstk-stgb-n2
+172.16.144.98           tebyan-opstk-stgb-n3
+172.16.144.91           tebyan-opstk-stgb-w1
+172.16.144.92           tebyan-opstk-stgb-w2
+172.16.144.93           tebyan-opstk-stgb-w3
+
+172.16.144.235          tebyan-opstk-stgc-c1
+172.16.144.236          tebyan-opstk-stgc-c2
+172.16.144.237          tebyan-opstk-stgc-c3
+172.16.144.238          tebyan-opstk-stgc-n1
+172.16.144.239          tebyan-opstk-stgc-n2
+172.16.144.240          tebyan-opstk-stgc-n3
+172.16.144.233          tebyan-opstk-stgc-w1
+172.16.144.234          tebyan-opstk-stgc-w2
 
 172.16.64.33            tebyan-backup-64.33
 ########################################################################
