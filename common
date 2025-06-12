@@ -252,7 +252,7 @@ kubernetes_stuff() {
     # export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
     
     echo -e "Copying kubectl aliases..."
-    install -o "$targetuser" -g "$targetuser" \
+    install -o "$targetuser" -g "$targetuser" -m 644 \
         ./configurations/kubectl_aliases.txt "$targethome/.kubectl_aliases"
     
     echo -e "Updating user's \"bashrc\"..."
