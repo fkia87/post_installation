@@ -235,7 +235,8 @@ finish_msg() {
 }
 
 _configure_krew() {
-    sudo -E -u "$targetuser" ./configure_krew.sh
+    kubectl krew version > /dev/null 2>&1 || \
+        sudo -E -u "$targetuser" ./configure_krew.sh
     command -v fzf > /dev/null || install_pkg fzf
     config_bashrc
 }
@@ -251,7 +252,8 @@ kubernetes_stuff() {
     # export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
     
     echo -e "Copying kubectl aliases..."
-    cp -f configurations/kubectl_aliases.txt "$targethome/.kubectl_aliases"
+    install -o "$targetuser" -g "$targetuser" \
+        ./configurations/kubectl_aliases.txt "$targethome/.kubectl_aliases"
     
     echo -e "Updating user's \"bashrc\"..."
     sed -i '/# POST INSTALLATION/Q' "$targethome"/.bashrc

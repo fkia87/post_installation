@@ -4,6 +4,7 @@
 source ~/.bashrc 2> /dev/null
 
 _install_krew() {
+    echo -e "Downloading and installing 'Krew'..."
     (
     cd "$(mktemp -d)" &&
     OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
