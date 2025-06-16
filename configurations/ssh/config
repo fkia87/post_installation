@@ -17,7 +17,7 @@ User ubuntu
 Port 22
 IdentityFile ~/.ssh/iman_id_rsa
 
-Host tebyan-cdn-*
+Host tebyan-cdn-* temp-server
 User ubuntu
 Port 22
 
