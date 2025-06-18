@@ -79,7 +79,7 @@ digg() {
 	local types=(A AAAA CNAME MX NS TXT SOA SRV PTR SPF)
 	resolvectl flush-caches > /dev/null 2>&1
 	for type in "${types[@]}"; do
-    	dig +noall +answer "$domain" "$type" || return 1
+    	dig +noall +answer +timeout=3 +retry=0 "$domain" "$type" || return 1
 	done
 }
 # Since you may want to use this in a 'watch' command
