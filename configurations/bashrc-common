@@ -106,6 +106,7 @@ bind "set show-all-if-ambiguous on" 2> /dev/null
 
 alias sudo='sudo '
 alias mtr='mtr -b '
+alias +x='chmod +x'
 alias pokemon='curl pkmn.li'
 alias pkmn='pokemon'
 alias weather='wttr'
