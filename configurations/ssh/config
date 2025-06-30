@@ -17,7 +17,7 @@ User ubuntu
 Port 22
 IdentityFile ~/.ssh/iman_id_rsa
 
-Host tebyan-cdn-* temp-server
+Host tebyan-cdn-*
 User ubuntu
 Port 22
 
@@ -63,7 +63,7 @@ Port 22
 
 Host damavand-nexus damavand-gitlab-runner damavand-opstk-*
 User f.kia
-Port 22
+Port 5151
 
 Host damavand-cdn-haproxy repo.peysaz.ir peysaz
 User ubuntu
@@ -84,7 +84,3 @@ Port 2024
 Host seyedkhandan-* damavand-haproxy
 User f.kia
 Port 4141
-
-Host mattermost-temp
-User ubuntu
-Port 2244
