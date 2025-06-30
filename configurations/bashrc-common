@@ -74,6 +74,32 @@ rcp() {
 	rsync -avPz -e "ssh ${ssh_option}" "$@"
 }
 
+addhost() {
+	case $1 in
+		-h | --help)
+			echo "Add a host to '/etc/hosts'"
+			echo "Usage:"
+			echo "  addhost <IP_ADDRESS> <HOSTNAME>"
+			return
+			;;
+	esac
+	[[ $# -ne 2 ]] && { echo "This function requires two arguments." >&2; return 1; }
+	echo "$1 $2" | sudo tee -a /etc/hosts
+}
+
+removehost() {
+	case $1 in
+		-h | --help)
+			echo "Remove a host from '/etc/hosts'"
+			echo "Usage:"
+			echo "  removehost <IP_ADDRESS> <HOSTNAME>"
+			return
+			;;
+	esac
+	[[ $# -ne 2 ]] && { echo "This function requires two arguments." >&2; return 1; }
+	sudo sed -i "/^$1\s*$2/d" /etc/hosts
+}
+
 digg() {
 	local domain="$1"
 	local types=(A AAAA CNAME MX NS TXT SOA SRV PTR SPF)
