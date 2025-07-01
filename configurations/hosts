@@ -3,7 +3,7 @@
 212.132.119.241         saba ahmadian
 212.227.243.206         ionos-usa
 65.108.27.182           pooyanit-fin
-89.144.138.38           serverha-iran-ubuntu24
+# 89.144.138.38           serverha-iran-ubuntu24
 185.37.54.160           temp-server
 185.37.54.227           mattermost-temp
 # ANP ##################################################################
@@ -132,6 +132,11 @@
 78.39.188.60            damavand-cdn-edge-kuber-w1
 78.39.188.90            damavand-cdn-edge-kuber-w2
 78.39.188.72            damavand-cdn-haproxy
+
+172.17.97.1             damavand-panel-backend
+172.17.97.2             damavand-panel-db
+# 172.17.97.3             damavand-panel-
+172.30.1.1              damavand-panel-front
 
 78.39.188.239           panel.damavand.cloud
 

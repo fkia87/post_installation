@@ -57,7 +57,11 @@ Host ionos-usa pooyanit-fin
 User root
 Port 22
 
-Host serverha-iran-ubuntu24
+Host damavand-panel-front
+User fkia
+Port 15292
+
+Host damavand-panel-backend damavand-panel-db
 User fkia
 Port 22
 
