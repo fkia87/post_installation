@@ -45,7 +45,7 @@ Host maas-server-01
 User awx
 Port 4141
 
-Host cdn-dev-env dev-env
+Host cdn-dev-env dev-env temp-server
 User fedora
 Port 22
 
@@ -61,7 +61,7 @@ Host ionos-usa pooyanit-fin
 User root
 Port 22
 
-Host damavand-panel-* temp-server
+Host damavand-panel-*
 User fkia
 Port 22
 
