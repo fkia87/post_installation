@@ -21,6 +21,10 @@ Host tebyan-cdn-*
 User ubuntu
 Port 22
 
+Host tebyan-panel-*
+User fkia
+Port 15292
+
 Host tebyan-* ansible-stage-144.166 haproxy-main haproxy-stage damavand-gitlab
 User f.kia
 Port 4141
