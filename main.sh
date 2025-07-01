@@ -163,9 +163,9 @@ case $(os) in
             cp ./configurations/dnf.conf /etc/dnf/dnf.conf
             echo -e "${BLUE}Installing \"rpm fusion repositories\"...${DECOLOR}"
             dnf -y install \
-            https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"${REL}".noarch.rpm \
-            https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"${REL}"\
-            .noarch.rpm
+            https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm \
+            https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
+            dnf config-manager setopt fedora-cisco-openh264.enabled=1
         }
         ask "Config dnf and rpmfusion?" "config_dnf"
         ;;
