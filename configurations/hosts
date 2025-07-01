@@ -135,8 +135,7 @@
 
 172.17.97.1             damavand-panel-backend
 172.17.97.2             damavand-panel-db
-# 172.17.97.3             damavand-panel-
-172.30.1.1              damavand-panel-front
+172.17.97.6             damavand-panel-front
 
 78.39.188.239           panel.damavand.cloud
 
