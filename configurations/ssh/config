@@ -22,7 +22,7 @@ User ubuntu
 Port 22
 
 Host tebyan-panel-*
-User fkia
+User f.kia
 Port 15292
 
 Host tebyan-* ansible-stage-144.166 haproxy-main haproxy-stage damavand-gitlab
