@@ -78,7 +78,6 @@ install_ssh_config() {
 }
 
 config_ssh() {
-    set -x
     echo -e "${BLUE}Configuring \"SSH\"...${DECOLOR}"
     cp /etc/ssh/ssh_config{,.bak}
     echo -e "${BBLUE}Enter your SSH private key password:${DECOLOR}"
@@ -108,7 +107,6 @@ config_ssh() {
     StrictHostKeyChecking no
 EOF
     install_ssh_config
-    set +x
 }
 
 config_hosts() {
