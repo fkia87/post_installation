@@ -103,8 +103,8 @@ config_ssh() {
     sed -i '/^ServerAliveInterval/d' /etc/ssh/ssh_config
     sed -i '/^StrictHostKeyChecking/d' /etc/ssh/ssh_config
     cat << EOF >> /etc/ssh/ssh_config
-    ServerAliveInterval 60
-    StrictHostKeyChecking no
+ServerAliveInterval 60
+StrictHostKeyChecking no
 EOF
     install_ssh_config
 }
