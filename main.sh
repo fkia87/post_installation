@@ -12,6 +12,8 @@ print_help() {
 -----------------------------------+------------------------------------------------------------
             --bashrc               |   Update only bashrc files
 -----------------------------------+------------------------------------------------------------
+           --ssh-proxy             |   Install SSH tunnel services
+-----------------------------------+------------------------------------------------------------
    --scripts, --install-scripts    |   Install scripts
 -----------------------------------+------------------------------------------------------------
  --templates, --install-templates  |   Install templates
@@ -127,6 +129,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --gitconfig)
             install_gitconfig
+            shift 1
+            ;;
+        --ssh-proxy)
+            config_proxy
             shift 1
             ;;
         *)

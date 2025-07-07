@@ -1,0 +1,13 @@
+[Unit]
+Description=us-proxy
+Requires=network.target
+
+[Service]
+Type=simple
+ExecStart=ssh -tt -o StrictHostKeyChecking=no -p22 -D12346 -vv -N ubuntu@ionos-usa
+Restart=on-failure
+RestartSec=5
+User=$targetuser
+
+[Install]
+WantedBy=multi-user.target
