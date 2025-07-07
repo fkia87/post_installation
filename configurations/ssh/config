@@ -45,9 +45,13 @@ Host maas-server-01
 User awx
 Port 4141
 
-Host cdn-dev-env dev-env temp-server
+Host cdn-dev-env dev-env
 User fedora
 Port 22
+
+Host temp-server
+User fedora
+Port 2244
 
 Host anp-zvm-240 ibm-240 anp-zvm-237
 User root
