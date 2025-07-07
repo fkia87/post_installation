@@ -12,34 +12,13 @@ Host saba ahmadian
 User root
 Port 2244
 
-Host tebyan-cdn-test-* tebyan-cdn-pretest-* tebyan-cdn-kuber-* damavand-cdn-*-kuber-*
-User ubuntu
-Port 22
-IdentityFile ~/.ssh/iman_id_rsa
-
-Host tebyan-cdn-*
-User ubuntu
-Port 22
-
-Host tebyan-panel-*
-User f.kia
-Port 15292
-
-Host tebyan-* ansible-stage-144.166 haproxy-main haproxy-stage damavand-gitlab
+Host ansible-stage-144.166 haproxy-main haproxy-stage damavand-gitlab
 User f.kia
 Port 4141
 
 Host damavand-deployer damavand-ntp01 dev_sakku damavand-webmin sharif-server damavand-maas sakku-stage-cloud-installer
 User ubuntu
 Port 22
-
-Host damavand-ceph-osd-*
-User administrator
-Port 5454
-
-Host damavand-ceph-*
-User ubuntu
-Port 5454
 
 Host maas-server-01
 User awx
@@ -65,17 +44,21 @@ Host ionos-usa pooyanit-fin
 User root
 Port 22
 
-Host damavand-panel-*
+Host tebyan-panel-sandbox tebyan-panel-sb
 User fkia
 Port 22
 
-Host damavand-nexus damavand-gitlab-runner damavand-opstk-*
+Host damavand-nexus damavand-gitlab-runner
 User f.kia
 Port 5151
 
 Host damavand-cdn-haproxy repo.peysaz.ir peysaz
 User ubuntu
 Port 22
+
+Host damavand-haproxy
+User f.kia
+Port 4141
 
 Host seyedkhandan-opstk-w*
 User f.kia
@@ -89,6 +72,35 @@ Host seyedkhandan-ceph-*
 User f.kia
 Port 2024
 
-Host seyedkhandan-* damavand-haproxy
+Host seyedkhandan-*
+User f.kia
+Port 4141
+
+Host tebyan-cdn-test-* tebyan-cdn-pretest-* tebyan-cdn-kuber-* damavand-cdn-*-kuber-*
+User ubuntu
+Port 22
+IdentityFile ~/.ssh/iman_id_rsa
+
+Host damavand-panel-*
+User fkia
+Port 22
+
+Host damavand-opstk-*
+User f.kia
+Port 5151
+
+Host damavand-ceph-osd-*
+User administrator
+Port 5454
+
+Host damavand-ceph-*
+User ubuntu
+Port 5454
+
+Host tebyan-cdn-*
+User ubuntu
+Port 22
+
+Host tebyan-*
 User f.kia
 Port 4141

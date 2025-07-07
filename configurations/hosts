@@ -3,9 +3,7 @@
 212.132.119.241         saba ahmadian
 212.227.243.206         ionos-usa
 65.108.27.182           pooyanit-fin
-# 89.144.138.38           serverha-iran-ubuntu24
 185.37.54.194           temp-server
-185.37.54.227           mattermost-temp
 # ANP ##################################################################
 
 ## ESX
@@ -246,4 +244,6 @@
 172.16.64.33            tebyan-backup-64.33
 
 172.30.1.1              tebyan-panel-front
+94.232.169.108          tebyan-panel-sandbox tebyan-panel-sb
+
 ########################################################################
