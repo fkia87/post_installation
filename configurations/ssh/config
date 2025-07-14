@@ -64,7 +64,7 @@ Host seyedkhandan-opstk-w*
 User f.kia
 Port 65023
 
-Host seyedkhandan-opstk-* seyedkhandan-dns*
+Host seyedkhandan-opstk-* seyedkhandan-dns* seyedkhandan-haproxy* seyedkhandan-gitlab2
 User f.kia
 Port 22
 
