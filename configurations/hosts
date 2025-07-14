@@ -74,10 +74,14 @@
 172.18.31.4             seyedkhandan-ntp1
 172.18.31.5             seyedkhandan-ntp2
 172.18.31.6             seyedkhandan-nexus
+172.18.31.15            seyedkhandan-haproxy1
+172.18.31.16            seyedkhandan-haproxy2
+172.18.31.17            seyedkhandan-haproxy-vip
 172.18.31.7             seyedkhandan-ansible-deployer
 172.18.31.8             seyedkhandan-ipa1
 172.18.31.9             seyedkhandan-ipa2
 172.18.31.10            seyedkhandan-gitlab
+172.18.31.14            seyedkhandan-gitlab2
 172.18.31.11            seyedkhandan-monitoring-central
 172.18.8.10             seyedkhandan-monitoring-ceph
 
