@@ -119,6 +119,17 @@ calc() {
 	awk "BEGIN{ print $* }"
 }
 
+gp() {
+	if ! command -v git > /dev/null 2>&1; then
+		echo "git: Command not fountd."
+		return 1
+	fi
+	for remote in $(git remote); do
+		echo -e "\nPushing into ${remote}..."
+		git push "$remote"
+	done
+}
+
 # krew
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
@@ -137,11 +148,10 @@ alias pokemon='curl pkmn.li'
 alias pkmn='pokemon'
 alias weather='wttr'
 alias weather_in='wttr'
-alias ip='ip -c -h -p '
-alias ipa='ip -br a'
+alias ip='ip -c -h -p'
 alias sl='systemctl -T '
-alias sls='sl status '
-alias slr='sl restart '
+alias sls='sl status'
+alias slr='sl restart'
 alias h='head '
 alias t='tail '
 alias ping='ping -OD '
@@ -194,8 +204,8 @@ alias dc='docker compose'
 alias pc='podman compose'
 alias pclogs='podman compose logs -fn'
 alias plogs='podman logs -fn'
-alias dclogs='docker compose logs -fn'
-alias dlogs='docker logs -fn'
+alias dclogs='docker compose logs -f'
+alias dlogs='docker logs -f'
 alias pr='podman run --http-proxy=false'
 alias dr='docker run --http-proxy=false'
 
