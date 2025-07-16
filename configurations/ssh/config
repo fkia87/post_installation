@@ -72,6 +72,10 @@ Host seyedkhandan-ceph-*
 User f.kia
 Port 2024
 
+Host seyedkhandan-haproxy*
+User f.kia
+Port 4141
+
 Host seyedkhandan-*
 User f.kia
 Port 4141
