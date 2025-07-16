@@ -121,7 +121,7 @@ calc() {
 
 gp() {
 	if ! command -v git > /dev/null 2>&1; then
-		echo "git: Command not fountd."
+		echo "git: Command not found."
 		return 1
 	fi
 	for remote in $(git remote); do
