@@ -18,6 +18,8 @@ print_help() {
 -----------------------------------+------------------------------------------------------------
  --templates, --install-templates  |   Install templates
 -----------------------------------+------------------------------------------------------------
+  --packages, --install-packages   |   Install useful packages
+-----------------------------------+------------------------------------------------------------
      --fonts, --install-fonts      |   Install fonts
 -----------------------------------+------------------------------------------------------------
        --kube, --kubernetes        |   Install Kubernetes client and Krew
@@ -109,6 +111,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --install-script* | --script*)
             install_scripts
+            shift 1
+            ;;
+        --install-package* | --package*)
+            useful_packages
             shift 1
             ;;
         --install-template* | --template*)

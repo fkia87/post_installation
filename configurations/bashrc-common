@@ -74,6 +74,53 @@ rcp() {
 	rsync -avPz -e "ssh ${ssh_option}" "$@"
 }
 
+encryptdir() {
+	! command -v gocryptfs > /dev/null && {
+		echo -e "'gocryptfs' is not installed."
+		return 1
+		}
+	! [[ -d $1 ]] && { 
+		echo "Give an existing directory as the first argument." >&2
+		return 1
+		}
+	echo -e "Encrypting directory using 'gocryptfs'..."
+	local enc_dir="${1%/}.encrypted"
+	local mount_dir="${1%/}.mount"
+	echo -e "Creating '$enc_dir'..."
+	mkdir "$enc_dir" || return 1
+	echo -e "Creating '$mount_dir'..."
+	mkdir "$mount_dir" || return 1
+	echo -e "Initializing '$enc_dir'..."
+	gocryptfs -init "$enc_dir" || return 1
+	echo -e "Mounting '$enc_dir' into '$mount_dir'..."
+	gocryptfs "$enc_dir" "$mount_dir" || return 1
+	echo -e "Encrypting files..."
+	cp -r "$1"/{,.}* "$mount_dir" || return 1
+	echo -e "Unmounting '$mount_dir'..."
+	fusermount -u "$mount_dir" && \
+		rm -rf "$mount_dir" && \
+		echo -e "Successfully encrypted '$1' as $enc_dir." && \
+		echo -e "You may now remove '$1'." || \
+		return 1
+}
+
+decryptdir() {
+	! command -v gocryptfs > /dev/null && {
+		echo -e "'gocryptfs' is not installed."
+		return 1
+		}
+	! [[ -d $1 ]] && { 
+		echo "Give an existing directory as the first argument." >&2
+		return 1
+		}
+	local dec_dir="${1%/}.decrypted"
+	mkdir "$dec_dir"
+	gocryptfs "$1" "$dec_dir" && \
+	echo -e "Successfully mounted directory on '$dec_dir'." && \
+	echo -e "Run: 'fusermount -u $dec_dir && rm -rf $dec_dir' to unmount." || \
+	return 1
+}
+
 addhost() {
 	case $1 in
 		-h | --help)

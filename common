@@ -177,7 +177,7 @@ useful_packages() {
             pkg_to_install+=(unrar btop fping)
             ;;
     esac
-    pkg_to_install+=(bat curl)
+    pkg_to_install+=(bat curl gocryptfs)
 
     # shellcheck disable=SC2068
     install_pkg ${pkg_to_install[@]}
