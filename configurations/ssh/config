@@ -48,6 +48,10 @@ Host tebyan-panel-sandbox tebyan-panel-sb
 User fkia
 Port 22
 
+Host tebyan-vpnaas-stg-jenkins
+User ubuntu
+Port 22
+
 Host damavand-nexus damavand-gitlab-runner
 User f.kia
 Port 5151

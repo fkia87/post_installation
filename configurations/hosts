@@ -164,6 +164,8 @@
 172.24.0.182            tebyan-cdn-test-kuber-w2
 172.24.0.226            tebyan-cdn-test-kuber-w3
 
+172.16.144.75           tebyan-vpnaas-stg-jenkins
+
 172.16.64.106           tebyan-opstk-c1
 172.16.64.107           tebyan-opstk-c2
 172.16.64.108           tebyan-opstk-c3
