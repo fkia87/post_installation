@@ -48,6 +48,10 @@ Host tebyan-panel-sandbox tebyan-panel-sb
 User fkia
 Port 22
 
+Host tebyan-panel-front
+User f.kia
+Port 15292
+
 Host tebyan-vpnaas-stg-jenkins
 User ubuntu
 Port 22
