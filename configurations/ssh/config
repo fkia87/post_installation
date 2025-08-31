@@ -44,7 +44,7 @@ Host ionos-usa pooyanit-fin
 User root
 Port 22
 
-Host tebyan-panel-backend
+Host tebyan-panel-backend tebyan-panel-db
 User root
 Port 22
 
