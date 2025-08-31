@@ -44,6 +44,10 @@ Host ionos-usa pooyanit-fin
 User root
 Port 22
 
+Host tebyan-panel-backend
+User root
+Port 22
+
 Host tebyan-panel-sandbox tebyan-panel-sb
 User fkia
 Port 22
