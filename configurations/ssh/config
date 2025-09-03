@@ -74,23 +74,23 @@ Port 4141
 
 Host seyedkhandan-opstk-w*
 User f.kia
-Port 65023
+Port 6161
 
 Host seyedkhandan-opstk-* seyedkhandan-dns* seyedkhandan-haproxy* seyedkhandan-gitlab2
 User f.kia
-Port 22
+Port 6161
 
 Host seyedkhandan-ceph-*
 User f.kia
-Port 2024
+Port 6161
 
 Host seyedkhandan-haproxy*
 User f.kia
-Port 4141
+Port 6161
 
 Host seyedkhandan-*
 User f.kia
-Port 4141
+Port 6161
 
 Host tebyan-cdn-test-* tebyan-cdn-pretest-* tebyan-cdn-kuber-* damavand-cdn-*-kuber-*
 User ubuntu
