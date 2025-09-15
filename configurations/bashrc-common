@@ -262,3 +262,6 @@ alias aria2c='aria2c -x8 -s8 -j8 '
 
 # git
 alias g='git'
+
+alias passwdgen='pwgen'
+alias genpasswd='pwgen'

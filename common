@@ -168,10 +168,10 @@ config_grub() {
 useful_packages() {
     case $(os) in
         fedora | manjaro)
-            pkg_to_install+=(unrar btop fping duf colorized-logs lsd vim wget)
+            pkg_to_install+=(unrar pwgen btop fping duf colorized-logs lsd vim wget)
             ;;
         ubuntu | debian)
-            pkg_to_install+=(fping duf colorized-logs)
+            pkg_to_install+=(fping pwgen duf colorized-logs)
             ;;
         rocky)
             pkg_to_install+=(unrar btop fping)
