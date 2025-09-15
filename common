@@ -40,7 +40,7 @@ create_dirs() {
     echo -e "${BLUE}Creating directories in \"$targethome\"...${DECOLOR}"
     groupadd -U "$targetuser" "$targetuser" 2> /dev/null || :
     install -d -o "$targetuser" -g "$targetuser" \
-        "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh,.config/terminator}
+        "$targethome"/{.fonts,.themes,bin,Applications,.icons,.ssh,.config,.config/terminator}
 }
 
 config_bashrc() {
