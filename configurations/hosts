@@ -33,6 +33,7 @@
 172.24.0.10             haproxy-main
 172.24.0.20             haproxy-stage
 185.37.54.199           peysaz repo.peysaz.ir
+185.37.54.208           nextcloud-demo
 
 # SAKKU STAGE ##########################################################
 172.16.147.55           sakku-stage-cloud-installer

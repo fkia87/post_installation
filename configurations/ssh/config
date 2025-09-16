@@ -24,7 +24,7 @@ Host maas-server-01
 User awx
 Port 4141
 
-Host cdn-dev-env dev-env
+Host cdn-dev-env dev-env nextcloud-demo
 User fedora
 Port 22
 
