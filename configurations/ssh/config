@@ -18,7 +18,7 @@ Port 4141
 
 Host damavand-deployer damavand-ntp01 dev_sakku damavand-webmin sharif-server damavand-maas sakku-stage-cloud-installer
 User ubuntu
-Port 22
+Port 5151
 
 Host maas-server-01
 User awx
