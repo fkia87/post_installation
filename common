@@ -258,7 +258,7 @@ kubernetes_stuff() {
     cat << EOF >> "$targethome"/.bashrc
 # POST INSTALLATION
 [[ -f ~/.kubectl_aliases ]] && source ~/.kubectl_aliases
-export KUBECONFIG=\$(find $targethome/.kube/kubeconfig-* | paste -sd ":" -)
+export KUBECONFIG=\$(find $targethome/.kube/kubeconfig-* 2> /dev/null| paste -sd ":" -)
 export KUBECONFIG=\$KUBECONFIG:$targethome/.kube/config
 EOF
     RELOAD=1
